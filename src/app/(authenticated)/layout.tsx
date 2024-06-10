@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { getAuth } from '@/features/auth/queries/get-auth';
+import { signOut } from '@/features/auth/actions/sign-out';
 
 export default async function AuthenticatedLayout({
   children,
@@ -12,5 +13,12 @@ export default async function AuthenticatedLayout({
     redirect('/sign-in');
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <form action={signOut}>
+        <button>Sign out</button>
+      </form>
+      {children}
+    </>
+  )
 }

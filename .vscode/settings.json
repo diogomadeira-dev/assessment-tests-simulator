@@ -10,4 +10,9 @@
     "editor.quickSuggestions": {
         "strings": true
     },
+    // 18n-ally
+    "i18n-ally.localesPaths": [
+        "locales"
+    ],
+    "i18n-ally.keystyle": "nested"
 }

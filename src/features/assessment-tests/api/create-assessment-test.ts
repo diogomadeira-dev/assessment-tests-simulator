@@ -1,7 +1,29 @@
 import { z } from 'zod'
 
 export const CreateAssessmentInput = z.object({
-  username: z.string().min(2).max(50),
+  parts: z.array(
+    z.object({
+      name: z.string().min(2).max(50),
+      pages: z.array(
+        z.object({
+          pageNumber: z.number(),
+          questions: z.array(
+            z.object({
+              questionNumber: z.number(),
+              type: z.enum(['multiple_choice']),
+              label: z.string().min(2).max(50),
+              options: z.array(
+                z.object({
+                  id: z.string().min(2).max(50),
+                  label: z.string().min(2).max(50),
+                }),
+              ),
+            }),
+          ),
+        }),
+      ),
+    }),
+  ),
 })
 
 export type CreateAssessmentInputSchema = z.infer<typeof CreateAssessmentInput>

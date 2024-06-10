@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { getAuth } from '@/features/auth/queries/get-auth';
 import { signOut } from '@/features/auth/actions/sign-out';
+import { Button } from '@/components/ui/button';
 
 export default async function AuthenticatedLayout({
   children,
@@ -16,7 +17,7 @@ export default async function AuthenticatedLayout({
   return (
     <>
       <form action={signOut}>
-        <button>Sign out</button>
+        <Button>Sign out</Button>
       </form>
       {children}
     </>

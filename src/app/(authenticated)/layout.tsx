@@ -1,17 +1,17 @@
-import { redirect } from 'next/navigation';
-import { getAuth } from '@/features/auth/queries/get-auth';
-import { signOut } from '@/features/auth/actions/sign-out';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button'
+import { signOut } from '@/features/auth/actions/sign-out'
+import { getAuth } from '@/features/auth/queries/get-auth'
+import { redirect } from 'next/navigation'
 
 export default async function AuthenticatedLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
-  const { user } = await getAuth();
+  const { user } = await getAuth()
 
   if (!user) {
-    redirect('/sign-in');
+    redirect('/sign-in')
   }
 
   return (

@@ -1,17 +1,16 @@
-import { SignInForm } from '@/features/auth/components/sign-in-form';
-import { getAuth } from '@/features/auth/queries/get-auth';
-import { getTranslations } from 'next-intl/server';
+import { SignInForm } from '@/features/auth/components/sign-in-form'
+import { getAuth } from '@/features/auth/queries/get-auth'
+import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
-import { redirect } from 'next/navigation';
+import { redirect } from 'next/navigation'
 
 const SignInPage = async () => {
+  const t = await getTranslations()
 
-  const t = await getTranslations();
-
-  const { user } = await getAuth();
+  const { user } = await getAuth()
 
   if (user) {
-    redirect('/dashboard');
+    redirect('/dashboard')
   }
 
   return (
@@ -40,7 +39,7 @@ const SignInPage = async () => {
                 {t('title')}
               </h1>
               <p className="text-sm text-muted-foreground">
-                {t("auth.description")}
+                {t('auth.description')}
               </p>
             </div>
             <SignInForm />
@@ -48,7 +47,7 @@ const SignInPage = async () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignInPage;
+export default SignInPage

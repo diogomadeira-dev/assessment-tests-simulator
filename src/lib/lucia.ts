@@ -1,11 +1,11 @@
-import { Lucia, TimeSpan } from 'lucia';
-import { PrismaAdapter } from '@lucia-auth/adapter-prisma';
-import { prisma } from './prisma';
+import { PrismaAdapter } from '@lucia-auth/adapter-prisma'
+import { Lucia, TimeSpan } from 'lucia'
+import { prisma } from './prisma'
 
-const adapter = new PrismaAdapter(prisma.session, prisma.user);
+const adapter = new PrismaAdapter(prisma.session, prisma.user)
 
 export const lucia = new Lucia(adapter, {
-  sessionExpiresIn: new TimeSpan(4, "h"),
+  sessionExpiresIn: new TimeSpan(4, 'h'),
   sessionCookie: {
     // this sets cookies with super long expiration
     // since Next.js doesn't allow Lucia to extend cookie expiration when rendering pages
@@ -19,17 +19,17 @@ export const lucia = new Lucia(adapter, {
     return {
       // attributes has the type of DatabaseUserAttributes
       username: attributes.username,
-    };
+    }
   },
-});
+})
 
 declare module 'lucia' {
   interface Register {
-    Lucia: typeof lucia;
-    DatabaseUserAttributes: DatabaseUserAttributes;
+    Lucia: typeof lucia
+    DatabaseUserAttributes: DatabaseUserAttributes
   }
 }
 
 interface DatabaseUserAttributes {
-  username: string;
+  username: string
 }

@@ -1,37 +1,37 @@
-import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google"
-import "./globals.css";
-import { cn } from "@/lib/utils";
-import { NextIntlClientProvider } from 'next-intl';
-import { getLocale, getMessages } from 'next-intl/server';
+import { cn } from '@/lib/utils'
+import type { Metadata } from 'next'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
+import { Inter as FontSans } from 'next/font/google'
+import './globals.css'
 
 const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
+  subsets: ['latin'],
+  variable: '--font-sans',
 })
 
 export const metadata: Metadata = {
-  title: "Assessment tests simulator",
-  description: "Assessment tests simulator",
-};
+  title: 'Assessment tests simulator',
+  description: 'Assessment tests simulator',
+}
 
 export default async function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
-  const locale = await getLocale();
+  const locale = await getLocale()
 
   // Providing all messages to the client
   // side is the easiest way to get started
-  const messages = await getMessages();
+  const messages = await getMessages()
 
   return (
     <html lang={locale}>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          'min-h-screen bg-background font-sans antialiased',
+          fontSans.variable,
         )}
       >
         <NextIntlClientProvider messages={messages}>
@@ -39,5 +39,5 @@ export default async function RootLayout({
         </NextIntlClientProvider>
       </body>
     </html>
-  );
+  )
 }

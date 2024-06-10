@@ -1,7 +1,7 @@
 {
-    "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-        "source.fixAll": "always"
+        "source.fixAll.eslint": "always",
+        "source.organizeImports": "always"
     },
     // Tailwind CSS IntelliSense
     "files.associations": {
@@ -14,5 +14,16 @@
     "i18n-ally.localesPaths": [
         "locales"
     ],
-    "i18n-ally.keystyle": "nested"
+    "i18n-ally.keystyle": "nested",
+    // Search exclude
+    "search.exclude": {
+        ".git": true,
+        ".eslintcache": true,
+        "node_modules": true,
+        "npm-debug.log.*": true,
+        "test/**/__snapshots__": true,
+        "package-lock.json": true,
+        "*.{css,sass,scss}.d.ts": true,
+        "/**/assets/*": true
+    },
 }

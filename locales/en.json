@@ -1,5 +1,11 @@
 {
+    "title": "Assessment tests simulator",
+    "labels": {
+        "username": "User",
+        "password": "Password"
+    },
     "auth": {
-        "signUp": "Sign up"
+        "signIn": "Sign in",
+        "description": "Enter your access data to log in"
     }
 }

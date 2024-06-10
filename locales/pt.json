@@ -1,5 +1,11 @@
 {
+    "title": "Simulador de Provas Digitais",
+    "labels": {
+        "username": "Utilizador",
+        "password": "Palavra-passe"
+    },
     "auth": {
-        "signUp": "Entrar"
+        "signIn": "Entrar",
+        "description": "Introduz os dados de acesso para entrares"
     }
 }

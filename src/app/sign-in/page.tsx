@@ -1,9 +1,17 @@
 import { SignInForm } from '@/features/auth/components/sign-in-form';
-import { useTranslations } from 'next-intl';
+import { getAuth } from '@/features/auth/queries/get-auth';
+import { getTranslations } from 'next-intl/server';
+import { redirect } from 'next/navigation';
 
-const SignInPage = () => {
+const SignInPage = async () => {
 
-  const t = useTranslations('auth');
+  const t = await getTranslations('auth');
+
+  const { user } = await getAuth();
+
+  if (user) {
+    redirect('/dashboard');
+  }
 
   return (
     <>

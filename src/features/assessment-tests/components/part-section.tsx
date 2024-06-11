@@ -11,6 +11,11 @@ export const PartSection = () => {
     name: 'parts',
   })
 
+  const pageFieldArray = useFieldArray({
+    control: form.control,
+    name: 'pages',
+  })
+
   return (
     <div>
       {partFieldArray.fields.map((part, partIndex) => (
@@ -18,15 +23,45 @@ export const PartSection = () => {
           <p>PART {part.partNumber}</p>
 
           <div className="mb-8 min-h-40 w-60 bg-neutral-200">
-            <PageSection part={part} />
+            <PageSection part={part} partIndex={partIndex} />
           </div>
 
           <Button
             type="button"
             variant="destructive"
-            onClick={() => partFieldArray.remove(partIndex)}
+            onClick={() => {
+              // const pages = form
+              //   .watch()
+              //   .pages?.filter((page) => page.part === part.partNumber)
+              // console.log('🚀 ~ pages:', pages)
+
+              // pages.flatMap((page) => console.log('page', page.pageNumber))
+
+              // pages.forEach((page) => pageFieldArray.remove(page.pageNumber))
+
+              // partFieldArray.remove(partIndex)
+
+              const pages = form
+                .watch()
+                .pages?.filter((page) => page.part === part.partNumber)
+
+              const pageIndices = pages.map((page) =>
+                form
+                  .getValues('pages')
+                  .findIndex((p) => p.pageNumber === page.pageNumber),
+              )
+
+              pageIndices
+                .sort((a, b) => b - a) // Sort indices in descending order
+                .forEach((index) => pageFieldArray.remove(index))
+
+              partFieldArray.remove(partIndex)
+
+              // TODO: ao eliminar pages, ele elimina a part
+              // mas nao esta a atualizar os index das pages
+            }}
           >
-            Delete part
+            Delete part {partIndex}
           </Button>
         </div>
       ))}

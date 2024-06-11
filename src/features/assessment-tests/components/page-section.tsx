@@ -4,8 +4,10 @@ import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
 
 export const PageSection = ({
   part,
+  partIndex,
 }: {
   part: CreateAssessmentInputSchema['parts'][number]
+  partIndex: number
 }) => {
   const form = useFormContext<CreateAssessmentInputSchema>()
 
@@ -17,11 +19,11 @@ export const PageSection = ({
   const pages = pageFieldArray.fields.filter(
     (page) => page.part === part.partNumber,
   )
-  console.log('🚀 ~ pages:', pages)
+  //   console.log('🚀 ~ pages:', pages)
 
   return (
-    <div key={part.id}>
-      {pages.map((page, pageIndex, { length }) => (
+    <div key={partIndex}>
+      {pages.map((page, pageIndex) => (
         <div key={pageIndex} className="min-h-30 w-30 m-8 bg-neutral-600">
           <p>
             PAGE {page.pageNumber} - {part.partNumber}

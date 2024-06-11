@@ -15,78 +15,90 @@ export const CreateAssessmentForm = () => {
   const form = useForm<CreateAssessmentInputSchema>({
     resolver: zodResolver(CreateAssessmentInput),
     defaultValues: {
+      questionNumber: 0,
       parts: [
         {
           name: 'A',
           pages: [
             {
               pageNumber: 1,
-              questions: [
-                {
-                  questionNumber: 1,
-                  type: 'multiple_choice',
-                  label: 'question multiple choice 1',
-                  options: [
-                    {
-                      id: 'a',
-                      label: 'cat',
-                    },
-                    {
-                      id: 'b',
-                      label: 'dog',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          name: 'B',
-          pages: [
-            {
-              pageNumber: 1,
-              questions: [
-                {
-                  questionNumber: 1,
-                  type: 'multiple_choice',
-                  label: 'question multiple choice 2',
-                  options: [
-                    {
-                      id: 'a',
-                      label: 'cat',
-                    },
-                    {
-                      id: 'b',
-                      label: 'dog',
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              pageNumber: 2,
-              questions: [
-                {
-                  questionNumber: 1,
-                  type: 'multiple_choice',
-                  label: 'question multiple choice 3',
-                  options: [
-                    {
-                      id: 'a',
-                      label: 'cat',
-                    },
-                    {
-                      id: 'b',
-                      label: 'dog',
-                    },
-                  ],
-                },
-              ],
+              part: 'A',
             },
           ],
         },
       ],
+      // parts: [
+      //   {
+      //     name: 'A',
+      //     pages: [
+      //       {
+      //         pageNumber: 1,
+      //         questions: [
+      //           {
+      //             questionNumber: 1,
+      //             type: 'multiple_choice',
+      //             label: 'question multiple choice 1',
+      //             options: [
+      //               {
+      //                 id: 'a',
+      //                 label: 'cat',
+      //               },
+      //               {
+      //                 id: 'b',
+      //                 label: 'dog',
+      //               },
+      //             ],
+      //           },
+      //         ],
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     name: 'B',
+      //     pages: [
+      //       {
+      //         pageNumber: 1,
+      //         questions: [
+      //           {
+      //             questionNumber: 2,
+      //             type: 'multiple_choice',
+      //             label: 'question multiple choice 2',
+      //             options: [
+      //               {
+      //                 id: 'a',
+      //                 label: 'cat',
+      //               },
+      //               {
+      //                 id: 'b',
+      //                 label: 'dog',
+      //               },
+      //             ],
+      //           },
+      //         ],
+      //       },
+      //       {
+      //         pageNumber: 2,
+      //         questions: [
+      //           {
+      //             questionNumber: 3,
+      //             type: 'multiple_choice',
+      //             label: 'question multiple choice 3',
+      //             options: [
+      //               {
+      //                 id: 'a',
+      //                 label: 'cat',
+      //               },
+      //               {
+      //                 id: 'b',
+      //                 label: 'dog',
+      //               },
+      //             ],
+      //           },
+      //         ],
+      //       },
+      //     ],
+      //   },
+      // ],
     },
   })
 
@@ -118,15 +130,44 @@ export const CreateAssessmentForm = () => {
             type="button"
             variant="outline"
             onClick={() => {
+              const newQuestionNumber = form.watch('questionNumber') + 1
+
+              const partIndex = form.watch().parts.length
+
+              const previousPartLenght =
+                partIndex > 0
+                  ? form.watch().parts[partIndex - 1].pages.length
+                  : 0
+
+              // console.log(
+              //   '🚀 ~ CreateAssessmentForm ~ previousPartLenght:',
+              //   form.watch(),
+              // )
+
+              // const previousPartLenght =
+              //   pageLength > 0 ? form.watch().parts[pageLength].pages.length : 0
+
+              // console.log(
+              //   '🚀 ~ CreateAssessmentForm ~ previousPartLenght:',
+              //   pageLength,
+              // )
+
               partFieldArray.append({
                 name: nextChar(partFieldArray.fields.at(-1)?.name),
                 pages: [
                   {
-                    pageNumber: 1,
-                    questions: [],
+                    pageNumber:
+                      partIndex > 0
+                        ? previousPartLenght + (length + 1)
+                        : length + 1,
+                    part: nextChar(partFieldArray.fields.at(-1)?.name),
+                    // questions: [],
                   },
                 ],
               })
+
+              // Set new question number
+              form.setValue('questionNumber', newQuestionNumber)
             }}
           >
             append new part

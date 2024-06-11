@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const CreateAssessmentInput = z.object({
   parts: z.array(
     z.object({
-      name: z.string().min(2).max(50),
+      name: z.string().min(1).max(5),
       pages: z.array(
         z.object({
           pageNumber: z.number(),
@@ -12,12 +12,12 @@ export const CreateAssessmentInput = z.object({
               questionNumber: z.number(),
               type: z.enum(['multiple_choice']),
               label: z.string().min(2).max(50),
-              options: z.array(
-                z.object({
-                  id: z.string().min(2).max(50),
-                  label: z.string().min(2).max(50),
-                }),
-              ),
+              // options: z.array(
+              //   z.object({
+              //     id: z.string().min(2).max(50),
+              //     label: z.string().min(2).max(50),
+              //   }),
+              // ),
             }),
           ),
         }),

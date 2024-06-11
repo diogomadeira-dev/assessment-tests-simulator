@@ -1,21 +1,15 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+import { Form } from '@/components/ui/form'
+import { nextChar } from '@/utils/common'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useFieldArray, useForm } from 'react-hook-form'
 import {
   CreateAssessmentInput,
   CreateAssessmentInputSchema,
 } from '../api/create-assessment-test'
+import { PartSection } from './part-section'
 
 export const CreateAssessmentForm = () => {
   const form = useForm<CreateAssessmentInputSchema>({
@@ -96,7 +90,7 @@ export const CreateAssessmentForm = () => {
     },
   })
 
-  const { fields, remove } = useFieldArray({
+  const partFieldArray = useFieldArray({
     control: form.control,
     name: 'parts',
   })
@@ -108,42 +102,36 @@ export const CreateAssessmentForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <ul>
-          {fields.map((item, index) => {
-            return (
-              <li key={item.id}>
-                <FormField
-                  control={form.control}
-                  name={`parts.${index}.pages.${index}.questions.${index}.label`}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Username</FormLabel>
-                      <FormControl>
-                        <Input placeholder="shadcn" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+        {JSON.stringify(form.formState.errors, null, 2)}
 
-                <button type="button" onClick={() => remove(index)}>
-                  Delete
-                </button>
-              </li>
-            )
-          })}
-        </ul>
+        {partFieldArray.fields.map((part, partIndex) => (
+          <PartSection
+            key={partIndex}
+            partFieldArray={partFieldArray}
+            part={part}
+            partIndex={partIndex}
+          />
+        ))}
 
-        {/* <section>
-          <button
+        <section>
+          <Button
             type="button"
+            variant="outline"
             onClick={() => {
-              append({ username: '' })
+              partFieldArray.append({
+                name: nextChar(partFieldArray.fields.at(-1)?.name),
+                pages: [
+                  {
+                    pageNumber: 1,
+                    questions: [],
+                  },
+                ],
+              })
             }}
           >
-            append
-          </button>
-        </section> */}
+            append new part
+          </Button>
+        </section>
 
         <Button type="submit">Submit</Button>
       </form>

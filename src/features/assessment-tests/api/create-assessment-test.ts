@@ -3,23 +3,34 @@ import { z } from 'zod'
 export const CreateAssessmentInput = z.object({
   parts: z.array(
     z.object({
-      partNumber: z.number(),
+      name: z.number(),
+      pages: z.array(
+        z.object({
+          number: z.number(),
+        }),
+      ),
     }),
   ),
-  pages: z.array(
-    z.object({
-      pageNumber: z.number(),
-      part: z.number(),
-    }),
-  ),
-  questions: z.array(
-    z.object({
-      type: z.enum(['text']),
-      label: z.string().min(2).max(50),
-      pageNumber: z.number(),
-      part: z.number(),
-    }),
-  ),
+
+  // parts: z.array(
+  //   z.object({
+  //     partNumber: z.number(),
+  //   }),
+  // ),
+  // pages: z.array(
+  //   z.object({
+  //     pageNumber: z.number(),
+  //     part: z.number(),
+  //   }),
+  // ),
+  // questions: z.array(
+  //   z.object({
+  //     type: z.enum(['text']),
+  //     label: z.string().min(2).max(50),
+  //     pageNumber: z.number(),
+  //     part: z.number(),
+  //   }),
+  // ),
 
   // questionNumber: z.number(),
   // parts: z.array(

@@ -13,19 +13,20 @@ export const PageSection = ({
 
   const pageFieldArray = useFieldArray({
     control: form.control,
-    name: 'pages',
+    name: `parts.${partIndex}.pages` as 'parts.0.pages',
   })
 
-  const pages = pageFieldArray.fields.filter(
-    (page) => page.part === part.partNumber,
-  )
+  // const pages = form
+  //   .watch()
+  //   .pages.filter((page) => page.part === part.partNumber)
 
   return (
     <div key={partIndex}>
-      {pages.map((page, pageIndex) => (
+      {form.watch().parts[partIndex].pages.map((page, pageIndex) => (
         <div key={pageIndex} className="min-h-30 w-30 m-8 bg-neutral-600">
           <p>
-            PAGE {page.pageNumber} - {part.partNumber}
+            PAGE {page.number}
+            {/* - {part.partNumber} */}
           </p>
         </div>
       ))}
@@ -34,16 +35,35 @@ export const PageSection = ({
         type="button"
         variant="outline"
         onClick={() => {
+          // ! repeated
+          const totalPages = form.watch().parts.reduce((acc, part) => {
+            return acc + part.pages.length
+          }, 0)
+          // console.log('🚀 ~ totalPages:', totalPages)
+
           pageFieldArray.append({
-            part: part.partNumber,
-            pageNumber:
-              pageFieldArray.fields.length > 0
-                ? pageFieldArray.fields.at(-1)?.pageNumber + 1
-                : 0,
+            number: totalPages + 1,
           })
+
+          // ! repeated
+          let count = 0
+          if (form.watch().parts && form.watch().parts.length > 0) {
+            const test = form.watch().parts.map((partElement) => ({
+              name: partElement.name,
+              pages: partElement.pages.map((pageElement) => {
+                count++
+                return {
+                  number: count,
+                }
+              }),
+            }))
+            console.log('🚀 ~ PartSection ~ test:', test)
+
+            form.setValue('parts', test)
+          }
         }}
       >
-        append new part
+        new page
       </Button>
     </div>
   )

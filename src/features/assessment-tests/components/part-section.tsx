@@ -11,40 +11,60 @@ export const PartSection = () => {
     name: 'parts',
   })
 
-  const pageFieldArray = useFieldArray({
-    control: form.control,
-    name: 'pages',
-  })
+  // useEffect(() => {
+  //   let count = 0
+
+  //   if (form.watch().parts && form.watch().parts.length > 0) {
+  //     const test = form.watch().parts.map((partElement) => ({
+  //       name: partElement.name,
+  //       pages: partElement.pages.map((pageElement) => {
+  //         count++
+  //         return {
+  //           number: count,
+  //         }
+  //       }),
+  //     }))
+  //     console.log('🚀 ~ PartSection ~ test:', test)
+
+  //     form.setValue('parts', test)
+  //   }
+  // }, [form.watch()])
 
   return (
     <div>
       {partFieldArray.fields.map((part, partIndex) => (
-        <div key={part.partNumber}>
-          <p>PART {part.partNumber}</p>
+        <div key={part.name}>
+          <p>PART {part.name}</p>
 
           <div className="mb-8 min-h-40 w-60 bg-neutral-200">
             <PageSection part={part} partIndex={partIndex} />
           </div>
 
-          <Button
+          {/* <Button
             type="button"
             variant="destructive"
             onClick={() => {
-              const filteredPageIndex: number[] = []
-              form.watch().pages.forEach((page, pageIndex: number) => {
-                if (page.part === part.partNumber)
-                  filteredPageIndex.push(pageIndex)
-              })
+              const filteredPages = form
+                .watch()
+                .pages.map((page, pageIndex, pageArray) => {
+                  const previousItem = pageArray[pageIndex - 1]
 
-              console.log('filteredPageIndex', filteredPageIndex)
+                  if (previousItem) {
+                    console.log(
+                      '🚀 ~ filteredPages ~ page:',
+                      page.pageNumber,
+                      previousItem.pageNumber,
+                    )
+                  }
 
-              pageFieldArray.remove(filteredPageIndex)
+                  return page
+                })
 
-              partFieldArray.remove(part.partNumber)
+              console.log('filteredPages', filteredPages)
             }}
           >
             Delete part {part.partNumber}
-          </Button>
+          </Button> */}
         </div>
       ))}
 
@@ -52,12 +72,50 @@ export const PartSection = () => {
         type="button"
         variant="outline"
         onClick={() => {
+          // ! repeated
+          const totalPages = form.watch().parts.reduce((acc, part) => {
+            return acc + part.pages.length
+          }, 0)
+
+          const partsArray = []
+
+          // form.watch().parts.forEach((partElement) => {
+          //   console.log('partElement', partElement)
+
+          //   partElement.pages.forEach((pageElement) => {
+          //     console.log('pageElement', pageElement)
+          //   })
+          // })
+
           partFieldArray.append({
-            partNumber:
-              partFieldArray.fields.length > 0
-                ? partFieldArray.fields.at(-1)?.partNumber + 1
-                : 0,
+            name: form.watch().parts.length + 1,
+            pages: [
+              {
+                number: totalPages + 1,
+              },
+            ],
+            // partNumber:
+            //   partFieldArray.fields.length > 0
+            //     ? partFieldArray.fields.at(-1)?.partNumber + 1
+            //     : 0,
           })
+
+          // ! repeated
+          let count = 0
+          if (form.watch().parts && form.watch().parts.length > 0) {
+            const test = form.watch().parts.map((partElement) => ({
+              name: partElement.name,
+              pages: partElement.pages.map((pageElement) => {
+                count++
+                return {
+                  number: count,
+                }
+              }),
+            }))
+            console.log('🚀 ~ PartSection ~ test:', test)
+
+            form.setValue('parts', test)
+          }
         }}
       >
         append new part

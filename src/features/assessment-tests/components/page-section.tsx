@@ -19,7 +19,6 @@ export const PageSection = ({
   const pages = pageFieldArray.fields.filter(
     (page) => page.part === part.partNumber,
   )
-  //   console.log('🚀 ~ pages:', pages)
 
   return (
     <div key={partIndex}>

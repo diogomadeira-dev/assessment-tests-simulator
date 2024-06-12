@@ -19,7 +19,7 @@ export const PartSection = () => {
   return (
     <div>
       {partFieldArray.fields.map((part, partIndex) => (
-        <div key={partIndex}>
+        <div key={part.partNumber}>
           <p>PART {part.partNumber}</p>
 
           <div className="mb-8 min-h-40 w-60 bg-neutral-200">
@@ -30,38 +30,20 @@ export const PartSection = () => {
             type="button"
             variant="destructive"
             onClick={() => {
-              // const pages = form
-              //   .watch()
-              //   .pages?.filter((page) => page.part === part.partNumber)
-              // console.log('🚀 ~ pages:', pages)
+              const filteredPageIndex: number[] = []
+              form.watch().pages.forEach((page, pageIndex: number) => {
+                if (page.part === part.partNumber)
+                  filteredPageIndex.push(pageIndex)
+              })
 
-              // pages.flatMap((page) => console.log('page', page.pageNumber))
+              console.log('filteredPageIndex', filteredPageIndex)
 
-              // pages.forEach((page) => pageFieldArray.remove(page.pageNumber))
+              pageFieldArray.remove(filteredPageIndex)
 
-              // partFieldArray.remove(partIndex)
-
-              const pages = form
-                .watch()
-                .pages?.filter((page) => page.part === part.partNumber)
-
-              const pageIndices = pages.map((page) =>
-                form
-                  .getValues('pages')
-                  .findIndex((p) => p.pageNumber === page.pageNumber),
-              )
-
-              pageIndices
-                .sort((a, b) => b - a) // Sort indices in descending order
-                .forEach((index) => pageFieldArray.remove(index))
-
-              partFieldArray.remove(partIndex)
-
-              // TODO: ao eliminar pages, ele elimina a part
-              // mas nao esta a atualizar os index das pages
+              partFieldArray.remove(part.partNumber)
             }}
           >
-            Delete part {partIndex}
+            Delete part {part.partNumber}
           </Button>
         </div>
       ))}

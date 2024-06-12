@@ -11,24 +11,27 @@ export const PartSection = () => {
     name: 'parts',
   })
 
-  // useEffect(() => {
-  //   let count = 0
+  const updateIndexes = () => {
+    let pageCount = 0
+    if (form.watch().parts && form.watch().parts.length > 0) {
+      const updatedIndexes = form
+        .watch()
+        .parts.map((partElement, partIndex) => {
+          return {
+            name: partIndex,
+            pages: partElement.pages.map((pageElement, pageIndex) => {
+              console.log('🚀 ~ pageCount', pageCount)
+              pageCount++
+              return {
+                number: pageCount,
+              }
+            }),
+          }
+        })
 
-  //   if (form.watch().parts && form.watch().parts.length > 0) {
-  //     const test = form.watch().parts.map((partElement) => ({
-  //       name: partElement.name,
-  //       pages: partElement.pages.map((pageElement) => {
-  //         count++
-  //         return {
-  //           number: count,
-  //         }
-  //       }),
-  //     }))
-  //     console.log('🚀 ~ PartSection ~ test:', test)
-
-  //     form.setValue('parts', test)
-  //   }
-  // }, [form.watch()])
+      form.setValue('parts', updatedIndexes)
+    }
+  }
 
   return (
     <div>
@@ -40,31 +43,17 @@ export const PartSection = () => {
             <PageSection part={part} partIndex={partIndex} />
           </div>
 
-          {/* <Button
+          <Button
             type="button"
             variant="destructive"
             onClick={() => {
-              const filteredPages = form
-                .watch()
-                .pages.map((page, pageIndex, pageArray) => {
-                  const previousItem = pageArray[pageIndex - 1]
+              partFieldArray.remove(partIndex)
 
-                  if (previousItem) {
-                    console.log(
-                      '🚀 ~ filteredPages ~ page:',
-                      page.pageNumber,
-                      previousItem.pageNumber,
-                    )
-                  }
-
-                  return page
-                })
-
-              console.log('filteredPages', filteredPages)
+              updateIndexes()
             }}
           >
-            Delete part {part.partNumber}
-          </Button> */}
+            Delete part {part.name}
+          </Button>
         </div>
       ))}
 
@@ -100,22 +89,7 @@ export const PartSection = () => {
             //     : 0,
           })
 
-          // ! repeated
-          let count = 0
-          if (form.watch().parts && form.watch().parts.length > 0) {
-            const test = form.watch().parts.map((partElement) => ({
-              name: partElement.name,
-              pages: partElement.pages.map((pageElement) => {
-                count++
-                return {
-                  number: count,
-                }
-              }),
-            }))
-            console.log('🚀 ~ PartSection ~ test:', test)
-
-            form.setValue('parts', test)
-          }
+          updateIndexes()
         }}
       >
         append new part

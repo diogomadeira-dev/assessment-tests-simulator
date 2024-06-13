@@ -1,7 +1,30 @@
 import { Button } from '@/components/ui/button'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { DeleteIcon } from 'lucide-react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
 import { PageSection } from './page-section'
+
+// ! TODO: MOVE THIS TO ANOTHER PLACE
+export const updateIndexes = (form: any) => {
+  let pageCount = 0
+  if (form.watch().parts && form.watch().parts.length > 0) {
+    const updatedIndexes = form.watch().parts.map((partElement, partIndex) => {
+      return {
+        name: partIndex,
+        pages: partElement.pages.map((pageElement, pageIndex) => {
+          console.log('🚀 ~ pageCount', pageCount)
+          pageCount++
+          return {
+            number: pageCount,
+          }
+        }),
+      }
+    })
+
+    form.setValue('parts', updatedIndexes)
+  }
+}
 
 export const PartSection = () => {
   const form = useFormContext<CreateAssessmentInputSchema>()
@@ -11,49 +34,30 @@ export const PartSection = () => {
     name: 'parts',
   })
 
-  const updateIndexes = () => {
-    let pageCount = 0
-    if (form.watch().parts && form.watch().parts.length > 0) {
-      const updatedIndexes = form
-        .watch()
-        .parts.map((partElement, partIndex) => {
-          return {
-            name: partIndex,
-            pages: partElement.pages.map((pageElement, pageIndex) => {
-              console.log('🚀 ~ pageCount', pageCount)
-              pageCount++
-              return {
-                number: pageCount,
-              }
-            }),
-          }
-        })
-
-      form.setValue('parts', updatedIndexes)
-    }
-  }
-
   return (
-    <div>
+    <ScrollArea className="h-[800px] w-[200px] rounded-md border p-4">
       {partFieldArray.fields.map((part, partIndex) => (
         <div key={part.name}>
-          <p>PART {part.name}</p>
+          <div className="flex justify-between">
+            <p>PART {part.name}</p>
 
-          <div className="mb-8 min-h-40 w-60 bg-neutral-200">
-            <PageSection part={part} partIndex={partIndex} />
+            <Button
+              type="button"
+              variant="destructive"
+              size="icon"
+              onClick={() => {
+                partFieldArray.remove(partIndex)
+
+                updateIndexes(form)
+              }}
+            >
+              <DeleteIcon className="h-4 w-4" />
+            </Button>
           </div>
 
-          <Button
-            type="button"
-            variant="destructive"
-            onClick={() => {
-              partFieldArray.remove(partIndex)
-
-              updateIndexes()
-            }}
-          >
-            Delete part {part.name}
-          </Button>
+          <div>
+            <PageSection part={part} partIndex={partIndex} />
+          </div>
         </div>
       ))}
 
@@ -66,16 +70,6 @@ export const PartSection = () => {
             return acc + part.pages.length
           }, 0)
 
-          const partsArray = []
-
-          // form.watch().parts.forEach((partElement) => {
-          //   console.log('partElement', partElement)
-
-          //   partElement.pages.forEach((pageElement) => {
-          //     console.log('pageElement', pageElement)
-          //   })
-          // })
-
           partFieldArray.append({
             name: form.watch().parts.length + 1,
             pages: [
@@ -83,17 +77,13 @@ export const PartSection = () => {
                 number: totalPages + 1,
               },
             ],
-            // partNumber:
-            //   partFieldArray.fields.length > 0
-            //     ? partFieldArray.fields.at(-1)?.partNumber + 1
-            //     : 0,
           })
 
-          updateIndexes()
+          updateIndexes(form)
         }}
       >
         append new part
       </Button>
-    </div>
+    </ScrollArea>
   )
 }

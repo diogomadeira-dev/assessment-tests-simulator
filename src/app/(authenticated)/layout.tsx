@@ -1,5 +1,4 @@
-import { Button } from '@/components/ui/button'
-import { signOut } from '@/features/auth/actions/sign-out'
+import { SiteHeader } from '@/components/site-header'
 import { getAuth } from '@/features/auth/queries/get-auth'
 import { redirect } from 'next/navigation'
 
@@ -16,9 +15,7 @@ export default async function AuthenticatedLayout({
 
   return (
     <>
-      <form action={signOut}>
-        <Button>Sign out</Button>
-      </form>
+      <SiteHeader />
       {children}
     </>
   )

@@ -3,7 +3,6 @@ import { CreateAssessmentForm } from '@/features/assessment-tests/components/cre
 const CreateAssessmentTest = () => {
   return (
     <>
-      <h2>CreateAssessmentTest</h2>
       <CreateAssessmentForm />
     </>
   )

@@ -7,18 +7,11 @@ export const QuestionSection = () => {
   const form = useFormContext<CreateAssessmentInputSchema>()
 
   const { selectedPart, selectedPage } = form.watch()
-  console.log('🚀 ~ QuestionSection ~ selectedPage:', selectedPage)
-  console.log('🚀 ~ QuestionSection ~ selectedPart:', selectedPart)
 
   const questionFieldArray = useFieldArray({
     control: form.control,
     name: `parts.${selectedPart}.pages.${selectedPage}.questions` as 'parts.0.pages.0.questions',
   })
-
-  // const questionFieldArray = useFieldArray({
-  //   control: form.control,
-  //   name: `parts.${selectedPart}.pages.${selectedPage}.questions`,
-  // })
 
   const questions = form.watch(
     `parts.${selectedPart}.pages.${selectedPage}.questions`,

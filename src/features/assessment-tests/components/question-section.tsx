@@ -8,11 +8,14 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { DeleteIcon, Plus } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
 import { updateIndexes } from './part-section'
 
 export const QuestionSection = () => {
+  const t = useTranslations()
+
   const form = useFormContext<CreateAssessmentInputSchema>()
 
   const { selectedPart, selectedPage } = form.watch()
@@ -27,7 +30,7 @@ export const QuestionSection = () => {
   )
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-8">
       {questions &&
         questions.length > 0 &&
         questions.map((question, questionIndex) => (
@@ -61,7 +64,7 @@ export const QuestionSection = () => {
           </div>
         ))}
 
-      <div className="w-full bg-neutral-100">
+      <div className="w-full">
         <Button
           type="button"
           variant="outline"
@@ -72,7 +75,8 @@ export const QuestionSection = () => {
             })
           }}
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="h-5 w-5" />
+          {`${t('labels.add')} ${t('assessment-test.question')}`}
         </Button>
       </div>
     </div>

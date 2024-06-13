@@ -48,7 +48,7 @@ export const PartSection = () => {
         <div key={part.id}>
           <div className="flex items-center justify-center gap-2 pb-4">
             <p className="h-fit font-black">
-              {`${t('assessment-test.part')} ${AlphabeticEnum[form.watch().selectedPart]}`}
+              {`${t('assessment-test.part')} ${AlphabeticEnum[part.name]}`}
             </p>
 
             <Button
@@ -74,7 +74,6 @@ export const PartSection = () => {
       <div className="flex justify-center">
         <Button
           type="button"
-          variant="secondary"
           onClick={() => {
             // ! repeated
             const totalPages = form.watch().parts.reduce((acc, part) => {

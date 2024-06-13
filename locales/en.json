@@ -11,6 +11,7 @@
     },
     "assessment-test": {
         "part": "Part",
-        "page": "Page"
+        "page": "Page",
+        "question": "Question"
     }
 }

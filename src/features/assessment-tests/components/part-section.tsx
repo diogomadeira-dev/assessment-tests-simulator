@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { DeleteIcon } from 'lucide-react'
-import { Dispatch, SetStateAction } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
 import { PageSection } from './page-section'
@@ -31,17 +30,7 @@ export const updateIndexes = (form: any) => {
   }
 }
 
-export const PartSection = ({
-  selectedPart,
-  setSelectedPart,
-  selectedPage,
-  setSelectedPage,
-}: {
-  selectedPart: number
-  setSelectedPart: Dispatch<SetStateAction<number>>
-  selectedPage: number
-  setSelectedPage: Dispatch<SetStateAction<number>>
-}) => {
+export const PartSection = () => {
   const form = useFormContext<CreateAssessmentInputSchema>()
 
   const partFieldArray = useFieldArray({
@@ -71,14 +60,7 @@ export const PartSection = ({
           </div>
 
           <div>
-            <PageSection
-              part={part}
-              partIndex={partIndex}
-              selectedPart={selectedPart}
-              setSelectedPart={setSelectedPart}
-              selectedPage={selectedPage}
-              setSelectedPage={setSelectedPage}
-            />
+            <PageSection part={part} partIndex={partIndex} />
           </div>
         </div>
       ))}

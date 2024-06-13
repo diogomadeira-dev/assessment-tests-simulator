@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { DeleteIcon, Plus } from 'lucide-react'
-import { Dispatch, SetStateAction } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
 import { updateIndexes } from './part-section'
@@ -9,17 +8,9 @@ import { updateIndexes } from './part-section'
 export const PageSection = ({
   part,
   partIndex,
-  selectedPart,
-  setSelectedPart,
-  selectedPage,
-  setSelectedPage,
 }: {
   part: CreateAssessmentInputSchema['parts'][number]
   partIndex: number
-  selectedPart: number
-  setSelectedPart: Dispatch<SetStateAction<number>>
-  selectedPage: number
-  setSelectedPage: Dispatch<SetStateAction<number>>
 }) => {
   const form = useFormContext<CreateAssessmentInputSchema>()
 
@@ -38,12 +29,12 @@ export const PageSection = ({
         <div key={page.id}>
           <div
             className={cn('h-44 w-full bg-neutral-100', {
-              'bg-blue-300': selectedPage === page.number,
+              'bg-blue-300': form.watch('selectedPage') === page.number,
             })}
             // TODO: REVAMP TO USE SHADCN CARD CLICABLE
             onClick={() => {
-              setSelectedPage(page.number)
-              setSelectedPart(part.name)
+              form.setValue('selectedPage', page.number)
+              form.setValue('selectedPart', part.name)
             }}
           >
             <p>PAGE {page.number}</p>

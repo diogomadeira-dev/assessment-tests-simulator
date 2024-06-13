@@ -3,19 +3,22 @@ import { Plus } from 'lucide-react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
 
-export const QuestionSection = ({
-  selectedPart = 0,
-  selectedPage = 0,
-}: {
-  selectedPart: number
-  selectedPage: number
-}) => {
+export const QuestionSection = () => {
   const form = useFormContext<CreateAssessmentInputSchema>()
+
+  const { selectedPart, selectedPage } = form.watch()
+  console.log('🚀 ~ QuestionSection ~ selectedPage:', selectedPage)
+  console.log('🚀 ~ QuestionSection ~ selectedPart:', selectedPart)
 
   const questionFieldArray = useFieldArray({
     control: form.control,
-    name: `parts.${selectedPart}.pages.${selectedPage}.questions`,
+    name: `parts.${selectedPart}.pages.${selectedPage}.questions` as 'parts.0.pages.0.questions',
   })
+
+  // const questionFieldArray = useFieldArray({
+  //   control: form.control,
+  //   name: `parts.${selectedPart}.pages.${selectedPage}.questions`,
+  // })
 
   const questions = form.watch(
     `parts.${selectedPart}.pages.${selectedPage}.questions`,

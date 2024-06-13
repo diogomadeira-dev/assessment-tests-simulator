@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { AlphabeticEnum } from '@/types/assessment-tests'
-import { DeleteIcon } from 'lucide-react'
+import { X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
@@ -46,22 +46,22 @@ export const PartSection = () => {
     <ScrollArea className="h-screen w-[200px] rounded-md border p-4">
       {partFieldArray.fields.map((part, partIndex) => (
         <div key={part.id}>
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-2 pb-4">
             <p className="h-fit font-black">
-              {t('assessment-test.part')} {AlphabeticEnum[part.name]}
+              {`${t('assessment-test.part')} ${AlphabeticEnum[form.watch().selectedPart]}`}
             </p>
 
             <Button
               type="button"
-              variant="ghost"
-              size="icon"
+              variant="destructive"
+              size="badge"
               onClick={() => {
                 partFieldArray.remove(partIndex)
 
                 updateIndexes(form)
               }}
             >
-              <DeleteIcon className="h-4 w-4" />
+              <X className="h-4 w-4" />
             </Button>
           </div>
 
@@ -71,30 +71,33 @@ export const PartSection = () => {
         </div>
       ))}
 
-      <Button
-        type="button"
-        variant="outline"
-        onClick={() => {
-          // ! repeated
-          const totalPages = form.watch().parts.reduce((acc, part) => {
-            return acc + part.pages.length
-          }, 0)
+      <div className="flex justify-center">
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={() => {
+            // ! repeated
+            const totalPages = form.watch().parts.reduce((acc, part) => {
+              return acc + part.pages.length
+            }, 0)
 
-          partFieldArray.append({
-            name: form.watch().parts.length + 1,
-            pages: [
-              {
-                number: totalPages + 1,
-                questions: [],
-              },
-            ],
-          })
+            partFieldArray.append({
+              name: form.watch().parts.length + 1,
+              pages: [
+                {
+                  number: totalPages + 1,
+                  questions: [],
+                },
+              ],
+            })
 
-          updateIndexes(form)
-        }}
-      >
-        append new part
-      </Button>
+            updateIndexes(form)
+          }}
+        >
+          {t('labels.add')} {t('assessment-test.part')}{' '}
+          {AlphabeticEnum[form.watch().parts.length]}
+        </Button>
+      </div>
     </ScrollArea>
   )
 }

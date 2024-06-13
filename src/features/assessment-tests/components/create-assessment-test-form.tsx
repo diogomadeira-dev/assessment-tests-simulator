@@ -2,7 +2,9 @@
 
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
+import { AlphabeticEnum } from '@/types/assessment-tests'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import {
   CreateAssessmentInput,
@@ -12,6 +14,8 @@ import { PartSection } from './part-section'
 import { QuestionSection } from './question-section'
 
 export const CreateAssessmentForm = () => {
+  const t = useTranslations()
+
   const form = useForm<CreateAssessmentInputSchema>({
     resolver: zodResolver(CreateAssessmentInput),
     defaultValues: {
@@ -41,12 +45,20 @@ export const CreateAssessmentForm = () => {
         <div className="flex">
           <PartSection />
 
-          <div>
+          <div className="w-full p-8">
+            <div className="flex justify-between">
+              <p className="h-fit font-black text-neutral-600">
+                {`${t('assessment-test.part')} ${AlphabeticEnum[form.watch().selectedPart]}`}{' '}
+                -{' '}
+                {`${t('assessment-test.page')} ${form.watch().selectedPage + 1}`}
+              </p>
+
+              <Button type="submit">Submit</Button>
+            </div>
+
             <QuestionSection />
 
-            <Button type="submit">Submit</Button>
-
-            <pre>{JSON.stringify(form.watch(), null, 4)}</pre>
+            {/* <pre>{JSON.stringify(form.watch(), null, 4)}</pre> */}
           </div>
         </div>
       </form>

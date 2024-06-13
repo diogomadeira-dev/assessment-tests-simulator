@@ -1,4 +1,12 @@
 import { Button } from '@/components/ui/button'
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import { DeleteIcon, Plus } from 'lucide-react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
@@ -19,12 +27,24 @@ export const QuestionSection = () => {
   )
 
   return (
-    <div>
+    <div className="space-y-4">
       {questions &&
         questions.length > 0 &&
         questions.map((question, questionIndex) => (
-          <div key={questionIndex}>
-            <p>question: {question.type}</p>
+          <div key={questionIndex} className="flex items-end gap-4">
+            <FormField
+              control={form.control}
+              name={`parts.${selectedPart}.pages.${selectedPage}.questions.${questionIndex}.type`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Write your question</FormLabel>
+                  <FormControl>
+                    <Input placeholder="shadcn" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <Button
               type="button"

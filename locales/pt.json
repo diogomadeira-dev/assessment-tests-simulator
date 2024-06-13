@@ -2,13 +2,15 @@
     "title": "Simulador de Provas Digitais",
     "labels": {
         "username": "Utilizador",
-        "password": "Palavra-passe"
+        "password": "Palavra-passe",
+        "add": "Adicionar"
     },
     "auth": {
         "signIn": "Entrar",
         "description": "Introduz os dados de acesso para entrares"
     },
     "assessment-test": {
-        "part": "Parte"
+        "part": "Parte",
+        "page": "Página"
     }
 }

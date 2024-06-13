@@ -1,6 +1,8 @@
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { AlphabeticEnum } from '@/types/assessment-tests'
 import { DeleteIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
 import { PageSection } from './page-section'
@@ -31,6 +33,8 @@ export const updateIndexes = (form: any) => {
 }
 
 export const PartSection = () => {
+  const t = useTranslations()
+
   const form = useFormContext<CreateAssessmentInputSchema>()
 
   const partFieldArray = useFieldArray({
@@ -42,12 +46,14 @@ export const PartSection = () => {
     <ScrollArea className="h-screen w-[200px] rounded-md border p-4">
       {partFieldArray.fields.map((part, partIndex) => (
         <div key={part.id}>
-          <div className="flex justify-between">
-            <p>PART {part.name}</p>
+          <div className="flex items-center justify-center gap-2">
+            <p className="h-fit font-black">
+              {t('assessment-test.part')} {AlphabeticEnum[part.name]}
+            </p>
 
             <Button
               type="button"
-              variant="destructive"
+              variant="ghost"
               size="icon"
               onClick={() => {
                 partFieldArray.remove(partIndex)

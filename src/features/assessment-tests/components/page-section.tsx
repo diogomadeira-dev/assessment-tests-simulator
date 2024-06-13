@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import { DeleteIcon, Plus } from 'lucide-react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
@@ -25,7 +26,17 @@ export const PageSection = ({
   return (
     <div key={partIndex} className="space-y-4">
       {form.watch().parts[partIndex].pages.map((page, pageIndex) => (
-        <div key={pageIndex} className="h-44 w-full bg-neutral-100">
+        <div
+          key={pageIndex}
+          className={cn('h-44 w-full bg-neutral-100', {
+            'bg-blue-300': form.watch('selectedPage') === page.number,
+          })}
+          // TODO: REVAMP TO USE SHADCN CARD CLICABLE
+          onClick={() => {
+            form.setValue('selectedPage', page.number)
+            form.setValue('selectedPart', part.name)
+          }}
+        >
           <p>
             PAGE {page.number}
             {/* - {part.partNumber} */}
@@ -46,7 +57,7 @@ export const PageSection = ({
         </div>
       ))}
 
-      <div className="h-44 w-full bg-neutral-100">
+      <div className="w-full bg-neutral-100">
         <Button
           type="button"
           variant="outline"

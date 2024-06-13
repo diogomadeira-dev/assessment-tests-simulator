@@ -9,10 +9,15 @@ import {
   CreateAssessmentInputSchema,
 } from '../api/create-assessment-test'
 import { PartSection } from './part-section'
+import { QuestionSection } from './question-section'
 
 export const CreateAssessmentForm = () => {
   const form = useForm<CreateAssessmentInputSchema>({
     resolver: zodResolver(CreateAssessmentInput),
+    defaultValues: {
+      selectedPage: 0,
+      selectedPart: 0,
+    },
   })
 
   const onSubmit = (values: CreateAssessmentInputSchema) => {
@@ -26,9 +31,11 @@ export const CreateAssessmentForm = () => {
           <PartSection />
 
           <div>
-            <pre>{JSON.stringify(form.watch(), null, 4)}</pre>
+            <QuestionSection />
 
             <Button type="submit">Submit</Button>
+
+            <pre>{JSON.stringify(form.watch(), null, 4)}</pre>
           </div>
         </div>
       </form>

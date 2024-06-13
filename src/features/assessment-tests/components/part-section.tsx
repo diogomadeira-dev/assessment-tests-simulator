@@ -1,21 +1,26 @@
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { DeleteIcon } from 'lucide-react'
+import { Dispatch, SetStateAction } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
 import { PageSection } from './page-section'
 
 // ! TODO: MOVE THIS TO ANOTHER PLACE
 export const updateIndexes = (form: any) => {
-  let pageCount = 0
+  let partCount = -1
+  let pageCount = -1
   if (form.watch().parts && form.watch().parts.length > 0) {
     const updatedIndexes = form.watch().parts.map((partElement, partIndex) => {
+      partCount++
+      // console.log('🚀 ~ updatedIndexes ~ partCount:', partCount, partElement)
       return {
-        name: partIndex,
+        ...partElement,
+        name: partCount,
         pages: partElement.pages.map((pageElement, pageIndex) => {
-          console.log('🚀 ~ pageCount', pageCount)
           pageCount++
           return {
+            ...pageElement,
             number: pageCount,
           }
         }),
@@ -26,7 +31,17 @@ export const updateIndexes = (form: any) => {
   }
 }
 
-export const PartSection = () => {
+export const PartSection = ({
+  selectedPart,
+  setSelectedPart,
+  selectedPage,
+  setSelectedPage,
+}: {
+  selectedPart: number
+  setSelectedPart: Dispatch<SetStateAction<number>>
+  selectedPage: number
+  setSelectedPage: Dispatch<SetStateAction<number>>
+}) => {
   const form = useFormContext<CreateAssessmentInputSchema>()
 
   const partFieldArray = useFieldArray({
@@ -35,9 +50,9 @@ export const PartSection = () => {
   })
 
   return (
-    <ScrollArea className="h-[800px] w-[200px] rounded-md border p-4">
+    <ScrollArea className="h-screen w-[200px] rounded-md border p-4">
       {partFieldArray.fields.map((part, partIndex) => (
-        <div key={part.name}>
+        <div key={part.id}>
           <div className="flex justify-between">
             <p>PART {part.name}</p>
 
@@ -56,7 +71,14 @@ export const PartSection = () => {
           </div>
 
           <div>
-            <PageSection part={part} partIndex={partIndex} />
+            <PageSection
+              part={part}
+              partIndex={partIndex}
+              selectedPart={selectedPart}
+              setSelectedPart={setSelectedPart}
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
           </div>
         </div>
       ))}
@@ -75,6 +97,7 @@ export const PartSection = () => {
             pages: [
               {
                 number: totalPages + 1,
+                questions: [],
               },
             ],
           })

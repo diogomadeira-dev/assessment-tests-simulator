@@ -1,8 +1,6 @@
 import { z } from 'zod'
 
 export const CreateAssessmentInput = z.object({
-  selectedPage: z.number(),
-  selectedPart: z.number(),
   parts: z.array(
     z.object({
       name: z.number(),

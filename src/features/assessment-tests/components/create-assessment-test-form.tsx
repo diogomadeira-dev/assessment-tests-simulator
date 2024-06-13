@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   CreateAssessmentInput,
@@ -12,11 +13,24 @@ import { PartSection } from './part-section'
 import { QuestionSection } from './question-section'
 
 export const CreateAssessmentForm = () => {
+  // ! TODO: REVAMP TO REDUX LOCAL STATE
+  const [selectedPart, setSelectedPart] = useState(0)
+  const [selectedPage, setSelectedPage] = useState(0)
+
   const form = useForm<CreateAssessmentInputSchema>({
     resolver: zodResolver(CreateAssessmentInput),
     defaultValues: {
-      selectedPage: 0,
-      selectedPart: 0,
+      parts: [
+        {
+          name: 0,
+          pages: [
+            {
+              number: 0,
+              questions: [],
+            },
+          ],
+        },
+      ],
     },
   })
 
@@ -28,10 +42,18 @@ export const CreateAssessmentForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex">
-          <PartSection />
+          <PartSection
+            selectedPart={selectedPart}
+            setSelectedPart={setSelectedPart}
+            selectedPage={selectedPage}
+            setSelectedPage={setSelectedPage}
+          />
 
           <div>
-            <QuestionSection />
+            <QuestionSection
+              selectedPart={selectedPart}
+              selectedPage={selectedPage}
+            />
 
             <Button type="submit">Submit</Button>
 

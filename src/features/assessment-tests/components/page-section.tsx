@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { DeleteIcon, Plus } from 'lucide-react'
+import { Dispatch, SetStateAction } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
 import { updateIndexes } from './part-section'
@@ -8,9 +9,17 @@ import { updateIndexes } from './part-section'
 export const PageSection = ({
   part,
   partIndex,
+  selectedPart,
+  setSelectedPart,
+  selectedPage,
+  setSelectedPage,
 }: {
   part: CreateAssessmentInputSchema['parts'][number]
   partIndex: number
+  selectedPart: number
+  setSelectedPart: Dispatch<SetStateAction<number>>
+  selectedPage: number
+  setSelectedPage: Dispatch<SetStateAction<number>>
 }) => {
   const form = useFormContext<CreateAssessmentInputSchema>()
 
@@ -25,22 +34,20 @@ export const PageSection = ({
 
   return (
     <div key={partIndex} className="space-y-4">
-      {form.watch().parts[partIndex].pages.map((page, pageIndex) => (
-        <div
-          key={pageIndex}
-          className={cn('h-44 w-full bg-neutral-100', {
-            'bg-blue-300': form.watch('selectedPage') === page.number,
-          })}
-          // TODO: REVAMP TO USE SHADCN CARD CLICABLE
-          onClick={() => {
-            form.setValue('selectedPage', page.number)
-            form.setValue('selectedPart', part.name)
-          }}
-        >
-          <p>
-            PAGE {page.number}
-            {/* - {part.partNumber} */}
-          </p>
+      {pageFieldArray.fields.map((page, pageIndex) => (
+        <div key={page.id}>
+          <div
+            className={cn('h-44 w-full bg-neutral-100', {
+              'bg-blue-300': selectedPage === page.number,
+            })}
+            // TODO: REVAMP TO USE SHADCN CARD CLICABLE
+            onClick={() => {
+              setSelectedPage(page.number)
+              setSelectedPart(part.name)
+            }}
+          >
+            <p>PAGE {page.number}</p>
+          </div>
 
           <Button
             type="button"
@@ -66,28 +73,32 @@ export const PageSection = ({
             const totalPages = form.watch().parts.reduce((acc, part) => {
               return acc + part.pages.length
             }, 0)
-            // console.log('🚀 ~ totalPages:', totalPages)
+            console.log('🚀 ~ totalPages:', totalPages)
 
             pageFieldArray.append({
               number: totalPages + 1,
+              questions: [],
             })
 
-            // ! repeated
-            let count = 0
-            if (form.watch().parts && form.watch().parts.length > 0) {
-              const test = form.watch().parts.map((partElement) => ({
-                name: partElement.name,
-                pages: partElement.pages.map((pageElement) => {
-                  count++
-                  return {
-                    number: count,
-                  }
-                }),
-              }))
-              console.log('🚀 ~ PartSection ~ test:', test)
+            updateIndexes(form)
 
-              form.setValue('parts', test)
-            }
+            // // ! repeated
+            // let count = 0
+            // if (form.watch().parts && form.watch().parts.length > 0) {
+            //   const test = form.watch().parts.map((partElement) => ({
+            //     name: partElement.name,
+            //     pages: partElement.pages.map((pageElement) => {
+            //       count++
+            //       return {
+            //         number: count,
+            //         questions: [],
+            //       }
+            //     }),
+            //   }))
+            //   console.log('🚀 ~ PartSection ~ test:', test)
+
+            //   form.setValue('parts', test)
+            // }
           }}
         >
           <Plus className="h-4 w-4" />

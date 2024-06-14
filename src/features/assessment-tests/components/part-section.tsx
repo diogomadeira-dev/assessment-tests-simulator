@@ -51,18 +51,20 @@ export const PartSection = () => {
               {`${t('assessment-test.part')} ${AlphabeticEnum[part.name]}`}
             </p>
 
-            <Button
-              type="button"
-              variant="destructive"
-              size="badge"
-              onClick={() => {
-                partFieldArray.remove(partIndex)
+            {form.watch().parts.length > 1 && (
+              <Button
+                type="button"
+                variant="destructive"
+                size="badge"
+                onClick={() => {
+                  partFieldArray.remove(partIndex)
 
-                updateIndexes(form)
-              }}
-            >
-              <X className="h-4 w-4" />
-            </Button>
+                  updateIndexes(form)
+                }}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            )}
           </div>
 
           <div>

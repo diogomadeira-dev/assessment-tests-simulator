@@ -26,6 +26,8 @@ export const PageSection = ({
           <div
             className={cn('relative h-44 w-32 bg-neutral-100 px-3 py-2', {
               'bg-blue-300': form.watch('selectedPage') === page.number,
+              'border-2 border-destructive':
+                form.formState.errors?.parts?.[partIndex]?.pages?.[pageIndex],
             })}
             // TODO: REVAMP TO USE SHADCN CARD CLICABLE
             onClick={() => {
@@ -34,6 +36,10 @@ export const PageSection = ({
             }}
           >
             <p>PAGE {page.number}</p>
+
+            {form.formState.errors?.parts?.[partIndex]?.pages?.[pageIndex] && (
+              <p>error</p>
+            )}
 
             <Button
               type="button"

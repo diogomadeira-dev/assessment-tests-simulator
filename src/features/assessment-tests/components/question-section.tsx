@@ -37,12 +37,12 @@ export const QuestionSection = () => {
           <div key={questionIndex} className="flex items-end gap-4">
             <FormField
               control={form.control}
-              name={`parts.${selectedPart}.pages.${selectedPage}.questions.${questionIndex}.type`}
+              name={`parts.${selectedPart}.pages.${selectedPage}.questions.${questionIndex}.text`}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Write your question</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -70,8 +70,7 @@ export const QuestionSection = () => {
           variant="outline"
           onClick={() => {
             questionFieldArray.append({
-              label: '',
-              type: 'text',
+              text: '',
             })
           }}
         >

@@ -42,7 +42,7 @@ export const CreateAssessmentForm = () => {
     console.log(values)
   }
 
-  const selectedPageIndex = parts[selectedPart].pages.findIndex(
+  const selectedPageIndex = parts[selectedPart]?.pages.findIndex(
     (page) => page.number === selectedPage,
   )
 
@@ -53,7 +53,7 @@ export const CreateAssessmentForm = () => {
           <PartSection />
 
           <div className="w-full p-8">
-            {form.watch().parts[selectedPart].pages[selectedPageIndex]
+            {form.watch().parts[selectedPart]?.pages[selectedPageIndex]
               ?.number === selectedPage ? (
               <div>
                 <div className="flex justify-between">

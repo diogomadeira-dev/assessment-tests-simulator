@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { AlphabeticEnum } from '@/types/assessment-tests'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { FileSearch2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import {
@@ -11,6 +12,7 @@ import {
   CreateAssessmentInputSchema,
 } from '../api/create-assessment-test'
 import { PartSection } from './part-section'
+import { QuestionSection } from './question-section'
 
 export const CreateAssessmentForm = () => {
   const t = useTranslations()
@@ -34,11 +36,15 @@ export const CreateAssessmentForm = () => {
     },
   })
 
-  const { selectedPart, selectedPage } = form.watch()
+  const { selectedPart, selectedPage, parts } = form.watch()
 
   const onSubmit = (values: CreateAssessmentInputSchema) => {
     console.log(values)
   }
+
+  const selectedPageIndex = parts[selectedPart].pages.findIndex(
+    (page) => page.number === selectedPage,
+  )
 
   return (
     <Form {...form}>
@@ -47,22 +53,30 @@ export const CreateAssessmentForm = () => {
           <PartSection />
 
           <div className="w-full p-8">
-            <div className="flex justify-between">
-              <p className="h-fit font-black text-neutral-600">
-                {`${t('assessment-test.part')} ${AlphabeticEnum[selectedPart]}`}{' '}
-                - {`${t('assessment-test.page')} ${selectedPage + 1}`}
-              </p>
+            {form.watch().parts[selectedPart].pages[selectedPageIndex]
+              ?.number === selectedPage ? (
+              <div>
+                <div className="flex justify-between">
+                  <p className="h-fit font-black text-neutral-600">
+                    {`${t('assessment-test.part')} ${AlphabeticEnum[selectedPart]}`}{' '}
+                    - {`${t('assessment-test.page')} ${selectedPage + 1}`}
+                  </p>
 
-              <Button type="submit">Submit</Button>
-            </div>
+                  <Button type="submit">Submit</Button>
+                </div>
 
-            {/* {form.watch().parts[selectedPart].pages.length > 0 ? (
-              <QuestionSection />
+                <QuestionSection />
+              </div>
             ) : (
-              <p>Por favor selecione uma pagina</p>
-            )} */}
+              <div className="flex h-full flex-col items-center justify-center gap-8">
+                <FileSearch2 className="h-36 w-36 text-neutral-300" />
+                <p className="text-lg text-neutral-600">
+                  {t('assessment-test.selectPage')}
+                </p>
+              </div>
+            )}
 
-            <pre>{JSON.stringify(form.watch(), null, 4)}</pre>
+            {/* <pre>{JSON.stringify(form.watch(), null, 4)}</pre> */}
           </div>
         </div>
       </form>

@@ -16,7 +16,7 @@ export default async function AuthenticatedLayout({
   return (
     <>
       <SiteHeader />
-      {children}
+      <div className="bg-red-500">{children}</div>
     </>
   )
 }

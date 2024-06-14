@@ -12,6 +12,7 @@
     "assessment-test": {
         "part": "Parte",
         "page": "Página",
-        "question": "Pergunta"
+        "question": "Pergunta",
+        "selectPage": "Por favor seleciona uma página"
     }
 }

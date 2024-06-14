@@ -12,6 +12,7 @@
     "assessment-test": {
         "part": "Part",
         "page": "Page",
-        "question": "Question"
+        "question": "Question",
+        "selectPage": "Please select one page"
     }
 }

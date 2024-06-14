@@ -6,6 +6,7 @@ export const updateIndexes = (
 ) => {
   let partCount = -1
   let pageCount = -1
+
   if (form.watch().parts && form.watch().parts.length > 0) {
     const updatedIndexes = form.watch().parts.map((partElement) => {
       partCount++

@@ -11,7 +11,6 @@ import {
   CreateAssessmentInputSchema,
 } from '../api/create-assessment-test'
 import { PartSection } from './part-section'
-import { QuestionSection } from './question-section'
 
 export const CreateAssessmentForm = () => {
   const t = useTranslations()
@@ -35,6 +34,8 @@ export const CreateAssessmentForm = () => {
     },
   })
 
+  const { selectedPart, selectedPage } = form.watch()
+
   const onSubmit = (values: CreateAssessmentInputSchema) => {
     console.log(values)
   }
@@ -48,17 +49,20 @@ export const CreateAssessmentForm = () => {
           <div className="w-full p-8">
             <div className="flex justify-between">
               <p className="h-fit font-black text-neutral-600">
-                {`${t('assessment-test.part')} ${AlphabeticEnum[form.watch().selectedPart]}`}{' '}
-                -{' '}
-                {`${t('assessment-test.page')} ${form.watch().selectedPage + 1}`}
+                {`${t('assessment-test.part')} ${AlphabeticEnum[selectedPart]}`}{' '}
+                - {`${t('assessment-test.page')} ${selectedPage + 1}`}
               </p>
 
               <Button type="submit">Submit</Button>
             </div>
 
-            <QuestionSection />
+            {/* {form.watch().parts[selectedPart].pages.length > 0 ? (
+              <QuestionSection />
+            ) : (
+              <p>Por favor selecione uma pagina</p>
+            )} */}
 
-            {/* <pre>{JSON.stringify(form.watch(), null, 4)}</pre> */}
+            <pre>{JSON.stringify(form.watch(), null, 4)}</pre>
           </div>
         </div>
       </form>

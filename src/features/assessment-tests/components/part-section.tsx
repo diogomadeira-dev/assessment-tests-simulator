@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { AlphabeticEnum } from '@/types/assessment-tests'
-import { updateIndexes } from '@/utils/updateIndexes-assessment-tests-form'
+import { updateIndexes } from '@/utils/update-indexes-assessment-tests-form'
 import { X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useFieldArray, useFormContext } from 'react-hook-form'

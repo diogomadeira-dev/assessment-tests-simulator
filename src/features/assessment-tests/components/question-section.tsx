@@ -7,7 +7,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { updateIndexes } from '@/utils/updateIndexes-assessment-tests-form'
+import { updateIndexes } from '@/utils/update-indexes-assessment-tests-form'
 import { DeleteIcon, Plus } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useFieldArray, useFormContext } from 'react-hook-form'

@@ -12,7 +12,7 @@ export const updateIndexes = (
       partCount++
       return {
         ...partElement,
-        name: partCount,
+        number: partCount,
         pages: partElement.pages.map((pageElement) => {
           pageCount++
           return {

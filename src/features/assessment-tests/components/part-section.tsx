@@ -53,7 +53,6 @@ export const PartSection = () => {
         <Button
           type="button"
           onClick={() => {
-            // ! repeated
             const totalPages = form.watch().parts.reduce((acc, part) => {
               return acc + part.pages.length
             }, 0)
@@ -71,8 +70,7 @@ export const PartSection = () => {
             updateIndexes(form)
           }}
         >
-          {t('labels.add')} {t('assessment-test.part')}{' '}
-          {AlphabeticEnum[form.watch().parts.length]}
+          {`${t('labels.add')} ${t('assessment-test.part')} ${AlphabeticEnum[form.watch().parts.length]}`}
         </Button>
       </div>
     </ScrollArea>

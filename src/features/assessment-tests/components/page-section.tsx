@@ -36,11 +36,6 @@ export const PageSection = ({
             }}
           >
             <p>PAGE {page.number}</p>
-
-            {form.formState.errors?.parts?.[partIndex]?.pages?.[pageIndex] && (
-              <p>error</p>
-            )}
-
             <Button
               type="button"
               variant="destructive"
@@ -63,7 +58,6 @@ export const PageSection = ({
           type="button"
           variant="outline"
           onClick={() => {
-            // ! repeated
             const totalPages = form.watch().parts.reduce((acc, part) => {
               return acc + part.pages.length
             }, 0)

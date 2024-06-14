@@ -32,7 +32,7 @@ export const PageSection = ({
             // TODO: REVAMP TO USE SHADCN CARD CLICABLE
             onClick={() => {
               form.setValue('selectedPage', page.number)
-              form.setValue('selectedPart', part.name)
+              form.setValue('selectedPart', part.number)
             }}
           >
             <p>PAGE {page.number}</p>

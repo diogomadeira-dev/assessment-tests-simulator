@@ -24,7 +24,7 @@ export const PartSection = () => {
         <div key={part.id}>
           <div className="flex items-center justify-center gap-2 pb-4">
             <p className="h-fit font-black">
-              {`${t('assessment-test.part')} ${AlphabeticEnum[part.name]}`}
+              {`${t('assessment-test.part')} ${AlphabeticEnum[part.number]}`}
             </p>
 
             {form.watch().parts.length > 1 && (
@@ -58,7 +58,7 @@ export const PartSection = () => {
             }, 0)
 
             partFieldArray.append({
-              name: form.watch().parts.length + 1,
+              number: form.watch().parts.length + 1,
               pages: [
                 {
                   number: totalPages + 1,

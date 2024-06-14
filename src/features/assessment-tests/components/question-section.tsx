@@ -29,6 +29,8 @@ export const QuestionSection = () => {
     `parts.${selectedPart}.pages.${selectedPage}.questions`,
   )
 
+  // ! TODO: DELEVOP QUESTION NUMBER
+
   return (
     <div className="space-y-8">
       {questions &&
@@ -40,7 +42,7 @@ export const QuestionSection = () => {
               name={`parts.${selectedPart}.pages.${selectedPage}.questions.${questionIndex}.text`}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Write your question</FormLabel>
+                  <FormLabel>{questionIndex} Write your question</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>

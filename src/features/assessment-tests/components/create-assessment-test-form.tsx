@@ -24,7 +24,7 @@ export const CreateAssessmentForm = () => {
       selectedPage: 0,
       parts: [
         {
-          name: 0,
+          number: 0,
           pages: [
             {
               number: 0,

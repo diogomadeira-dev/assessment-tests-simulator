@@ -5,12 +5,13 @@ export const CreateAssessmentInput = z.object({
   selectedPart: z.number(),
   parts: z.array(
     z.object({
-      name: z.number(),
+      number: z.number(),
       pages: z.array(
         z.object({
           number: z.number(),
           questions: z.array(
             z.object({
+              number: z.number(),
               text: z.string().trim().min(2).max(50),
             }),
           ),

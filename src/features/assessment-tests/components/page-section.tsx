@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { useCounterStore } from '@/providers/counter-store-provider'
 import { updateIndexes } from '@/utils/update-indexes-assessment-tests-form'
 import { Plus, X } from 'lucide-react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
@@ -12,6 +13,9 @@ export const PageSection = ({
   part: CreateAssessmentInputSchema['parts'][number]
   partIndex: number
 }) => {
+  const { selectedPage, selectedPart, setSelectedPage, setSelectedPart } =
+    useCounterStore((state) => state)
+
   const form = useFormContext<CreateAssessmentInputSchema>()
 
   const pageFieldArray = useFieldArray({
@@ -21,20 +25,36 @@ export const PageSection = ({
 
   return (
     <div key={partIndex} className="space-y-4">
+      <div>
+        selectedPart: {selectedPart}
+        selectedPage: {selectedPage}
+      </div>
+
       {pageFieldArray.fields.map((page, pageIndex) => (
         <div key={page.id} className="flex justify-center">
           <div
             className={cn('relative h-44 w-32 bg-neutral-100 px-3 py-2', {
-              'bg-blue-300': form.watch('selectedPage') === page.number,
+              'bg-blue-300': selectedPage === page.number,
               'border-2 border-destructive':
                 form.formState.errors?.parts?.[partIndex]?.pages?.[pageIndex],
             })}
             // TODO: REVAMP TO USE SHADCN CARD CLICABLE
             onClick={() => {
-              form.setValue('selectedPage', page.number)
-              form.setValue('selectedPart', part.number)
+              // form.setValue('selectedPage', page.number)
+              // form.setValue('selectedPart', part.number)
+              setSelectedPage(page.number)
+              setSelectedPart(part.number)
             }}
           >
+            {/* <Button
+              type="button"
+              onClick={() => {
+                form.setValue('selectedPage', page.number)
+                form.setValue('selectedPart', part.number)
+              }}
+            >
+              SELECT
+            </Button> */}
             <p>PAGE {page.number}</p>
             <Button
               type="button"

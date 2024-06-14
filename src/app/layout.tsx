@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { CounterStoreProvider } from '@/providers/counter-store-provider'
 import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
@@ -32,7 +33,7 @@ export default async function RootLayout({
         className={cn('bg-background font-sans antialiased', fontSans.variable)}
       >
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <CounterStoreProvider>{children}</CounterStoreProvider>
         </NextIntlClientProvider>
       </body>
     </html>

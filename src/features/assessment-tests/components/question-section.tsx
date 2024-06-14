@@ -36,13 +36,13 @@ export const QuestionSection = () => {
       {questions &&
         questions.length > 0 &&
         questions.map((question, questionIndex) => (
-          <div key={questionIndex} className="flex items-end gap-4">
+          <div key={question.number} className="flex items-end gap-4">
             <FormField
               control={form.control}
               name={`parts.${selectedPart}.pages.${selectedPage}.questions.${questionIndex}.text`}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{questionIndex} Write your question</FormLabel>
+                  <FormLabel>{question.number} Write your question</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -71,9 +71,18 @@ export const QuestionSection = () => {
           type="button"
           variant="outline"
           onClick={() => {
+            const totalQuestions = form
+              .watch()
+              .parts[selectedPart]?.pages.reduce((acc, page) => {
+                return acc + page.questions.length
+              }, 0)
+
             questionFieldArray.append({
+              number: totalQuestions + 1,
               text: '',
             })
+
+            updateIndexes(form)
           }}
         >
           <Plus className="h-5 w-5" />

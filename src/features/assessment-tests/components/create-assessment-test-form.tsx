@@ -76,7 +76,7 @@ export const CreateAssessmentForm = () => {
               </div>
             )}
 
-            {/* <pre>{JSON.stringify(form.watch(), null, 4)}</pre> */}
+            <pre>{JSON.stringify(form.watch(), null, 4)}</pre>
           </div>
         </div>
       </form>

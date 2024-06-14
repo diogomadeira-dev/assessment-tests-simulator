@@ -7,11 +7,11 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { updateIndexes } from '@/utils/updateIndexes-assessment-tests-form'
 import { DeleteIcon, Plus } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
-import { updateIndexes } from './part-section'
 
 export const QuestionSection = () => {
   const t = useTranslations()

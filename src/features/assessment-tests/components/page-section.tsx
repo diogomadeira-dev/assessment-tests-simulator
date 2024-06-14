@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { updateIndexes } from '@/utils/updateIndexes-assessment-tests-form'
 import { Plus, X } from 'lucide-react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
-import { updateIndexes } from './part-section'
 
 export const PageSection = ({
   part,

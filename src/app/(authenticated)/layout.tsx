@@ -14,9 +14,10 @@ export default async function AuthenticatedLayout({
   }
 
   return (
-    <>
+    <div className="flex h-screen flex-col">
       <SiteHeader />
-      <div className="bg-red-500">{children}</div>
-    </>
+      <main className="flex-1 overflow-y-auto p-5">{children}</main>
+      <footer className="p-2 text-right">v1.0.0</footer>
+    </div>
   )
 }

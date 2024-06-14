@@ -29,10 +29,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={cn(
-          'min-h-screen bg-background font-sans antialiased',
-          fontSans.variable,
-        )}
+        className={cn('bg-background font-sans antialiased', fontSans.variable)}
       >
         <NextIntlClientProvider messages={messages}>
           {children}

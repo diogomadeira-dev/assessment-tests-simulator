@@ -48,8 +48,8 @@ export const CreateAssessmentForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="h-full">
+        <div className="flex h-full">
           <PartSection />
 
           <div className="w-full p-8">

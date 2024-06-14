@@ -1,19 +1,10 @@
-import Link from 'next/link'
-
-// import { siteConfig } from "@/config/site"
-// import { CommandMenu } from '@/components/command-menu'
 import { signOut } from '@/features/auth/actions/sign-out'
 import { cn } from '@/lib/utils'
 import { CircleEllipsis } from 'lucide-react'
+import Link from 'next/link'
 import { MainNav } from './main-nav'
 import { MobileNav } from './mobile-nav'
 import { Button, buttonVariants } from './ui/button'
-
-// import { Icons } from "@/components/icons"
-// import { MainNav } from "@/components/main-nav"
-// import { MobileNav } from "@/components/mobile-nav"
-// import { ModeToggle } from "@/components/mode-toggle"
-// import { buttonVariants } from "@/registry/new-york/ui/button"
 
 export function SiteHeader() {
   return (
@@ -24,6 +15,7 @@ export function SiteHeader() {
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
             {/* <CommandMenu /> */}
+            <p>teste</p>
           </div>
           <nav className="flex items-center">
             <Link href="/" target="_blank" rel="noreferrer">

@@ -19,7 +19,7 @@ export const PartSection = () => {
   })
 
   return (
-    <ScrollArea className="h-screen w-[200px] rounded-md border p-4">
+    <ScrollArea className="h-full w-[200px] rounded-md border p-4">
       {partFieldArray.fields.map((part, partIndex) => (
         <div key={part.id}>
           <div className="flex items-center justify-center gap-2 pb-4">

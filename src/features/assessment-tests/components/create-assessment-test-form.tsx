@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
+import { useAssessmentTestsStore } from '@/providers/assessment-tests-store-provider'
 import { AlphabeticEnum } from '@/types/assessment-tests'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FileSearch2 } from 'lucide-react'
@@ -17,11 +18,13 @@ import { QuestionSection } from './question-section'
 export const CreateAssessmentForm = () => {
   const t = useTranslations()
 
+  const { selectedPage, selectedPart } = useAssessmentTestsStore(
+    (state) => state,
+  )
+
   const form = useForm<CreateAssessmentInputSchema>({
     resolver: zodResolver(CreateAssessmentInput),
     defaultValues: {
-      selectedPart: 0,
-      selectedPage: 0,
       parts: [
         {
           number: 0,
@@ -36,15 +39,15 @@ export const CreateAssessmentForm = () => {
     },
   })
 
-  const { selectedPart, selectedPage, parts } = form.watch()
-
   const onSubmit = (values: CreateAssessmentInputSchema) => {
     console.log(values)
   }
 
-  const selectedPageIndex = parts[selectedPart]?.pages.findIndex(
-    (page) => page.number === selectedPage,
-  )
+  const selectedPageIndex = form
+    .watch()
+    .parts[
+      selectedPart
+    ]?.pages.findIndex((page) => page.number === selectedPage)
 
   return (
     <Form {...form}>

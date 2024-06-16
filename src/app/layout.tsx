@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { CounterStoreProvider } from '@/providers/counter-store-provider'
+import { AssessmentTestsStoreProvider } from '@/providers/assessment-tests-store-provider'
 import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
@@ -33,7 +33,10 @@ export default async function RootLayout({
         className={cn('bg-background font-sans antialiased', fontSans.variable)}
       >
         <NextIntlClientProvider messages={messages}>
-          <CounterStoreProvider>{children}</CounterStoreProvider>
+          {/* ! TODO: CHANGE TO GENERIC PROVIDER */}
+          <AssessmentTestsStoreProvider>
+            {children}
+          </AssessmentTestsStoreProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -1,30 +1,30 @@
 import { createStore } from 'zustand/vanilla'
 
-export type CounterState = {
+export type AssessmentTestsState = {
   selectedPart: number
   selectedPage: number
 }
 
-export type CounterActions = {
+export type AssessmentTestsActions = {
   setSelectedPart: (number: number) => void
   setSelectedPage: (number: number) => void
 }
 
-export type CounterStore = CounterState & CounterActions
+export type AssessmentTestsStore = AssessmentTestsState & AssessmentTestsActions
 
-export const initCounterStore = (): CounterState => {
+export const initAssessmentTestsStore = (): AssessmentTestsState => {
   return { selectedPart: 0, selectedPage: 0 }
 }
 
-export const defaultInitState: CounterState = {
+export const defaultInitState: AssessmentTestsState = {
   selectedPart: 0,
   selectedPage: 0,
 }
 
-export const createCounterStore = (
-  initState: CounterState = defaultInitState,
+export const createAssessmentTestsStore = (
+  initState: AssessmentTestsState = defaultInitState,
 ) => {
-  return createStore<CounterStore>()((set) => ({
+  return createStore<AssessmentTestsStore>()((set) => ({
     ...initState,
     setSelectedPart: (number) => set(() => ({ selectedPart: number })),
     setSelectedPage: (number) => set(() => ({ selectedPage: number })),

@@ -56,12 +56,17 @@ export const PartSection = () => {
             const totalPages = form.watch().parts.reduce((acc, part) => {
               return acc + part.pages.length
             }, 0)
+            // console.log('🚀 ~ totalPages ~ totalPages:', totalPages)
+            // console.log(
+            //   '🚀 ~ PartSection ~ form.watch().parts.length:',
+            //   form.watch().parts.length,
+            // )
 
             partFieldArray.append({
-              number: form.watch().parts.length + 1,
+              number: form.watch().parts.length,
               pages: [
                 {
-                  number: totalPages + 1,
+                  number: totalPages,
                   questions: [],
                 },
               ],

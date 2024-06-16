@@ -12,18 +12,10 @@ export const updateIndexes = (
     const updatedIndexes = form.watch().parts.map((partElement) => {
       partCount++
       return {
-        // ...partElement,
         number: partCount,
         pages: partElement.pages.map((pageElement) => {
           pageCount++
-          console.log(
-            '🚀 ~ pages:partElement.pages.map ~ pageCount:',
-            pageCount,
-            pageElement,
-          )
-
           return {
-            // ...pageElement,
             number: pageCount,
             questions: pageElement.questions.map((questionElement) => {
               questionCount++

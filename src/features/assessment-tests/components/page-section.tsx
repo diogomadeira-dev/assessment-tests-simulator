@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { useCounterStore } from '@/providers/counter-store-provider'
+import { useAssessmentTestsStore } from '@/providers/assessment-tests-store-provider'
 import { updateIndexes } from '@/utils/update-indexes-assessment-tests-form'
 import { Plus, X } from 'lucide-react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
@@ -14,7 +14,7 @@ export const PageSection = ({
   partIndex: number
 }) => {
   const { selectedPage, selectedPart, setSelectedPage, setSelectedPart } =
-    useCounterStore((state) => state)
+    useAssessmentTestsStore((state) => state)
 
   const form = useFormContext<CreateAssessmentInputSchema>()
 
@@ -24,7 +24,7 @@ export const PageSection = ({
   })
 
   return (
-    <div key={partIndex} className="space-y-4">
+    <div key={partIndex} className="space-y-4 bg-green-500">
       <div>
         selectedPart: {selectedPart}
         selectedPage: {selectedPage}
@@ -40,21 +40,11 @@ export const PageSection = ({
             })}
             // TODO: REVAMP TO USE SHADCN CARD CLICABLE
             onClick={() => {
-              // form.setValue('selectedPage', page.number)
-              // form.setValue('selectedPart', part.number)
-              setSelectedPage(page.number)
               setSelectedPart(part.number)
+              setSelectedPage(page.number)
+              console.log('🚀 ~ page.number:', page.number)
             }}
           >
-            {/* <Button
-              type="button"
-              onClick={() => {
-                form.setValue('selectedPage', page.number)
-                form.setValue('selectedPart', part.number)
-              }}
-            >
-              SELECT
-            </Button> */}
             <p>PAGE {page.number}</p>
             <Button
               type="button"
@@ -64,7 +54,7 @@ export const PageSection = ({
               onClick={() => {
                 pageFieldArray.remove(pageIndex)
 
-                updateIndexes(form)
+                // updateIndexes(form)
               }}
             >
               <X className="h-4 w-4" />
@@ -81,11 +71,14 @@ export const PageSection = ({
             const totalPages = form.watch().parts.reduce((acc, part) => {
               return acc + part.pages.length
             }, 0)
+            console.log('🚀 ~ totalPages ~ totalPages:', totalPages + 1)
 
             pageFieldArray.append({
-              number: totalPages + 1,
+              number: totalPages,
               questions: [],
             })
+
+            // setSelectedPage(totalPages)
 
             updateIndexes(form)
           }}

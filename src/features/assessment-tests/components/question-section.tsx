@@ -7,6 +7,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { useAssessmentTestsStore } from '@/providers/assessment-tests-store-provider'
 import { updateIndexes } from '@/utils/update-indexes-assessment-tests-form'
 import { DeleteIcon, Plus } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -18,18 +19,24 @@ export const QuestionSection = () => {
 
   const form = useFormContext<CreateAssessmentInputSchema>()
 
-  const { selectedPart, selectedPage } = form.watch()
+  const { selectedPage, selectedPart } = useAssessmentTestsStore(
+    (state) => state,
+  )
 
   const questionFieldArray = useFieldArray({
     control: form.control,
-    name: `parts.${selectedPart}.pages.${selectedPage}.questions` as 'parts.0.pages.0.questions',
+    name: `parts.${selectedPart}.pages.${selectedPage}.questions`,
   })
+
+  console.log(
+    '🚀 ~ QuestionSection ~ selectedPage:',
+    selectedPage,
+    selectedPart,
+  )
 
   const questions = form.watch(
     `parts.${selectedPart}.pages.${selectedPage}.questions`,
   )
-
-  // ! TODO: DELEVOP QUESTION NUMBER
 
   return (
     <div className="space-y-8">

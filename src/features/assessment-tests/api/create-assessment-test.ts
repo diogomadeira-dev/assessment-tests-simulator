@@ -3,13 +3,13 @@ import { z } from 'zod'
 export const CreateAssessmentInput = z.object({
   parts: z.array(
     z.object({
-      number: z.number(),
+      name: z.string(),
       pages: z.array(
         z.object({
-          number: z.number(),
+          number: z.string(),
           questions: z.array(
             z.object({
-              number: z.number(),
+              number: z.string(),
               text: z.string().trim().min(2).max(50),
             }),
           ),

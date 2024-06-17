@@ -1,37 +1,30 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Form } from '@/components/ui/form'
-import { useAssessmentTestsStore } from '@/providers/assessment-tests-store-provider'
-import { AlphabeticEnum } from '@/types/assessment-tests'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FileSearch2 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
-import { useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import {
   CreateAssessmentInput,
   CreateAssessmentInputSchema,
 } from '../api/create-assessment-test'
 import { PartSection } from './part-section'
-import { QuestionSection } from './question-section'
 
 export const CreateAssessmentForm = () => {
-  const t = useTranslations()
-
-  const { selectedPage, selectedPart } = useAssessmentTestsStore(
-    (state) => state,
-  )
-
   const form = useForm<CreateAssessmentInputSchema>({
     resolver: zodResolver(CreateAssessmentInput),
     defaultValues: {
       parts: [
         {
-          number: 0,
+          name: '',
           pages: [
             {
-              number: 0,
-              questions: [],
+              number: '',
+              questions: [
+                {
+                  number: '',
+                  text: '',
+                },
+              ],
             },
           ],
         },
@@ -39,50 +32,20 @@ export const CreateAssessmentForm = () => {
     },
   })
 
-  const onSubmit = (values: CreateAssessmentInputSchema) => {
-    console.log(values)
-  }
+  const { handleSubmit } = form
 
-  const selectedPageIndex = form
-    .watch()
-    .parts[
-      selectedPart
-    ]?.pages.findIndex((page) => page.number === selectedPage)
+  const onSubmit = (data: CreateAssessmentInputSchema) => console.log(data)
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="h-full">
-        <div className="flex h-full">
-          <PartSection />
+    <FormProvider {...form}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {JSON.stringify(form.formState.errors, null, 2)}
+        <pre>{JSON.stringify(form.watch(), null, 4)}</pre>
 
-          <div className="w-full p-8">
-            {form.watch().parts[selectedPart]?.pages[selectedPageIndex]
-              ?.number === selectedPage ? (
-              <div>
-                <div className="flex justify-between">
-                  <p className="h-fit font-black text-neutral-600">
-                    {`${t('assessment-test.part')} ${AlphabeticEnum[selectedPart]}`}{' '}
-                    - {`${t('assessment-test.page')} ${selectedPage + 1}`}
-                  </p>
+        <PartSection />
 
-                  <Button type="submit">Submit</Button>
-                </div>
-
-                <QuestionSection />
-              </div>
-            ) : (
-              <div className="flex h-full flex-col items-center justify-center gap-8">
-                <FileSearch2 className="h-36 w-36 text-neutral-300" />
-                <p className="text-lg text-neutral-600">
-                  {t('assessment-test.selectPage')}
-                </p>
-              </div>
-            )}
-
-            <pre>{JSON.stringify(form.watch(), null, 4)}</pre>
-          </div>
-        </div>
+        <Button type="submit">Submit</Button>
       </form>
-    </Form>
+    </FormProvider>
   )
 }

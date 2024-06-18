@@ -1,15 +1,8 @@
 import { Button } from '@/components/ui/button'
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
+import { AlphabeticEnum } from '@/types/assessment-tests'
 import { useTranslations } from 'next-intl'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
 import { PageSection } from './page-section'
 
 export const PartSection = () => {
@@ -29,11 +22,23 @@ export const PartSection = () => {
   })
 
   return (
-    <div>
-      {fields.map((field, partIndex) => (
+    <div className="space-y-16">
+      {fields.map((field, partIndex, array) => (
         <fieldset key={field.id}>
-          <legend>Part {partIndex}</legend>
+          <div className="flex items-center justify-center gap-2">
+            <h2 className="text-2xl font-black">
+              {`${t('assessment-test.part')} ${AlphabeticEnum[partIndex]}`}
+            </h2>
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={() => removeField(partIndex)}
+            >
+              Remove Part
+            </Button>
+          </div>
 
+          {/* 
           <FormField
             control={control}
             name={`parts.${partIndex}.name`}
@@ -46,29 +51,23 @@ export const PartSection = () => {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
           <PageSection partIndex={partIndex} />
-          <section
-            style={{
-              marginTop: 16,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 16,
-            }}
-          >
-            <Button type="button" onClick={() => removeField(partIndex)}>
-              Remove Part
-            </Button>
-            <Button
-              type="button"
-              onClick={() => appendField({ name: '', pages: [] })}
-            >
-              Append Part
-            </Button>
-          </section>
         </fieldset>
       ))}
+
+      <Button
+        type="button"
+        onClick={() =>
+          appendField({
+            // name: '',
+            pages: [],
+          })
+        }
+      >
+        Append Part
+      </Button>
     </div>
   )
 }

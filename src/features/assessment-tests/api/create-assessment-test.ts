@@ -3,10 +3,10 @@ import { z } from 'zod'
 export const CreateAssessmentInput = z.object({
   parts: z.array(
     z.object({
-      name: z.string(),
+      // name: z.string(),
       pages: z.array(
         z.object({
-          number: z.string(),
+          // number: z.string(),
           questions: z.array(
             z.object({
               number: z.string(),

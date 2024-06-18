@@ -7,8 +7,8 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
 
 interface QuestionProps {
   partIndex: number
@@ -22,17 +22,14 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
     append: appendChild,
     remove: removeChild,
   } = useFieldArray({
+    control,
     name: `parts.${partIndex}.pages.${pageIndex}.questions`,
   })
 
   return (
-    <fieldset>
-      <legend>Question</legend>
+    <fieldset className="space-y-4">
       {children.map((child, questionIndex) => (
-        <section
-          key={child.id}
-          style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}
-        >
+        <section key={child.id} className="flex items-end gap-2">
           <FormField
             control={control}
             name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.number`}
@@ -61,12 +58,19 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
             )}
           />
 
-          <Button type="button" onClick={() => removeChild(questionIndex)}>
+          <Button
+            type="button"
+            variant="destructive"
+            onClick={() => removeChild(questionIndex)}
+          >
             Remove Question
           </Button>
         </section>
       ))}
-      <Button type="button" onClick={() => appendChild({})}>
+      <Button
+        type="button"
+        onClick={() => appendChild({ number: '', text: '' })}
+      >
         Append Question
       </Button>
     </fieldset>

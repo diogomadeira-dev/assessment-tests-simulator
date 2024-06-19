@@ -9,6 +9,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
 import { useFieldArray, useFormContext } from 'react-hook-form'
+import { QuestionsTypeDialog } from './questionsTypeDialog'
 
 interface QuestionProps {
   partIndex: number
@@ -18,9 +19,9 @@ interface QuestionProps {
 export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
   const { control } = useFormContext<CreateAssessmentInputSchema>()
   const {
-    fields: children,
-    append: appendChild,
-    remove: removeChild,
+    fields: pages,
+    append: appendPage,
+    remove: removePage,
   } = useFieldArray({
     control,
     name: `parts.${partIndex}.pages.${pageIndex}.questions`,
@@ -28,7 +29,7 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
 
   return (
     <fieldset className="space-y-4">
-      {children.map((child, questionIndex) => (
+      {pages.map((child, questionIndex) => (
         <section key={child.id} className="flex items-end gap-2">
           <FormField
             control={control}
@@ -61,18 +62,20 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
           <Button
             type="button"
             variant="destructive"
-            onClick={() => removeChild(questionIndex)}
+            onClick={() => removePage(questionIndex)}
           >
             Remove Question
           </Button>
         </section>
       ))}
-      <Button
+
+      {/* <Button
         type="button"
         onClick={() => appendChild({ number: '', text: '' })}
       >
         Append Question
-      </Button>
+      </Button> */}
+      <QuestionsTypeDialog appendPage={appendPage} />
     </fieldset>
   )
 }

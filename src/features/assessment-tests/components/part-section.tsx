@@ -10,7 +10,7 @@ export const PartSection = () => {
 
   const form = useFormContext<CreateAssessmentInputSchema>()
 
-  const { control } = form
+  const { control, watch, reset } = form
 
   const {
     fields,
@@ -23,7 +23,7 @@ export const PartSection = () => {
 
   return (
     <div className="space-y-16">
-      {fields.map((field, partIndex, array) => (
+      {fields.map((field, partIndex) => (
         <fieldset key={field.id}>
           <div className="flex items-center justify-center gap-2">
             <h2 className="text-2xl font-black">

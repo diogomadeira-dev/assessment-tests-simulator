@@ -14,5 +14,8 @@
         "page": "Página",
         "question": "Pergunta",
         "selectPage": "Por favor seleciona uma página"
+    },
+    "errors": {
+        "required": "Obrigatório"
     }
 }

@@ -64,12 +64,7 @@ export const PageSection = ({ partIndex }: PageProps) => {
         onClick={() =>
           appendChild({
             number: '',
-            questions: [
-              {
-                number: '',
-                text: '',
-              },
-            ],
+            questions: [],
           })
         }
       >

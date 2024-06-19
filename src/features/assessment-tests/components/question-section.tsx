@@ -17,7 +17,7 @@ interface QuestionProps {
 }
 
 export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
-  const { control } = useFormContext<CreateAssessmentInputSchema>()
+  const { control, watch } = useFormContext<CreateAssessmentInputSchema>()
   const {
     fields: pages,
     append: appendPage,
@@ -26,6 +26,47 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
     control,
     name: `parts.${partIndex}.pages.${pageIndex}.questions`,
   })
+
+  const questionTypesSwitch = (questionIndex: number) => {
+    switch (
+      watch().parts[partIndex].pages[pageIndex].questions[questionIndex].type
+    ) {
+      case 'SHORT_TEXT':
+        return (
+          <FormField
+            control={control}
+            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.text`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Short text</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )
+      case 'LONG_TEXT':
+        return (
+          <FormField
+            control={control}
+            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.text`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Long text</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )
+      default:
+        return null
+    }
+  }
 
   return (
     <fieldset className="space-y-4">
@@ -45,19 +86,7 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
             )}
           />
 
-          <FormField
-            control={control}
-            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.text`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Question text</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {questionTypesSwitch(questionIndex)}
 
           <Button
             type="button"

@@ -35,7 +35,7 @@ export function QuestionsTypeDialog({
           Append Question
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-6xl">
         <DialogHeader>
           <DialogTitle>Questions Type</DialogTitle>
           <DialogDescription>
@@ -46,10 +46,31 @@ export function QuestionsTypeDialog({
           <DialogClose asChild>
             <Card
               className="cursor-pointer"
-              onClick={() => appendPage({ number: '', text: '' })}
+              onClick={() =>
+                appendPage({ number: '', text: '', type: 'SHORT_TEXT' })
+              }
             >
               <CardHeader>
-                <CardTitle>Text</CardTitle>
+                <CardTitle>Short Text</CardTitle>
+                <CardDescription>Text input</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p>Card Content</p>
+              </CardContent>
+              <CardFooter>
+                <p>Card Footer</p>
+              </CardFooter>
+            </Card>
+          </DialogClose>
+          <DialogClose asChild>
+            <Card
+              className="cursor-pointer"
+              onClick={() =>
+                appendPage({ number: '', text: '', type: 'LONG_TEXT' })
+              }
+            >
+              <CardHeader>
+                <CardTitle>Long Text</CardTitle>
                 <CardDescription>Text input</CardDescription>
               </CardHeader>
               <CardContent>

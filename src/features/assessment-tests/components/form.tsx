@@ -26,16 +26,9 @@ const CreateAssessmentTestForm = () => {
     defaultValues: {
       parts: [
         {
-          // name: '',
           pages: [
             {
-              // number: '',
-              questions: [
-                {
-                  number: '',
-                  text: '',
-                },
-              ],
+              questions: [],
             },
           ],
         },

@@ -2,10 +2,20 @@
     "title": "Assessment tests simulator",
     "labels": {
         "username": "User",
-        "password": "Password"
+        "password": "Password",
+        "add": "Add"
     },
     "auth": {
         "signIn": "Sign in",
         "description": "Enter your access data to log in"
+    },
+    "assessment-test": {
+        "part": "Part",
+        "page": "Page",
+        "question": "Question",
+        "selectPage": "Please select one page"
+    },
+    "errors": {
+        "required": "Required"
     }
 }

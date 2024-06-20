@@ -1,26 +1,26 @@
-'use server';
+'use server'
 
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-import { lucia } from '@/lib/lucia';
-import { getAuth } from '../queries/get-auth';
+import { lucia } from '@/lib/lucia'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+import { getAuth } from '../queries/get-auth'
 
 export const signOut = async (_formData: FormData) => {
-  const { session } = await getAuth();
+  const { session } = await getAuth()
 
   if (!session) {
-    redirect('/sign-in');
+    redirect('/sign-in')
   }
 
-  await lucia.invalidateSession(session.id);
+  await lucia.invalidateSession(session.id)
 
-  const sessionCookie = lucia.createBlankSessionCookie();
+  const sessionCookie = lucia.createBlankSessionCookie()
 
   cookies().set(
     sessionCookie.name,
     sessionCookie.value,
-    sessionCookie.attributes
-  );
+    sessionCookie.attributes,
+  )
 
-  redirect('/sign-in');
-};
+  redirect('/sign-in')
+}

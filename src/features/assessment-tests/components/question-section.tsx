@@ -12,6 +12,7 @@ import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
 import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
 import { useTranslations } from 'next-intl'
+import dynamic from 'next/dynamic'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { QuestionsTypeDialog } from './questionsTypeDialog'
 
@@ -26,6 +27,8 @@ type questionTypesSwitchProps = {
 
 export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
   const t = useTranslations()
+
+  const Editor = dynamic(() => import('@/components/editor'), { ssr: false })
 
   const { control, watch } = useFormContext<CreateAssessmentInputSchema>()
   const {
@@ -159,9 +162,12 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
                   </FormItem>
                 )}
               />
-              <div className="flex gap-2">
+
+              <Editor />
+
+              {/* <div className="flex gap-2">
                 {questionTypesSwitch({ questionIndex })}
-              </div>
+              </div> */}
             </div>
           </div>
           {questionIndex !== length - 1 && <Separator />}

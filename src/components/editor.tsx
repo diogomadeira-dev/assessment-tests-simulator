@@ -1,6 +1,6 @@
 'use client'
 
-import { BlockNoteEditor, PartialBlock } from '@blocknote/core'
+import { BlockNoteEditor, PartialBlock, locales } from '@blocknote/core'
 import { useCreateBlockNote } from '@blocknote/react'
 import { BlockNoteView } from '@blocknote/shadcn'
 import '@blocknote/shadcn/style.css'
@@ -27,10 +27,11 @@ const Editor: React.FC<EditorProps> = ({
     //   const [res] = await uploadFiles("imageUploader", { files: [file] });
     //   return res.url;
     // },
+    dictionary: locales.pt,
   })
 
   return (
-    <div className="-mx-[3.375rem] my-4">
+    <div className="border py-4">
       <BlockNoteView
         editor={editor}
         editable={editable}

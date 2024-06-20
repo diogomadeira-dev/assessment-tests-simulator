@@ -22,6 +22,7 @@ export const CreateAssessmentInput = z.object({
                 text: z.string(),
                 type: z.enum(getValues(QuestionTypeEnum)),
               })
+              // * SHORT_TEXT *
               .refine(
                 (data) => {
                   if (data.type === QuestionTypeEnum.SHORT_TEXT) {
@@ -34,6 +35,7 @@ export const CreateAssessmentInput = z.object({
                   path: ['text'],
                 },
               )
+              // * LONG_TEXT *
               .refine(
                 (data) => {
                   if (data.type === QuestionTypeEnum.LONG_TEXT) {

@@ -168,12 +168,6 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
         </section>
       ))}
 
-      {/* <Button
-        type="button"
-        onClick={() => appendChild({ number: '', text: '' })}
-      >
-        Append Question
-      </Button> */}
       <QuestionsTypeDialog appendPage={appendPage} />
     </fieldset>
   )

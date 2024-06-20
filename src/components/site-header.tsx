@@ -1,10 +1,7 @@
 import { signOut } from '@/features/auth/actions/sign-out'
-import { cn } from '@/lib/utils'
-import { CircleEllipsis } from 'lucide-react'
-import Link from 'next/link'
 import { MainNav } from './main-nav'
 import { MobileNav } from './mobile-nav'
-import { Button, buttonVariants } from './ui/button'
+import { Button } from './ui/button'
 
 export function SiteHeader() {
   return (
@@ -13,12 +10,12 @@ export function SiteHeader() {
         <MainNav />
         <MobileNav />
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
-            {/* <CommandMenu /> */}
+          {/* <div className="w-full flex-1 md:w-auto md:flex-none">
+            <CommandMenu />
             <p>teste</p>
-          </div>
+          </div> */}
           <nav className="flex items-center">
-            <Link href="/" target="_blank" rel="noreferrer">
+            {/* <Link href="/" target="_blank" rel="noreferrer">
               <div
                 className={cn(
                   buttonVariants({
@@ -43,7 +40,7 @@ export function SiteHeader() {
                 <CircleEllipsis className="h-3 w-3 fill-current" />
                 <span className="sr-only">Twitter</span>
               </div>
-            </Link>
+            </Link> */}
             {/* <ModeToggle /> */}
             <form action={signOut}>
               <Button>Sign out</Button>

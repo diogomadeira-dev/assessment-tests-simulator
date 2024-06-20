@@ -12,7 +12,7 @@ interface PageProps {
 export const PageSection = ({ partIndex }: PageProps) => {
   const t = useTranslations()
 
-  const { control, watch } = useFormContext<CreateAssessmentInputSchema>()
+  const { control } = useFormContext<CreateAssessmentInputSchema>()
 
   const {
     fields: pageFields,
@@ -25,13 +25,11 @@ export const PageSection = ({ partIndex }: PageProps) => {
 
   return (
     <fieldset className="flex flex-col justify-center">
-      {/* <legend>Page</legend> */}
       {pageFields.map((child, pageIndex) => (
         <section key={child.id} className="mb-10 rounded-2xl border p-10">
           <div className="flex items-center justify-center gap-2">
-            <p>ffweewf - {pageIndex}</p>
             <h3 className="text-xl font-extrabold">
-              {`${t('assessment-test.page')} ${partIndex}`}
+              {`${t('assessment-test.page')} ${pageIndex + 1}`}
             </h3>
             <Button
               type="button"
@@ -42,19 +40,6 @@ export const PageSection = ({ partIndex }: PageProps) => {
             </Button>
           </div>
 
-          {/* <FormField
-              control={control}
-              name={`parts.${partIndex}.pages.${pageIndex}.number`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Page number</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
           <QuestionSection partIndex={partIndex} pageIndex={pageIndex} />
         </section>
       ))}

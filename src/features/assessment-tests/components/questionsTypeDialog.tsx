@@ -25,6 +25,7 @@ export function QuestionsTypeDialog({
   appendPage: (questions: {
     number: string
     text: string
+    array: string[]
     type: QuestionType
   }) => void
 }) {
@@ -50,7 +51,12 @@ export function QuestionsTypeDialog({
             <Card
               className="cursor-pointer"
               onClick={() =>
-                appendPage({ number: '', text: '', type: 'SHORT_TEXT' })
+                appendPage({
+                  number: '',
+                  text: '',
+                  array: [],
+                  type: 'SHORT_TEXT',
+                })
               }
             >
               <CardHeader>
@@ -69,7 +75,12 @@ export function QuestionsTypeDialog({
             <Card
               className="cursor-pointer"
               onClick={() =>
-                appendPage({ number: '', text: '', type: 'LONG_TEXT' })
+                appendPage({
+                  number: '',
+                  text: '',
+                  array: [],
+                  type: 'LONG_TEXT',
+                })
               }
             >
               <CardHeader>
@@ -88,7 +99,12 @@ export function QuestionsTypeDialog({
             <Card
               className="cursor-pointer"
               onClick={() =>
-                appendPage({ number: '', text: '', type: 'RADIO_GROUP' })
+                appendPage({
+                  number: '',
+                  text: '',
+                  array: [],
+                  type: 'RADIO_GROUP',
+                })
               }
             >
               <CardHeader>

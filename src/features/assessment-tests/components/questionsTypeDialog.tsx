@@ -84,6 +84,25 @@ export function QuestionsTypeDialog({
               </CardFooter>
             </Card>
           </DialogClose>
+          <DialogClose asChild>
+            <Card
+              className="cursor-pointer"
+              onClick={() =>
+                appendPage({ number: '', text: '', type: 'RADIO_GROUP' })
+              }
+            >
+              <CardHeader>
+                <CardTitle>RADIO GROUP</CardTitle>
+                <CardDescription>single choice</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p>Card Content</p>
+              </CardContent>
+              <CardFooter>
+                <p>Card Footer</p>
+              </CardFooter>
+            </Card>
+          </DialogClose>
         </div>
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>

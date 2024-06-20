@@ -30,7 +30,7 @@ export enum AlphabeticEnum {
 export const QuestionTypeEnum = {
   SHORT_TEXT: 'SHORT_TEXT',
   LONG_TEXT: 'LONG_TEXT',
-  RADIO_GROUP: 'RADIO_GROUP',
+  RADIO_GROUP: 'RADIO_GROUP', // * Single choice
 } as const
 
 export type QuestionType =

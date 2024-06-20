@@ -8,17 +8,25 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
 import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
+import { useTranslations } from 'next-intl'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { QuestionsTypeDialog } from './questionsTypeDialog'
 
-interface QuestionProps {
+type QuestionProps = {
   partIndex: number
   pageIndex: number
 }
 
+type questionTypesSwitchProps = {
+  questionIndex: number
+}
+
 export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
+  const t = useTranslations()
+
   const { control, watch } = useFormContext<CreateAssessmentInputSchema>()
   const {
     fields: pages,
@@ -29,7 +37,7 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
     name: `parts.${partIndex}.pages.${pageIndex}.questions`,
   })
 
-  const questionTypesSwitch = (questionIndex: number) => {
+  const questionTypesSwitch = ({ questionIndex }: questionTypesSwitchProps) => {
     switch (
       watch().parts[partIndex].pages[pageIndex].questions[questionIndex].type
     ) {
@@ -122,32 +130,41 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
   }
 
   return (
-    <fieldset className="space-y-4">
-      {pages.map((child, questionIndex) => (
-        <section key={child.id} className="flex items-end gap-2">
-          <FormField
-            control={control}
-            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.number`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Question number</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+    <fieldset className="space-y-20">
+      {pages.map((child, questionIndex, { length }) => (
+        <section key={child.id} className="space-y-20">
+          <div>
+            <div className="flex items-center gap-2">
+              <h3 className="text-xl font-extrabold">New Question</h3>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => removePage(questionIndex)}
+              >
+                Remove Question
+              </Button>
+            </div>
 
-          {questionTypesSwitch(questionIndex)}
-
-          <Button
-            type="button"
-            variant="destructive"
-            onClick={() => removePage(questionIndex)}
-          >
-            Remove Question
-          </Button>
+            <div className="space-y-4">
+              <FormField
+                control={control}
+                name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.number`}
+                render={({ field }) => (
+                  <FormItem className="w-20">
+                    <FormLabel>Number</FormLabel>
+                    <FormControl>
+                      <Input placeholder="ex: 1.1" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex gap-2">
+                {questionTypesSwitch({ questionIndex })}
+              </div>
+            </div>
+          </div>
+          {questionIndex !== length - 1 && <Separator />}
         </section>
       ))}
 

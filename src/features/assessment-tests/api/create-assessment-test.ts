@@ -1,12 +1,9 @@
 import { getValues } from '@/lib/enum'
+import { QuestionTypeEnum } from '@/types/assessment-tests'
 import { z } from 'zod'
 
-export const QuestionType = {
-  SHORT_TEXT: 'SHORT_TEXT',
-  LONG_TEXT: 'LONG_TEXT',
-} as const
-
-export type QuestionTypeEnum = (typeof QuestionType)[keyof typeof QuestionType]
+export type QuestionTypeEnum =
+  (typeof QuestionTypeEnum)[keyof typeof QuestionTypeEnum]
 
 const stringValidate = z.string().trim().min(1).max(50)
 
@@ -23,11 +20,11 @@ export const CreateAssessmentInput = z.object({
               .object({
                 number: z.string(),
                 text: z.string(),
-                type: z.enum(getValues(QuestionType)),
+                type: z.enum(getValues(QuestionTypeEnum)),
               })
               .refine(
                 (data) => {
-                  if (data.type === QuestionType.SHORT_TEXT) {
+                  if (data.type === QuestionTypeEnum.SHORT_TEXT) {
                     return data.text.length > 0
                   }
                   return true
@@ -39,7 +36,7 @@ export const CreateAssessmentInput = z.object({
               )
               .refine(
                 (data) => {
-                  if (data.type === QuestionType.LONG_TEXT) {
+                  if (data.type === QuestionTypeEnum.LONG_TEXT) {
                     return data.text.length > 0
                   }
                   return true

@@ -17,13 +17,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { UseFieldArrayReturn } from 'react-hook-form'
-import { CreateAssessmentInputSchema } from '../api/create-assessment-test'
+import { QuestionType } from '@/types/assessment-tests'
 
 export function QuestionsTypeDialog({
   appendPage,
 }: {
-  appendPage: UseFieldArrayReturn<CreateAssessmentInputSchema>['append']
+  appendPage: (questions: {
+    number: string
+    text: string
+    type: QuestionType
+  }) => void
 }) {
   return (
     <Dialog>

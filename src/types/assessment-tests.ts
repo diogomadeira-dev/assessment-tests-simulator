@@ -26,3 +26,11 @@ export enum AlphabeticEnum {
   'Y',
   'Z',
 }
+
+export const QuestionTypeEnum = {
+  SHORT_TEXT: 'SHORT_TEXT',
+  LONG_TEXT: 'LONG_TEXT',
+} as const
+
+export type QuestionType =
+  (typeof QuestionTypeEnum)[keyof typeof QuestionTypeEnum]

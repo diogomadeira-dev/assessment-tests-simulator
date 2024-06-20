@@ -7,6 +7,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { QuestionsTypeDialog } from './questionsTypeDialog'
@@ -56,7 +57,11 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
               <FormItem>
                 <FormLabel>Long text</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Textarea
+                    placeholder="Escreve aqui..."
+                    className="resize-y"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import Heading from '@tiptap/extension-heading'
 import {
   EditorContent,
@@ -126,7 +127,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
 
 type TiptapProps = {
   onChange: (value: string) => void
-  error: FieldError
+  error: FieldError | undefined
 }
 
 const Tiptap = ({ onChange, error }: TiptapProps) => {
@@ -189,8 +190,15 @@ const Tiptap = ({ onChange, error }: TiptapProps) => {
 
   return (
     <div>
-      <Toolbar editor={editor} />
-      <EditorContent editor={editor} />
+      <div
+        className={cn({
+          'rounded-md border border-destructive': error,
+        })}
+      >
+        <Toolbar editor={editor} />
+        <EditorContent editor={editor} />
+      </div>
+
       {/* {editor && JSON.stringify(editor.getJSON(), null, 2)} */}
       {error && <FormMessage>{error.message}</FormMessage>}
     </div>

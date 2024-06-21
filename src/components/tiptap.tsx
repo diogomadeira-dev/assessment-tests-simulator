@@ -4,43 +4,32 @@ import Document from '@tiptap/extension-document'
 import Heading from '@tiptap/extension-heading'
 import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
-import { EditorContent, useEditor, type Editor } from '@tiptap/react'
+import {
+  EditorContent,
+  mergeAttributes,
+  useEditor,
+  type Editor,
+} from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import { Bold, Italic, List, ListOrdered, Strikethrough } from 'lucide-react'
+import {
+  Bold,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6,
+  Italic,
+  List,
+  ListOrdered,
+  Strikethrough,
+} from 'lucide-react'
 import { Separator } from './ui/separator'
 import { Toggle } from './ui/toggle'
 
 const Toolbar = ({ editor }: { editor: Editor }) => {
   return (
     <div className="flex flex-row items-center gap-1 rounded-tl-md rounded-tr-md border border-input bg-transparent p-1">
-      <Toggle
-        size="sm"
-        pressed={editor.isActive('heading', { level: 1 })}
-        onPressedChange={() =>
-          editor.chain().focus().toggleHeading({ level: 1 }).run()
-        }
-      >
-        H1
-      </Toggle>
-      <Toggle
-        size="sm"
-        pressed={editor.isActive('heading', { level: 2 })}
-        onPressedChange={() =>
-          editor.chain().focus().toggleHeading({ level: 2 }).run()
-        }
-      >
-        H2
-      </Toggle>
-      <Toggle
-        size="sm"
-        pressed={editor.isActive('heading', { level: 3 })}
-        onPressedChange={() =>
-          editor.chain().focus().toggleHeading({ level: 3 }).run()
-        }
-      >
-        H3
-      </Toggle>
-
       <Toggle
         size="sm"
         pressed={editor.isActive('bold')}
@@ -61,6 +50,61 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         onPressedChange={() => editor.chain().focus().toggleStrike().run()}
       >
         <Strikethrough className="h-4 w-4" />
+      </Toggle>
+      <Separator orientation="vertical" className="h-8 w-[1px]" />
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('heading', { level: 1 })}
+        onPressedChange={() =>
+          editor.chain().focus().toggleHeading({ level: 1 }).run()
+        }
+      >
+        <Heading1 className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('heading', { level: 2 })}
+        onPressedChange={() =>
+          editor.chain().focus().toggleHeading({ level: 2 }).run()
+        }
+      >
+        <Heading2 className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('heading', { level: 3 })}
+        onPressedChange={() =>
+          editor.chain().focus().toggleHeading({ level: 3 }).run()
+        }
+      >
+        <Heading3 className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('heading', { level: 4 })}
+        onPressedChange={() =>
+          editor.chain().focus().toggleHeading({ level: 4 }).run()
+        }
+      >
+        <Heading4 className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('heading', { level: 5 })}
+        onPressedChange={() =>
+          editor.chain().focus().toggleHeading({ level: 5 }).run()
+        }
+      >
+        <Heading5 className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('heading', { level: 6 })}
+        onPressedChange={() =>
+          editor.chain().focus().toggleHeading({ level: 6 }).run()
+        }
+      >
+        <Heading6 className="h-4 w-4" />
       </Toggle>
       <Separator orientation="vertical" className="h-8 w-[1px]" />
       <Toggle
@@ -90,17 +134,12 @@ const Tiptap = ({ onChange }: TiptapProps) => {
     editorProps: {
       attributes: {
         class:
-          'min-h-[80px] max-h-[180px] w-full rounded-md rounded-tr-none rounded-tl-none border border-input bg-transparent px-3 py-2 border-t-0 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto',
+          'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto max-h-[380px] min-h-[80px] w-full overflow-auto rounded-md rounded-tl-none rounded-tr-none border border-t-0 border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
       },
     },
     extensions: [
-      Document,
-      Paragraph,
-      Text,
-      Heading.configure({
-        levels: [1, 2, 3],
-      }),
       StarterKit.configure({
+        heading: false,
         orderedList: {
           HTMLAttributes: {
             class: 'list-decimal pl-4',
@@ -112,6 +151,32 @@ const Tiptap = ({ onChange }: TiptapProps) => {
           },
         },
       }),
+      Document,
+      Paragraph,
+      Text,
+      Heading.extend({
+        levels: [1, 2],
+        renderHTML({ node, HTMLAttributes }) {
+          const level = this.options.levels.includes(node.attrs.level)
+            ? node.attrs.level
+            : this.options.levels[0]
+          const classes: { [index: number]: string } = {
+            1: 'h1',
+            2: 'h2',
+            3: 'h3',
+            4: 'h4',
+            5: 'h5',
+            6: 'h6',
+          }
+          return [
+            `h${level}`,
+            mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+              class: `${classes[level]}`,
+            }),
+            0,
+          ]
+        },
+      }).configure({ levels: [1, 2, 3, 4, 5, 6] }),
     ],
     content: '',
     onUpdate({ editor }) {

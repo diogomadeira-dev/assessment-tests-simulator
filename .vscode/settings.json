@@ -7,6 +7,9 @@
     "files.associations": {
         "*.css": "tailwindcss"
     },
+    "tailwindCSS.experimental.classRegex": [
+      "class:\\s*?[\"'`]([^\"'`]*).*?,"
+    ],
     "editor.quickSuggestions": {
         "strings": true
     },

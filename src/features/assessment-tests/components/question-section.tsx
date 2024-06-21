@@ -167,8 +167,8 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
               <Controller
                 control={control}
                 name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.text`}
-                render={({ field: { onChange } }) => (
-                  <Tiptap onChange={onChange} />
+                render={({ field: { onChange }, fieldState: { error } }) => (
+                  <Tiptap onChange={onChange} error={error} />
                 )}
               />
 

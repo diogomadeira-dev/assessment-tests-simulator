@@ -1,9 +1,6 @@
 'use client'
 
-import Document from '@tiptap/extension-document'
 import Heading from '@tiptap/extension-heading'
-import Paragraph from '@tiptap/extension-paragraph'
-import Text from '@tiptap/extension-text'
 import {
   EditorContent,
   mergeAttributes,
@@ -24,6 +21,8 @@ import {
   ListOrdered,
   Strikethrough,
 } from 'lucide-react'
+import { FieldError } from 'react-hook-form'
+import { FormMessage } from './ui/form'
 import { Separator } from './ui/separator'
 import { Toggle } from './ui/toggle'
 
@@ -127,9 +126,10 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
 
 type TiptapProps = {
   onChange: (value: string) => void
+  error: FieldError
 }
 
-const Tiptap = ({ onChange }: TiptapProps) => {
+const Tiptap = ({ onChange, error }: TiptapProps) => {
   const editor = useEditor({
     editorProps: {
       attributes: {
@@ -151,9 +151,6 @@ const Tiptap = ({ onChange }: TiptapProps) => {
           },
         },
       }),
-      Document,
-      Paragraph,
-      Text,
       Heading.extend({
         levels: [1, 2],
         renderHTML({ node, HTMLAttributes }) {
@@ -180,7 +177,11 @@ const Tiptap = ({ onChange }: TiptapProps) => {
     ],
     content: '',
     onUpdate({ editor }) {
-      onChange(JSON.stringify(editor.getJSON()))
+      if (!editor.isEmpty) {
+        onChange(JSON.stringify(editor.getJSON()))
+      } else {
+        onChange('')
+      }
     },
   })
 
@@ -190,7 +191,8 @@ const Tiptap = ({ onChange }: TiptapProps) => {
     <div>
       <Toolbar editor={editor} />
       <EditorContent editor={editor} />
-      {editor && JSON.stringify(editor.getJSON(), null, 2)}
+      {/* {editor && JSON.stringify(editor.getJSON(), null, 2)} */}
+      {error && <FormMessage>{error.message}</FormMessage>}
     </div>
   )
 }

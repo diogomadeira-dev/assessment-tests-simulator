@@ -1,3 +1,4 @@
+import Tiptap from '@/components/tiptap'
 import { Button } from '@/components/ui/button'
 import {
   FormControl,
@@ -13,7 +14,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
 import { useTranslations } from 'next-intl'
 import dynamic from 'next/dynamic'
-import { useFieldArray, useFormContext } from 'react-hook-form'
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { QuestionsTypeDialog } from './questionsTypeDialog'
 
 type QuestionProps = {
@@ -28,7 +29,7 @@ type questionTypesSwitchProps = {
 export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
   const t = useTranslations()
 
-  const Editor = dynamic(() => import('@/components/editor'), { ssr: false })
+  const Editor = dynamic(() => import('@/components/tiptap'), { ssr: false })
 
   const { control, watch } = useFormContext<CreateAssessmentInputSchema>()
   const {
@@ -163,7 +164,13 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
                 )}
               />
 
-              <Editor />
+              <Controller
+                control={control}
+                name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.text`}
+                render={({ field: { onChange } }) => (
+                  <Tiptap onChange={onChange} />
+                )}
+              />
 
               {/* <div className="flex gap-2">
                 {questionTypesSwitch({ questionIndex })}

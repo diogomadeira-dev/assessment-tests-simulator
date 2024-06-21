@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 
 const AssessmentTests = () => {
-  const Editor = dynamic(() => import('@/components/editor'), { ssr: false })
+  const Editor = dynamic(() => import('@/components/tiptap'), { ssr: false })
 
   return (
     <div>

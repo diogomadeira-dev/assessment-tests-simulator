@@ -1,5 +1,9 @@
 'use client'
 
+import Document from '@tiptap/extension-document'
+import Heading from '@tiptap/extension-heading'
+import Paragraph from '@tiptap/extension-paragraph'
+import Text from '@tiptap/extension-text'
 import { EditorContent, useEditor, type Editor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { Bold, Italic, List, ListOrdered, Strikethrough } from 'lucide-react'
@@ -9,6 +13,34 @@ import { Toggle } from './ui/toggle'
 const Toolbar = ({ editor }: { editor: Editor }) => {
   return (
     <div className="flex flex-row items-center gap-1 rounded-tl-md rounded-tr-md border border-input bg-transparent p-1">
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('heading', { level: 1 })}
+        onPressedChange={() =>
+          editor.chain().focus().toggleHeading({ level: 1 }).run()
+        }
+      >
+        H1
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('heading', { level: 2 })}
+        onPressedChange={() =>
+          editor.chain().focus().toggleHeading({ level: 2 }).run()
+        }
+      >
+        H2
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('heading', { level: 3 })}
+        onPressedChange={() =>
+          editor.chain().focus().toggleHeading({ level: 3 }).run()
+        }
+      >
+        H3
+      </Toggle>
+
       <Toggle
         size="sm"
         pressed={editor.isActive('bold')}
@@ -62,6 +94,12 @@ const Tiptap = ({ onChange }: TiptapProps) => {
       },
     },
     extensions: [
+      Document,
+      Paragraph,
+      Text,
+      Heading.configure({
+        levels: [1, 2, 3],
+      }),
       StarterKit.configure({
         orderedList: {
           HTMLAttributes: {
@@ -81,9 +119,11 @@ const Tiptap = ({ onChange }: TiptapProps) => {
     },
   })
 
+  if (!editor) return null
+
   return (
     <div>
-      {editor ? <Toolbar editor={editor} /> : null}
+      <Toolbar editor={editor} />
       <EditorContent editor={editor} />
       {editor && JSON.stringify(editor.getJSON(), null, 2)}
     </div>

@@ -23,7 +23,7 @@ export const CreateAssessmentInput = z.object({
           questions: z.array(
             z.object({
               number: z.string(),
-              text: stringValidate,
+              label: stringValidate,
               // array: z.array(z.string()),
               type: z.enum(getValues(QuestionTypeEnum)),
             }),

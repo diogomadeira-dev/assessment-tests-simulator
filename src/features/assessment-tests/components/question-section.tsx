@@ -1,4 +1,4 @@
-import Tiptap from '@/components/tiptap'
+import Editor from '@/components/editor'
 import { Button } from '@/components/ui/button'
 import {
   FormControl,
@@ -13,7 +13,6 @@ import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
 import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
 import { useTranslations } from 'next-intl'
-import dynamic from 'next/dynamic'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { QuestionsTypeDialog } from './questionsTypeDialog'
 
@@ -28,8 +27,6 @@ type questionTypesSwitchProps = {
 
 export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
   const t = useTranslations()
-
-  const Editor = dynamic(() => import('@/components/tiptap'), { ssr: false })
 
   const { control, watch } = useFormContext<CreateAssessmentInputSchema>()
   const {
@@ -49,7 +46,7 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
         return (
           <FormField
             control={control}
-            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.text`}
+            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Short text</FormLabel>
@@ -65,7 +62,7 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
         return (
           <FormField
             control={control}
-            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.text`}
+            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Long text</FormLabel>
@@ -166,9 +163,9 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
 
               <Controller
                 control={control}
-                name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.text`}
+                name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
                 render={({ field: { onChange }, fieldState: { error } }) => (
-                  <Tiptap onChange={onChange} error={error} />
+                  <Editor onChange={onChange} error={error} editable />
                 )}
               />
 

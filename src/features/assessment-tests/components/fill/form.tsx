@@ -40,10 +40,9 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
       part.pages.map((page, pageIndex) => {
         pageCount++
         return {
+          partIndex,
           pageNumber: pageCount,
-          questions: page.questions.map((question, questionIndex) => ({
-            question,
-          })),
+          questions: page.questions.map((question, questionIndex) => question),
         }
       }),
     )
@@ -68,48 +67,15 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
           </div>
 
           <Tabs value={page.toString()}>
-            {/* <StartComponent /> */}
-
             <form onSubmit={form.handleSubmit(onSubmit)}>
               {/* <pre>{JSON.stringify(getData(), null, 2)}</pre> */}
 
               <StartComponent />
               <PageComponent getData={getData} />
 
-              {/* 
-              {dataFaker.parts.map((part, partIndex) => (
-                <div key={`partIndex-${partIndex}`}> */}
-              {/* {getData()[partIndex].pages.map((page, pageIndex) => ( */}
-
-              {/* ))} */}
-              {/* </div>
-              ))} */}
-
-              {/* {dataFaker.parts.map((part, partIndex) => {
-                return (
-                  <div key={`partIndex-${partIndex}`}>
-                    <p>pageCount: {page}</p>
-
-                    <pre>{JSON.stringify(getData(), null, 2)}</pre>
-
-                    <PageComponent />
-
-                    {part.pages.map((page, pageIndex) => (
-                      <div key={`pageIndex-${pageIndex}`}>
-                        <p>page number: {page.number}</p>
-                        {page.questions.map((question, questionIndex) => (
-                          <div key={`questionIndex-${questionIndex}`}>
-                            <PageComponent />
-                          </div>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                )
-              */}
-
               <div className="flex flex-row-reverse justify-between py-10">
                 <Button
+                  type="button"
                   variant="secondary"
                   onClick={() =>
                     router.push(pathname + '?page=' + (Number(page) + 1))

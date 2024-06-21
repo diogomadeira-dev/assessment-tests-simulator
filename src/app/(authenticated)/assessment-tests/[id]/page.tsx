@@ -12,16 +12,12 @@ export const dataFaker = {
           questions: [
             {
               number: '',
-              text: '',
-              array: [],
               type: 'SHORT_TEXT',
               label:
                 '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 1 - "},{"type":"text","text":"Pagina 1 - Parte A"}]}]}',
             },
             {
               number: '',
-              text: '',
-              array: [],
               type: 'SHORT_TEXT',
               label:
                 '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 2 - "},{"type":"text","text":"Pagina 1 - Parte A"}]}]}',
@@ -33,16 +29,12 @@ export const dataFaker = {
           questions: [
             {
               number: '',
-              text: '',
-              array: [],
               type: 'SHORT_TEXT',
               label:
                 '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 1 - "},{"type":"text","text":"Pagina 2 - Parte A"}]}]}',
             },
             {
               number: '',
-              text: '',
-              array: [],
               type: 'SHORT_TEXT',
               label:
                 '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 2 - "},{"type":"text","text":"Pagina 2 - Parte A"}]}]}',
@@ -58,16 +50,12 @@ export const dataFaker = {
           questions: [
             {
               number: '',
-              text: '',
-              array: [],
               type: 'SHORT_TEXT',
               label:
                 '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 1 - "},{"type":"text","text":"Pagina 1 - Parte B"}]}]}',
             },
             {
               number: '',
-              text: '',
-              array: [],
               type: 'SHORT_TEXT',
               label:
                 '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 2 - "},{"type":"text","text":"Pagina 1 - Parte B"}]}]}',
@@ -79,8 +67,6 @@ export const dataFaker = {
           questions: [
             {
               number: '',
-              text: '',
-              array: [],
               type: 'SHORT_TEXT',
               label:
                 '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 1 - "},{"type":"text","text":"Pagina 2 - Parte B"}]}]}',

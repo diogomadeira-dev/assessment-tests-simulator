@@ -7,20 +7,9 @@ export type QuestionTypeEnum =
 const stringValidate = z.string().trim().min(1)
 
 export const FillAssessmentInput = z.object({
-  parts: z.array(
+  questions: z.array(
     z.object({
-      pages: z.array(
-        z.object({
-          questions: z.array(
-            z.object({
-              // number: z.string(),
-              answer: stringValidate,
-              // label: stringValidate,
-              // type: z.enum(getValues(QuestionTypeEnum)),
-            }),
-          ),
-        }),
-      ),
+      answer: stringValidate,
     }),
   ),
 })

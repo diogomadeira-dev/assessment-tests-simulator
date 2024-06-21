@@ -1,4 +1,4 @@
-import CreateAssessmentTestForm from '@/features/assessment-tests/components/form'
+import CreateAssessmentTestForm from '@/features/assessment-tests/components/create/form'
 
 const CreateAssessmentTest = () => {
   return <CreateAssessmentTestForm />

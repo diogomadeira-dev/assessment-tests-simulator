@@ -13,7 +13,7 @@ import {
   CreateAssessmentInput,
   CreateAssessmentInputSchema,
 } from '@/features/assessment-tests/api/create-assessment-test'
-import { PartSection } from '@/features/assessment-tests/components/part-section'
+import { PartSection } from '@/features/assessment-tests/components/create/part-section'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { FormProvider, useForm } from 'react-hook-form'

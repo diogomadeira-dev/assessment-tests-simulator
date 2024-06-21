@@ -1,16 +1,16 @@
 import { type Editor } from '@tiptap/react'
 import {
-    Bold,
-    Heading1,
-    Heading2,
-    Heading3,
-    Heading4,
-    Heading5,
-    Heading6,
-    Italic,
-    List,
-    ListOrdered,
-    Strikethrough,
+  Bold,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6,
+  Italic,
+  List,
+  ListOrdered,
+  Strikethrough,
 } from 'lucide-react'
 import { Separator } from '../ui/separator'
 import { Toggle } from '../ui/toggle'

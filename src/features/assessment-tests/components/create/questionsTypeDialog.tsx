@@ -1,12 +1,5 @@
+import { QuestionTypeCard } from '@/components/question-type-card'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
 import {
   Dialog,
   DialogClose,
@@ -17,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { Skeleton } from '@/components/ui/skeleton'
 import { QuestionType } from '@/types/assessment-tests'
 
 export function QuestionsTypeDialog({
@@ -24,8 +18,7 @@ export function QuestionsTypeDialog({
 }: {
   appendPage: (questions: {
     number: string
-    text: string
-    array: string[]
+    label: string
     type: QuestionType
   }) => void
 }) {
@@ -46,78 +39,97 @@ export function QuestionsTypeDialog({
             Escolhe um tipo de pergunta para adicionar à página
           </DialogDescription>
         </DialogHeader>
-        <div className="flex items-center space-x-2">
+
+        <div className="grid grid-flow-row gap-8 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           <DialogClose asChild>
-            <Card
-              className="cursor-pointer"
-              onClick={() =>
+            <QuestionTypeCard
+              title="Caixa de texto"
+              description="Caixa de texto simples"
+              action={() =>
                 appendPage({
                   number: '',
-                  text: '',
-                  array: [],
-                  type: 'SHORT_TEXT',
-                })
-              }
-            >
-              <CardHeader>
-                <CardTitle>Short Text</CardTitle>
-                <CardDescription>Text input</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>Card Content</p>
-              </CardContent>
-              <CardFooter>
-                <p>Card Footer</p>
-              </CardFooter>
-            </Card>
-          </DialogClose>
-          <DialogClose asChild>
-            <Card
-              className="cursor-pointer"
-              onClick={() =>
-                appendPage({
-                  number: '',
-                  text: '',
-                  array: [],
-                  type: 'LONG_TEXT',
-                })
-              }
-            >
-              <CardHeader>
-                <CardTitle>Long Text</CardTitle>
-                <CardDescription>Text input</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>Card Content</p>
-              </CardContent>
-              <CardFooter>
-                <p>Card Footer</p>
-              </CardFooter>
-            </Card>
-          </DialogClose>
-          <DialogClose asChild>
-            <Card
-              className="cursor-pointer"
-              onClick={() =>
-                appendPage({
-                  number: '',
-                  text: '',
-                  array: [],
+                  label: '',
                   type: 'RADIO_GROUP',
                 })
               }
             >
-              <CardHeader>
-                <CardTitle>RADIO GROUP</CardTitle>
-                <CardDescription>single choice</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>Card Content</p>
-              </CardContent>
-              <CardFooter>
-                <p>Card Footer</p>
-              </CardFooter>
-            </Card>
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-4/5" />
+              </div>
+            </QuestionTypeCard>
+          </DialogClose>
+          <DialogClose asChild>
+            <QuestionTypeCard
+              title="Escolha múltipla"
+              description="Escolha múltipla"
+              action={() =>
+                appendPage({
+                  number: '',
+                  label: '',
+                  type: 'RADIO_GROUP',
+                })
+              }
+            >
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-4/5" />
+              </div>
+            </QuestionTypeCard>
+          </DialogClose>
+          <DialogClose asChild>
+            <QuestionTypeCard
+              title="Escolha única"
+              description="Escolha única"
+              action={() =>
+                appendPage({
+                  number: '',
+                  label: '',
+                  type: 'RADIO_GROUP',
+                })
+              }
+            >
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-4/5" />
+              </div>
+            </QuestionTypeCard>
+          </DialogClose>
+          <DialogClose asChild>
+            <QuestionTypeCard
+              title="Ligação de pares"
+              description="Ligação de pares"
+              action={() =>
+                appendPage({
+                  number: '',
+                  label: '',
+                  type: 'RADIO_GROUP',
+                })
+              }
+            >
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-4/5" />
+              </div>
+            </QuestionTypeCard>
+          </DialogClose>
+          <DialogClose asChild>
+            <QuestionTypeCard
+              title="Ordenar campos"
+              description="Ordenar campos"
+              action={() =>
+                appendPage({
+                  number: '',
+                  label: '',
+                  type: 'RADIO_GROUP',
+                })
+              }
+            >
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-4/5" />
+              </div>
+            </QuestionTypeCard>
           </DialogClose>
         </div>
         <DialogFooter className="sm:justify-start">

@@ -13,6 +13,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
 import { useTranslations } from 'next-intl'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid'
 import { QuestionsTypeDialog } from './questionsTypeDialog'
 
 type QuestionProps = {
@@ -70,7 +71,15 @@ const Children = ({
           </button>
         </section>
       ))}
-      <button type="button" onClick={() => appendOption({ name: '' })}>
+      <button
+        type="button"
+        onClick={() =>
+          appendOption({
+            id: uuidv4(),
+            name: '',
+          })
+        }
+      >
         Append option
       </button>
     </fieldset>

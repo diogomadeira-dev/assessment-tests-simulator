@@ -26,6 +26,7 @@ export const CreateAssessmentInput = z.object({
               label: stringValidate,
               options: z.array(
                 z.object({
+                  id: z.string(),
                   name: z.string(),
                 }),
               ),

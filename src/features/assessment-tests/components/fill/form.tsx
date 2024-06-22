@@ -83,12 +83,11 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
 
   const { data, pageCount } = getData()
 
-  console.log('🚀 ~ FillAssessmentTestForm ~ data:', data)
-
   return (
     <Form {...form}>
       <div className="flex h-screen">
         <div className="container">
+          <pre>{JSON.stringify(form.formState.errors, null, 2)}</pre>
           <div className="flex justify-between py-12">
             <p className="text-sm text-muted-foreground">
               Prova Modelo 1 | Matemática e Estudo do meio 2º Ano de
@@ -97,6 +96,10 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
             <p className="text-sm text-muted-foreground">
               {page}/{pageCount}
             </p>
+
+            <Button type="submit" variant="secondary">
+              Submit
+            </Button>
           </div>
 
           <Tabs value={page.toString()}>

@@ -35,7 +35,21 @@ export const dataFaker = {
             },
             {
               number: '',
-              type: 'SHORT_TEXT',
+              type: 'RADIO_GROUP',
+              options: [
+                {
+                  id: 'e0d6cebb-599e-47a1-a16f-49f5fcc74bc1',
+                  name: 'option 1',
+                },
+                {
+                  id: '90a1fd3d-c12c-445b-a1e9-bb1bd7d47e24',
+                  name: 'option 2',
+                },
+                {
+                  id: 'b1dae93b-f532-40ac-b2c8-bdfaa61e26d0',
+                  name: 'option 3',
+                },
+              ],
               label:
                 '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 2 - "},{"type":"text","text":"Pagina 2 - Parte A"}]}]}',
             },

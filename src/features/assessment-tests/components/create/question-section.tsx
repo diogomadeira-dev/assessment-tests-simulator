@@ -8,7 +8,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
 import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
@@ -25,10 +24,65 @@ type questionTypesSwitchProps = {
   questionIndex: number
 }
 
+const Children = ({
+  questionIndex,
+  partIndex,
+  pageIndex,
+}: {
+  questionIndex: number
+  partIndex: number
+  pageIndex: number
+}) => {
+  const { control } = useFormContext<CreateAssessmentInputSchema>()
+
+  const {
+    fields: options,
+    append: appendOption,
+    remove: removeOption,
+  } = useFieldArray({
+    control,
+    name: `parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.options`,
+  })
+
+  return (
+    <fieldset>
+      <legend>Children</legend>
+      {options.map((option, optionIndex) => (
+        <section
+          key={option.id}
+          style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}
+        >
+          <FormField
+            control={control}
+            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.options.${optionIndex}.name`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Number</FormLabel>
+                <FormControl>
+                  <Input placeholder="Option" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <button type="button" onClick={() => removeOption(optionIndex)}>
+            Remove option
+          </button>
+        </section>
+      ))}
+      <button type="button" onClick={() => appendOption({ name: '' })}>
+        Append option
+      </button>
+    </fieldset>
+  )
+}
+
 export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
   const t = useTranslations()
 
-  const { control, watch } = useFormContext<CreateAssessmentInputSchema>()
+  const { control, watch, setValue, getValues } =
+    useFormContext<CreateAssessmentInputSchema>()
+
   const {
     fields: pages,
     append: appendPage,
@@ -80,46 +134,52 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
         )
       case 'RADIO_GROUP':
         return (
-          <FormField
-            control={control}
-            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.array`}
-            render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>Notify me about...</FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={(value) => field.onChange([value])}
-                    // defaultValue={field.value}
-                    className="flex flex-col space-y-1"
-                  >
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="all" />
-                      </FormControl>
-                      <FormLabel className="font-normal">
-                        All new messages
-                      </FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="mentions" />
-                      </FormControl>
-                      <FormLabel className="font-normal">
-                        Direct messages and mentions
-                      </FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="none" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Nothing</FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <>
+            {/* <FormField
+              control={control}
+              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.options`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Number</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Option" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            /> */}
+            <Children
+              partIndex={partIndex}
+              pageIndex={pageIndex}
+              questionIndex={questionIndex}
+            />
+
+            {/* {pages[pageIndex].questions[questionIndex].options.map((field, index) => (
+          <fieldset key={field.id}>
+            <legend>Field {index}</legend>
+            <input {...register(`rounds.${index}.name`)} />
+            <Children fieldIndex={index} />
+            <section
+              style={{
+                marginTop: 16,
+                display: "flex",
+                alignItems: "center",
+                gap: 16
+              }}
+            >
+              <button type="button" onClick={() => removeField(index)}>
+                Remove
+              </button>
+              <button
+                type="button"
+                onClick={() => appendField({ name: "", scrim: [] })}
+              >
+                Append Field
+              </button>
+            </section>
+          </fieldset>
+        ))} */}
+          </>
         )
       // case "TYPE":
       //   return (
@@ -169,9 +229,9 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
                 )}
               />
 
-              {/* <div className="flex gap-2">
+              <div className="flex gap-2">
                 {questionTypesSwitch({ questionIndex })}
-              </div> */}
+              </div>
             </div>
           </div>
           {questionIndex !== length - 1 && <Separator />}

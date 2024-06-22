@@ -24,7 +24,11 @@ export const CreateAssessmentInput = z.object({
             z.object({
               number: z.string(),
               label: stringValidate,
-              // array: z.array(z.string()),
+              options: z.array(
+                z.object({
+                  name: z.string(),
+                }),
+              ),
               type: z.enum(getValues(QuestionTypeEnum)),
             }),
             // .superRefine((data, ctx) => {

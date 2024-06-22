@@ -15,6 +15,7 @@ import { AlphabeticEnum } from '@/types/assessment-tests'
 import { useSearchParams } from 'next/navigation'
 import { useFormContext } from 'react-hook-form'
 import { FillAssessmentInputSchema } from '../../api/fill-assessment-test'
+import BreakComponent from './break'
 
 export default function PageComponent({ data }: { data: any }) {
   const searchParams = useSearchParams()
@@ -122,12 +123,14 @@ export default function PageComponent({ data }: { data: any }) {
     }
   }
 
+  if (pageData?.breakPart) return <BreakComponent />
+
   return (
     <TabsContent value={page > 0 ? page.toString() : ''}>
       <Card>
         <CardContent className="space-y-2">
           <p>Part {AlphabeticEnum[pageData.partIndex]}</p>
-          <p>Page {page}</p>
+          <p>Page {pageData.pageNumber}</p>
 
           {pageData?.questions.length > 0 &&
             pageData.questions.map((question, questionIndex) => (

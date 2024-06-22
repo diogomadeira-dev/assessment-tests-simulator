@@ -34,18 +34,46 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
     console.log('🚀 ~ onSubmit ~ data:', data)
   }
 
+  // const getData = () => {
+  //   let pageCount = 0
+  //   const data = dataFaker.parts.flatMap((part, partIndex) =>
+  //     part.pages.map((page, pageIndex) => {
+  //       pageCount++
+  //       return {
+  //         partIndex,
+  //         pageNumber: pageCount,
+  //         questions: page.questions.map((question, questionIndex) => question),
+  //       }
+  //     }),
+  //   )
+
+  //   return {
+  //     pageCount,
+  //     data,
+  //   }
+  // }
+
   const getData = () => {
     let pageCount = 0
-    const data = dataFaker.parts.flatMap((part, partIndex) =>
-      part.pages.map((page, pageIndex) => {
+    const data = []
+    dataFaker.parts.forEach((part, partIndex) => {
+      if (partIndex !== 0) {
         pageCount++
-        return {
+        data.push({
+          breakPart: partIndex,
+          pageNumber: pageCount,
+        })
+      }
+
+      part.pages.forEach((page, pageIndex) => {
+        pageCount++
+        data.push({
           partIndex,
           pageNumber: pageCount,
           questions: page.questions.map((question, questionIndex) => question),
-        }
-      }),
-    )
+        })
+      })
+    })
 
     return {
       pageCount,
@@ -73,10 +101,10 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
 
           <Tabs value={page.toString()}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-              {/* <pre>{JSON.stringify(getData(), null, 2)}</pre> */}
+              {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
 
-              <StartComponent />
-              {page > 0 && <PageComponent data={data} />}
+              {/* ! TODO: CAN I DE THIS WITH SWITCH??? */}
+              {page === 0 ? <StartComponent /> : <PageComponent data={data} />}
 
               <div className="flex flex-row-reverse justify-between py-10">
                 <Button

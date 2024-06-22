@@ -14,20 +14,12 @@ import { Textarea } from '@/components/ui/textarea'
 import { AlphabeticEnum } from '@/types/assessment-tests'
 import { useSearchParams } from 'next/navigation'
 import { useFormContext } from 'react-hook-form'
-import { CreateAssessmentInputSchema } from '../../api/create-assessment-test'
 import { FillAssessmentInputSchema } from '../../api/fill-assessment-test'
 
-export default function PageComponent({
-  getData,
-}: {
-  getData: {
-    pageNumber: number
-    questions: CreateAssessmentInputSchema['parts'][number]['pages'][number]['questions']
-  }
-}) {
+export default function PageComponent({ data }: { data: any }) {
   const searchParams = useSearchParams()
   const page = Number(searchParams.get('page')) || 0
-  const data = getData()[page - 1]
+  const pageData = data[page - 1]
 
   const { control } = useFormContext<FillAssessmentInputSchema>()
 
@@ -48,7 +40,7 @@ export default function PageComponent({
               <FormItem>
                 {/* <FormLabel>Short text</FormLabel> */}
                 <Editor
-                  key={`editor-${data}-${question.label}-${questionIndex}`}
+                  key={`editor-${pageData}-${question.label}-${questionIndex}`}
                   content={question.label}
                 />
                 <FormControl>
@@ -134,12 +126,12 @@ export default function PageComponent({
     <TabsContent value={page > 0 ? page.toString() : ''}>
       <Card>
         <CardContent className="space-y-2">
-          <p>Part {AlphabeticEnum[data.partIndex]}</p>
+          <p>Part {AlphabeticEnum[pageData.partIndex]}</p>
           <p>Page {page}</p>
 
-          {data?.questions.length > 0 &&
-            data.questions.map((question, questionIndex) => (
-              <div key={`editor-${data}-${questionIndex}`}>
+          {pageData?.questions.length > 0 &&
+            pageData.questions.map((question, questionIndex) => (
+              <div key={`editor-${pageData}-${questionIndex}`}>
                 <p>question.type - {question.type}</p>
                 {questionTypesSwitch({ questionIndex, question })}
               </div>

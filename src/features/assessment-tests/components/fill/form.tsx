@@ -20,7 +20,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const page = searchParams.get('page') || 0
+  const page = Number(searchParams.get('page')) || 0
 
   const [value, setValue] = useState(1)
 
@@ -47,8 +47,15 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
       }),
     )
 
-    return data
+    return {
+      pageCount,
+      data,
+    }
   }
+
+  const { data, pageCount } = getData()
+
+  console.log('🚀 ~ FillAssessmentTestForm ~ data:', data)
 
   return (
     <Form {...form}>
@@ -59,11 +66,9 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
               Prova Modelo 1 | Matemática e Estudo do meio 2º Ano de
               escolaridade
             </p>
-            {value !== 0 && (
-              <p className="text-sm text-muted-foreground">
-                {value}/{maxPages}
-              </p>
-            )}
+            <p className="text-sm text-muted-foreground">
+              {page}/{pageCount}
+            </p>
           </div>
 
           <Tabs value={page.toString()}>
@@ -71,7 +76,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
               {/* <pre>{JSON.stringify(getData(), null, 2)}</pre> */}
 
               <StartComponent />
-              <PageComponent getData={getData} />
+              {page > 0 && <PageComponent data={data} />}
 
               <div className="flex flex-row-reverse justify-between py-10">
                 <Button
@@ -84,15 +89,17 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                   Seguinte
                 </Button>
 
-                <Button
-                  type="button"
-                  variant="secondary"
-                  onClick={() =>
-                    router.push(pathname + '?page=' + (Number(page) - 1))
-                  }
-                >
-                  Voltar
-                </Button>
+                {page > 0 && (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={() =>
+                      router.push(pathname + '?page=' + (Number(page) - 1))
+                    }
+                  >
+                    Voltar
+                  </Button>
+                )}
               </div>
             </form>
           </Tabs>

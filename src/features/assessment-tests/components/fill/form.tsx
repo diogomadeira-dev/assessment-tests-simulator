@@ -7,6 +7,7 @@ import { Form, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -22,7 +23,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
 
   const page = Number(searchParams.get('page')) || 0
 
-  const [values, setValues] = useState(null)
+  const [tabPage, setTabPage] = useState(1)
 
   const form = useForm<FillAssessmentInputSchema>({
     resolver: zodResolver(FillAssessmentInput),
@@ -113,13 +114,21 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
     console.log('form.formState.errors', form.formState.errors)
   }, [form.formState.errors])
 
+  useEffect(() => {
+    setTabPage(page)
+    console.log('🚀 ~ useEffect ~ setTabPage:', tabPage)
+  }, [])
+
+  useEffect(() => {
+    router.push(pathname + '?page=' + tabPage)
+  }, [tabPage])
+
   // if (!values) return 'loading...'
 
   return (
     <Form {...form}>
       <div className="flex h-screen">
         <div className="container">
-          <pre>{JSON.stringify(form.watch(), null, 2)}</pre>
           {/* errors: {JSON.stringify(form.formState.errors)} */}
           <div className="flex justify-between py-12">
             <p className="text-sm text-muted-foreground">
@@ -141,7 +150,14 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                 <PageComponent data={values} />
               )} */}
 
-              <Tabs defaultValue="1" className="w-[400px]">
+              <Tabs
+                defaultValue={page.toString()}
+                value={tabPage.toString()}
+                onValueChange={(value) =>
+                  // router.push(pathname + '?page=' + value)
+                  setTabPage(Number(value))
+                }
+              >
                 <TabsList>
                   {dataFaker.parts.map((part, partIndex) =>
                     part.pages.map((page, pageIndex) => (
@@ -159,48 +175,61 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                 </TabsContent>
                 <TabsContent value="2">Change your password here.</TabsContent> */}
                 {dataFaker.parts.map((part, partIndex) => (
-                  <div key={partIndex} className="bg-green-400">
+                  <div key={partIndex}>
                     {/* <p>partIndex - {partIndex}</p> */}
                     {part.pages.map((page, pageIndex) => (
-                      <div key={pageIndex} className="bg-red-400">
+                      <div key={pageIndex}>
                         {/* <p>page number - {page.number}</p> */}
                         <TabsContent value={page.number.toString()}>
-                          {page?.questions &&
-                            page?.questions.length > 0 &&
-                            page.questions.map((question, questionIndex) => (
-                              <div key={questionIndex} className="bg-blue-400">
-                                <p>pageIndex - {pageIndex}</p>
+                          <AnimatePresence mode="wait">
+                            <motion.div
+                              key={`pageIndex-${pageIndex}`}
+                              initial={{ y: 10, opacity: 0 }}
+                              animate={{ y: 0, opacity: 1 }}
+                              exit={{ y: -10, opacity: 0 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              {page?.questions &&
+                                page?.questions.length > 0 &&
+                                page.questions.map(
+                                  (question, questionIndex) => (
+                                    <div key={questionIndex}>
+                                      <p>pageIndex - {pageIndex}</p>
 
-                                <FormItem>
-                                  <Editor
-                                    key={`editor-${question.label}-${questionIndex}`}
-                                    content={question.label}
-                                  />
-                                  <Input
-                                    {...form.register(
-                                      `parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`,
-                                      {
-                                        value: '',
-                                      },
-                                    )}
-                                  />
-                                  {form.formState.errors?.parts?.[partIndex]
-                                    ?.pages?.[pageIndex]?.questions?.[
-                                    questionIndex
-                                  ]?.answer?.message && (
-                                    <FormMessage>
-                                      {
-                                        form.formState.errors?.parts?.[
+                                      <FormItem>
+                                        <Editor
+                                          key={`editor-${question.label}-${questionIndex}`}
+                                          content={question.label}
+                                        />
+                                        <Input
+                                          {...form.register(
+                                            `parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`,
+                                            {
+                                              value: '',
+                                            },
+                                          )}
+                                        />
+                                        {form.formState.errors?.parts?.[
                                           partIndex
                                         ]?.pages?.[pageIndex]?.questions?.[
                                           questionIndex
-                                        ]?.answer?.message
-                                      }
-                                    </FormMessage>
-                                  )}
-                                </FormItem>
-                              </div>
-                            ))}
+                                        ]?.answer?.message && (
+                                          <FormMessage>
+                                            {
+                                              form.formState.errors?.parts?.[
+                                                partIndex
+                                              ]?.pages?.[pageIndex]
+                                                ?.questions?.[questionIndex]
+                                                ?.answer?.message
+                                            }
+                                          </FormMessage>
+                                        )}
+                                      </FormItem>
+                                    </div>
+                                  ),
+                                )}
+                            </motion.div>
+                          </AnimatePresence>
                         </TabsContent>
                       </div>
                     ))}
@@ -212,12 +241,15 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                 Submit
               </Button>
 
+              {/* <pre>{JSON.stringify(form.watch(), null, 2)}</pre> */}
+
               <div className="flex flex-row-reverse justify-between py-10">
                 <Button
                   type="button"
                   variant="secondary"
                   onClick={() =>
-                    router.push(pathname + '?page=' + (Number(page) + 1))
+                    // router.push(pathname + '?page=' + (Number(page) + 1))
+                    setTabPage((oldState) => oldState + 1)
                   }
                 >
                   Seguinte
@@ -228,7 +260,8 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                     type="button"
                     variant="secondary"
                     onClick={() =>
-                      router.push(pathname + '?page=' + (Number(page) - 1))
+                      // router.push(pathname + '?page=' + (Number(page) - 1))
+                      setTabPage((oldState) => oldState - 1)
                     }
                   >
                     Voltar

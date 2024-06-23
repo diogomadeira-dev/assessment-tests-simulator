@@ -5,7 +5,7 @@ import Editor from '@/components/editor'
 import { Button } from '@/components/ui/button'
 import { Form, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Tabs } from '@/components/ui/tabs'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -141,50 +141,72 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                 <PageComponent data={values} />
               )} */}
 
-              {dataFaker.parts.map((part, partIndex) => (
-                <div key={partIndex} className="bg-green-400">
-                  <p>partIndex - {partIndex}</p>
-                  {part.pages.map((page, pageIndex) => (
-                    <div key={pageIndex} className="bg-red-400">
-                      <p>pageIndex - {pageIndex}</p>
-                      {page?.questions &&
-                        page?.questions.length > 0 &&
-                        page.questions.map((question, questionIndex) => (
-                          <div key={questionIndex} className="bg-blue-400">
-                            <p>pageIndex - {pageIndex}</p>
+              <Tabs defaultValue="1" className="w-[400px]">
+                <TabsList>
+                  {dataFaker.parts.map((part, partIndex) =>
+                    part.pages.map((page, pageIndex) => (
+                      <TabsTrigger
+                        key={`pageIndex-${pageIndex}`}
+                        value={page.number.toString()}
+                      >
+                        Page {page.number.toString()}
+                      </TabsTrigger>
+                    )),
+                  )}
+                </TabsList>
+                {/* <TabsContent value="1">
+                  Make changes to your account here.
+                </TabsContent>
+                <TabsContent value="2">Change your password here.</TabsContent> */}
+                {dataFaker.parts.map((part, partIndex) => (
+                  <div key={partIndex} className="bg-green-400">
+                    {/* <p>partIndex - {partIndex}</p> */}
+                    {part.pages.map((page, pageIndex) => (
+                      <div key={pageIndex} className="bg-red-400">
+                        {/* <p>page number - {page.number}</p> */}
+                        <TabsContent value={page.number.toString()}>
+                          {page?.questions &&
+                            page?.questions.length > 0 &&
+                            page.questions.map((question, questionIndex) => (
+                              <div key={questionIndex} className="bg-blue-400">
+                                <p>pageIndex - {pageIndex}</p>
 
-                            <FormItem>
-                              <Editor
-                                key={`editor-${question.label}-${questionIndex}`}
-                                content={question.label}
-                              />
-                              <Input
-                                {...form.register(
-                                  `parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`,
-                                  {
-                                    value: '',
-                                  },
-                                )}
-                              />
-                              {form.formState.errors?.parts?.[partIndex]
-                                ?.pages?.[pageIndex]?.questions?.[questionIndex]
-                                ?.answer?.message && (
-                                <FormMessage>
-                                  {
-                                    form.formState.errors?.parts?.[partIndex]
-                                      ?.pages?.[pageIndex]?.questions?.[
-                                      questionIndex
-                                    ]?.answer?.message
-                                  }
-                                </FormMessage>
-                              )}
-                            </FormItem>
-                          </div>
-                        ))}
-                    </div>
-                  ))}
-                </div>
-              ))}
+                                <FormItem>
+                                  <Editor
+                                    key={`editor-${question.label}-${questionIndex}`}
+                                    content={question.label}
+                                  />
+                                  <Input
+                                    {...form.register(
+                                      `parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`,
+                                      {
+                                        value: '',
+                                      },
+                                    )}
+                                  />
+                                  {form.formState.errors?.parts?.[partIndex]
+                                    ?.pages?.[pageIndex]?.questions?.[
+                                    questionIndex
+                                  ]?.answer?.message && (
+                                    <FormMessage>
+                                      {
+                                        form.formState.errors?.parts?.[
+                                          partIndex
+                                        ]?.pages?.[pageIndex]?.questions?.[
+                                          questionIndex
+                                        ]?.answer?.message
+                                      }
+                                    </FormMessage>
+                                  )}
+                                </FormItem>
+                              </div>
+                            ))}
+                        </TabsContent>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </Tabs>
 
               <Button type="submit" variant="secondary">
                 Submit

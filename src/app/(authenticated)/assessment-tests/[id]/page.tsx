@@ -9,6 +9,7 @@ export const dataFaker = {
     {
       pages: [
         {
+          number: 1,
           questions: [
             {
               number: '',
@@ -25,13 +26,13 @@ export const dataFaker = {
           ],
         },
         {
-          number: '',
+          number: 2,
           questions: [
             {
               number: '',
               type: 'SHORT_TEXT',
               label:
-                '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 1 - "},{"type":"text","text":"Pagina 2 - Parte A"}]}]}',
+                '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 3 - "},{"type":"text","text":"Pagina 2 - Parte A"}]}]}',
             },
             {
               number: '',
@@ -51,7 +52,7 @@ export const dataFaker = {
                 },
               ],
               label:
-                '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 2 - "},{"type":"text","text":"Pagina 2 - Parte A"}]}]}',
+                '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 4 - "},{"type":"text","text":"Pagina 2 - Parte A"}]}]}',
             },
           ],
         },
@@ -60,30 +61,30 @@ export const dataFaker = {
     {
       pages: [
         {
-          number: '',
+          number: 3,
           questions: [
             {
               number: '',
               type: 'SHORT_TEXT',
               label:
-                '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 1 - "},{"type":"text","text":"Pagina 1 - Parte B"}]}]}',
+                '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 5 - "},{"type":"text","text":"Pagina 1 - Parte B"}]}]}',
             },
             {
               number: '',
               type: 'SHORT_TEXT',
               label:
-                '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 2 - "},{"type":"text","text":"Pagina 1 - Parte B"}]}]}',
+                '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 6 - "},{"type":"text","text":"Pagina 1 - Parte B"}]}]}',
             },
           ],
         },
         {
-          number: '',
+          number: 4,
           questions: [
             {
               number: '',
               type: 'SHORT_TEXT',
               label:
-                '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 1 - "},{"type":"text","text":"Pagina 2 - Parte B"}]}]}',
+                '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 7 - "},{"type":"text","text":"Pagina 2 - Parte B"}]}]}',
             },
           ],
         },

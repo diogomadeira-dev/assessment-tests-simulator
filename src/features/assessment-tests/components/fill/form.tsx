@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AnimatePresence, motion } from 'framer-motion'
-import { CircleAlert } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CircleAlert } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -64,7 +64,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
             </p>
           </div>
           <Tabs value={page.toString()}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               {/* <pre>{JSON.stringify(dataFaker, null, 2)}</pre> */}
 
               <Tabs
@@ -72,30 +72,53 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                 value={tabPage.toString()}
                 onValueChange={(value) => setTabPage(Number(value))}
               >
-                <TabsList>
-                  {dataFaker.parts.map((part, partIndex) =>
-                    part.pages.map((page, pageIndex) => (
-                      <TabsTrigger
-                        key={`pageIndex-${pageIndex}`}
-                        value={page.number.toString()}
-                        className={cn({
-                          'border border-red-500':
-                            form.formState.errors?.parts?.[partIndex]?.pages?.[
-                              pageIndex
-                            ],
-                        })}
+                <div className="flex justify-between">
+                  <div className="flex gap-4">
+                    {page > 0 && (
+                      <Button
+                        type="button"
+                        size="icon"
+                        variant="secondary"
+                        onClick={() => setTabPage((oldState) => oldState - 1)}
                       >
-                        {/* // TODO: ADD THIS DYNAMIC WARNING TO TAB TRIGGER COMPONENT */}
-                        {form.formState.errors?.parts?.[partIndex]?.pages?.[
-                          pageIndex
-                        ] && (
-                          <CircleAlert className="mr-1 h-4 w-4 text-destructive" />
-                        )}
-                        Page {page.number.toString()}
-                      </TabsTrigger>
-                    )),
-                  )}
-                </TabsList>
+                        <ArrowLeft className="h-4 w-4" />
+                      </Button>
+                    )}
+                    <TabsList>
+                      {dataFaker.parts.map((part, partIndex) =>
+                        part.pages.map((page, pageIndex) => (
+                          <TabsTrigger
+                            key={`pageIndex-${pageIndex}`}
+                            value={page.number.toString()}
+                            className={cn({
+                              'border border-red-500':
+                                form.formState.errors?.parts?.[partIndex]
+                                  ?.pages?.[pageIndex],
+                            })}
+                          >
+                            {/* // TODO: ADD THIS DYNAMIC WARNING TO TAB TRIGGER COMPONENT */}
+                            {form.formState.errors?.parts?.[partIndex]?.pages?.[
+                              pageIndex
+                            ] && (
+                              <CircleAlert className="mr-1 h-4 w-4 text-destructive" />
+                            )}
+                            Page {page.number.toString()}
+                          </TabsTrigger>
+                        )),
+                      )}
+                    </TabsList>
+                    <Button
+                      type="button"
+                      size="icon"
+                      variant="secondary"
+                      onClick={() => setTabPage((oldState) => oldState + 1)}
+                    >
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </div>
+
+                  <Button type="submit">Submit</Button>
+                </div>
 
                 {dataFaker.parts.map((part, partIndex) => (
                   <div key={partIndex}>
@@ -103,20 +126,20 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                       <div key={pageIndex}>
                         <TabsContent value={page.number.toString()}>
                           <AnimatePresence mode="wait">
+                            {/* ! TODO: ANIMATION NOT WORK ON EXIT */}
                             <motion.div
                               key={`pageIndex-${pageIndex}`}
                               initial={{ y: 10, opacity: 0 }}
                               animate={{ y: 0, opacity: 1 }}
                               exit={{ y: -10, opacity: 0 }}
-                              transition={{ duration: 0.3 }}
+                              transition={{ duration: 0.5 }}
+                              className="space-y-8"
                             >
                               {page?.questions &&
                                 page?.questions.length > 0 &&
                                 page.questions.map(
                                   (question, questionIndex) => (
                                     <div key={questionIndex}>
-                                      <p>pageIndex - {pageIndex}</p>
-
                                       <FormItem>
                                         <Editor
                                           key={`editor-${question.label}-${questionIndex}`}
@@ -158,31 +181,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                 ))}
               </Tabs>
 
-              <Button type="submit" variant="secondary">
-                Submit
-              </Button>
-
               {/* <pre>{JSON.stringify(form.watch(), null, 2)}</pre> */}
-
-              <div className="flex flex-row-reverse justify-between py-10">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  onClick={() => setTabPage((oldState) => oldState + 1)}
-                >
-                  Seguinte
-                </Button>
-
-                {page > 0 && (
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    onClick={() => setTabPage((oldState) => oldState - 1)}
-                  >
-                    Voltar
-                  </Button>
-                )}
-              </div>
             </form>
           </Tabs>
         </div>

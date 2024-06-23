@@ -1,8 +1,10 @@
 'use client'
 
 import { dataFaker } from '@/app/(authenticated)/assessment-tests/[id]/page'
+import Editor from '@/components/editor'
 import { Button } from '@/components/ui/button'
-import { Form } from '@/components/ui/form'
+import { Form, FormItem, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import { Tabs } from '@/components/ui/tabs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
@@ -117,8 +119,8 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
     <Form {...form}>
       <div className="flex h-screen">
         <div className="container">
-          {/* <pre>{JSON.stringify(form.watch(), null, 2)}</pre>
-          errors: {JSON.stringify(form.formState.errors)} */}
+          <pre>{JSON.stringify(form.watch(), null, 2)}</pre>
+          {/* errors: {JSON.stringify(form.formState.errors)} */}
           <div className="flex justify-between py-12">
             <p className="text-sm text-muted-foreground">
               Prova Modelo 1 | Matemática e Estudo do meio 2º Ano de
@@ -151,37 +153,32 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                           <div key={questionIndex} className="bg-blue-400">
                             <p>pageIndex - {pageIndex}</p>
 
-                            <input
-                              {...form.register(
-                                `parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`,
-                                {
-                                  required: true,
-                                  value: '',
-                                  maxLength: 20,
-                                },
+                            <FormItem>
+                              <Editor
+                                key={`editor-${question.label}-${questionIndex}`}
+                                content={question.label}
+                              />
+                              <Input
+                                {...form.register(
+                                  `parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`,
+                                  {
+                                    value: '',
+                                  },
+                                )}
+                              />
+                              {form.formState.errors?.parts?.[partIndex]
+                                ?.pages?.[pageIndex]?.questions?.[questionIndex]
+                                ?.answer?.message && (
+                                <FormMessage>
+                                  {
+                                    form.formState.errors?.parts?.[partIndex]
+                                      ?.pages?.[pageIndex]?.questions?.[
+                                      questionIndex
+                                    ]?.answer?.message
+                                  }
+                                </FormMessage>
                               )}
-                            />
-
-                            {/* <FormField
-                              control={form.control}
-                              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`}
-                              render={({ field }) => (
-                                <FormItem>
-                                  <p>
-                                    TESTE -{' '}
-                                    {`questions.${questionIndex}.answer`}
-                                  </p>
-                                  <Editor
-                                    key={`editor-${question.label}-${questionIndex}`}
-                                    content={question.label}
-                                  />
-                                  <FormControl>
-                                    <Input {...field} />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            /> */}
+                            </FormItem>
                           </div>
                         ))}
                     </div>

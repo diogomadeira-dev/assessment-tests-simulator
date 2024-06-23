@@ -18,11 +18,12 @@ import { FillAssessmentInputSchema } from '../../api/fill-assessment-test'
 import BreakComponent from './break'
 
 export default function PageComponent({ data }: { data: any }) {
+  console.log('🚀 ~ PageComponent ~ data:', data)
   const searchParams = useSearchParams()
   const page = Number(searchParams.get('page')) || 0
-  const pageData = data[page - 1]
+  const pageData = data.data[page - 1]
 
-  const { control } = useFormContext<FillAssessmentInputSchema>()
+  const { control, register } = useFormContext<FillAssessmentInputSchema>()
 
   const questionTypesSwitch = ({
     questionIndex,
@@ -34,23 +35,33 @@ export default function PageComponent({ data }: { data: any }) {
     switch (question.type) {
       case 'SHORT_TEXT':
         return (
-          <FormField
-            control={control}
-            name={`questions.${questionIndex}.answer`}
-            render={({ field }) => (
-              <FormItem>
-                {/* <FormLabel>Short text</FormLabel> */}
-                <Editor
-                  key={`editor-${pageData}-${question.label}-${questionIndex}`}
-                  content={question.label}
-                />
-                <FormControl>
-                  <Input {...field} value={field.value || ''} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <>
+            {/* <input
+              type="text"
+              {...register(`questions.${question.questionCount - 1}.answer`)}
+              // defaultValue={defaultValue}
+            /> */}
+            <FormField
+              control={control}
+              name={`questions.${question.questionCount - 1}.answer`}
+              render={({ field }) => (
+                <FormItem>
+                  {/* <FormLabel>Short text</FormLabel> */}
+                  <p>
+                    TESTE - {`questions.${question.questionCount - 1}.answer`}
+                  </p>
+                  <Editor
+                    key={`editor-${pageData}-${question.label}-${questionIndex}`}
+                    content={question.label}
+                  />
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </>
         )
       case 'LONG_TEXT':
         return (
@@ -127,7 +138,29 @@ export default function PageComponent({ data }: { data: any }) {
             pageData.questions.map((question, questionIndex) => (
               <div key={`editor-${pageData}-${questionIndex}`}>
                 <p>question.type - {question.type}</p>
-                {questionTypesSwitch({ questionIndex, question })}
+                {/* {questionTypesSwitch({ questionIndex, question })} */}
+
+                <FormField
+                  control={control}
+                  name={`questions.${question.questionCount - 1}.answer`}
+                  render={({ field }) => (
+                    <FormItem>
+                      {/* <FormLabel>Short text</FormLabel> */}
+                      <p>
+                        TESTE -{' '}
+                        {`questions.${question.questionCount - 1}.answer`}
+                      </p>
+                      <Editor
+                        key={`editor-${pageData}-${question.label}-${questionIndex}`}
+                        content={question.label}
+                      />
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
             ))}
 

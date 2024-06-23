@@ -72,7 +72,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                 value={tabPage.toString()}
                 onValueChange={(value) => setTabPage(Number(value))}
               >
-                <div className="flex justify-between">
+                <div className="flex justify-between pb-8">
                   <div className="flex gap-4">
                     {page > 0 && (
                       <Button
@@ -102,7 +102,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                             ] && (
                               <CircleAlert className="mr-1 h-4 w-4 text-destructive" />
                             )}
-                            Page {page.number.toString()}
+                            {page.number.toString()}
                           </TabsTrigger>
                         )),
                       )}

@@ -6,8 +6,10 @@ import { Button } from '@/components/ui/button'
 import { Form, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AnimatePresence, motion } from 'framer-motion'
+import { CircleAlert } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -24,6 +26,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
   const page = Number(searchParams.get('page')) || 0
 
   const [tabPage, setTabPage] = useState(1)
+  const [pageCount, setPageCount] = useState(0)
 
   const form = useForm<FillAssessmentInputSchema>({
     resolver: zodResolver(FillAssessmentInput),
@@ -33,97 +36,18 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
     console.log('🚀 ~ onSubmit ~ data:', data)
   }
 
-  // const getData = () => {
-  //   let pageCount = 0
-  //   let questionCount = 0
-  //   const data = []
-  //   dataFaker.parts.forEach((part, partIndex) => {
-  //     if (partIndex !== 0) {
-  //       pageCount++
-  //       data.push({
-  //         breakPart: partIndex,
-  //         pageNumber: pageCount,
-  //       })
-  //     }
-
-  //     part.pages.forEach((page, pageIndex) => {
-  //       pageCount++
-  //       data.push({
-  //         partIndex,
-  //         pageNumber: pageCount,
-  //         questions: page.questions.map((question, questionIndex) => {
-  //           questionCount++
-  //           return {
-  //             questionCount,
-  //             ...question,
-  //           }
-  //         }),
-  //       })
-  //     })
-  //   })
-
-  //   return {
-  //     pageCount,
-  //     data,
-  //   }
-  // }
-
-  // const { data, pageCount } = getData()
-
-  // useEffect(() => {
-  //   // console.log('data', data)
-
-  //   let pageCount = 0
-  //   let questionCount = 0
-  //   const data = []
-  //   dataFaker.parts.forEach((part, partIndex) => {
-  //     if (partIndex !== 0) {
-  //       pageCount++
-  //       data.push({
-  //         breakPart: partIndex,
-  //         pageNumber: pageCount,
-  //       })
-  //     }
-
-  //     part.pages.forEach((page, pageIndex) => {
-  //       pageCount++
-  //       data.push({
-  //         partIndex,
-  //         pageNumber: pageCount,
-  //         questions: page.questions.map((question, questionIndex) => {
-  //           questionCount++
-  //           form.setValue(`questions.${questionIndex}.answer`, '')
-  //           console.log(`Registering: questions.${questionIndex}.answer`) // Debug log
-
-  //           return {
-  //             questionCount,
-  //             ...question,
-  //           }
-  //         }),
-  //       })
-  //     })
-  //   })
-
-  //   setValues({
-  //     pageCount,
-  //     data,
-  //   })
-  // }, [dataFaker])
-
-  useEffect(() => {
-    console.log('form.formState.errors', form.formState.errors)
-  }, [form.formState.errors])
-
   useEffect(() => {
     setTabPage(page)
-    console.log('🚀 ~ useEffect ~ setTabPage:', tabPage)
+
+    let pageCounter = 0
+    dataFaker.parts.forEach((part) => part.pages.forEach(() => pageCounter++))
+
+    setPageCount(pageCounter)
   }, [])
 
   useEffect(() => {
     router.push(pathname + '?page=' + tabPage)
   }, [tabPage])
-
-  // if (!values) return 'loading...'
 
   return (
     <Form {...form}>
@@ -135,28 +59,18 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
               Prova Modelo 1 | Matemática e Estudo do meio 2º Ano de
               escolaridade
             </p>
-            {/* <p className="text-sm text-muted-foreground">
-              {page}/{values.pageCount}
-            </p> */}
+            <p className="text-sm text-muted-foreground">
+              {page}/{pageCount}
+            </p>
           </div>
           <Tabs value={page.toString()}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               {/* <pre>{JSON.stringify(dataFaker, null, 2)}</pre> */}
 
-              {/* ! TODO: CAN I DE THIS WITH SWITCH??? */}
-              {/* {page === 0 ? (
-                <StartComponent />
-              ) : (
-                <PageComponent data={values} />
-              )} */}
-
               <Tabs
                 defaultValue={page.toString()}
                 value={tabPage.toString()}
-                onValueChange={(value) =>
-                  // router.push(pathname + '?page=' + value)
-                  setTabPage(Number(value))
-                }
+                onValueChange={(value) => setTabPage(Number(value))}
               >
                 <TabsList>
                   {dataFaker.parts.map((part, partIndex) =>
@@ -164,22 +78,29 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                       <TabsTrigger
                         key={`pageIndex-${pageIndex}`}
                         value={page.number.toString()}
+                        className={cn({
+                          'border border-red-500':
+                            form.formState.errors?.parts?.[partIndex]?.pages?.[
+                              pageIndex
+                            ],
+                        })}
                       >
+                        {/* // TODO: ADD THIS DYNAMIC WARNING TO TAB TRIGGER COMPONENT */}
+                        {form.formState.errors?.parts?.[partIndex]?.pages?.[
+                          pageIndex
+                        ] && (
+                          <CircleAlert className="mr-1 h-4 w-4 text-destructive" />
+                        )}
                         Page {page.number.toString()}
                       </TabsTrigger>
                     )),
                   )}
                 </TabsList>
-                {/* <TabsContent value="1">
-                  Make changes to your account here.
-                </TabsContent>
-                <TabsContent value="2">Change your password here.</TabsContent> */}
+
                 {dataFaker.parts.map((part, partIndex) => (
                   <div key={partIndex}>
-                    {/* <p>partIndex - {partIndex}</p> */}
                     {part.pages.map((page, pageIndex) => (
                       <div key={pageIndex}>
-                        {/* <p>page number - {page.number}</p> */}
                         <TabsContent value={page.number.toString()}>
                           <AnimatePresence mode="wait">
                             <motion.div
@@ -247,10 +168,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                 <Button
                   type="button"
                   variant="secondary"
-                  onClick={() =>
-                    // router.push(pathname + '?page=' + (Number(page) + 1))
-                    setTabPage((oldState) => oldState + 1)
-                  }
+                  onClick={() => setTabPage((oldState) => oldState + 1)}
                 >
                   Seguinte
                 </Button>
@@ -259,10 +177,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                   <Button
                     type="button"
                     variant="secondary"
-                    onClick={() =>
-                      // router.push(pathname + '?page=' + (Number(page) - 1))
-                      setTabPage((oldState) => oldState - 1)
-                    }
+                    onClick={() => setTabPage((oldState) => oldState - 1)}
                   >
                     Voltar
                   </Button>

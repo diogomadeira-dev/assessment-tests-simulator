@@ -1,6 +1,7 @@
 import { type Editor } from '@tiptap/react'
 import {
   Bold,
+  FileAudio,
   Heading1,
   Heading2,
   Heading3,
@@ -108,6 +109,18 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
         onPressedChange={() => editor.chain().focus().toggleOrderedList().run()}
       >
         <ListOrdered className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('audio')}
+        onPressedChange={() =>
+          // TODO: import audio to storage
+          editor.commands.setAudio({
+            src: 'https://samplelib.com/lib/preview/mp3/sample-15s.mp3',
+          })
+        }
+      >
+        <FileAudio className="h-4 w-4" />
       </Toggle>
     </div>
   )

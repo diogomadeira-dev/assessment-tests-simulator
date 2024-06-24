@@ -7,7 +7,7 @@
                   "questions": [
                       {
                           "number": "",
-                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"1. Seleciona a opção correta\"}]},{\"type\":\"paragraph\"},{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"A História que acabaste de ouvir é sobre\"}]}]}",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Ouve a história atentamente\"}]},{\"type\":\"paragraph\"},{\"type\":\"Audio\",\"attrs\":{\"keyId\":\"g1kbg-kx6y9\",\"src\":\"https://samplelib.com/lib/preview/mp3/sample-15s.mp3\",\"controls\":true,\"autoplay\":false,\"loop\":false,\"muted\":false,\"preload\":\"metadata\",\"volume\":1,\"margin\":\"0in\",\"clear\":\"none\",\"float\":\"unset\",\"display\":\"block\",\"justifyContent\":\"start\",\"width\":null,\"height\":null}},{\"type\":\"paragraph\"},{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"1. Seleciona a opção correta\"}]},{\"type\":\"paragraph\"},{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"A História que acabaste de ouvir é sobre\"}]}]}",
                           "type": "RADIO_GROUP",
                           "options": [
                               {

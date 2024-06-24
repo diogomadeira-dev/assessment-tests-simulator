@@ -1,6 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
+import { HyperMultimediaKit } from '@docs.plus/extension-hypermultimedia'
 import Heading from '@tiptap/extension-heading'
 import { EditorContent, mergeAttributes, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
@@ -68,6 +69,11 @@ const Editor = (props: TiptapProps) => {
           ]
         },
       }).configure({ levels: [1, 2, 3, 4, 5, 6] }),
+      HyperMultimediaKit.configure({
+        Audio: {
+          controls: true,
+        },
+      }),
     ],
     content: props?.content ? JSON.parse(props.content) : '',
     onUpdate({ editor }) {

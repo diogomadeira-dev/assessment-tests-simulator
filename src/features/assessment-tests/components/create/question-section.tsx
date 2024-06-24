@@ -107,19 +107,15 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
     ) {
       case 'SHORT_TEXT':
         return (
-          <FormField
-            control={control}
-            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Short text</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="w-full">
+            <Controller
+              control={control}
+              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
+              render={({ field: { onChange }, fieldState: { error } }) => (
+                <Editor onChange={onChange} error={error} editable />
+              )}
+            />
+          </div>
         )
       case 'LONG_TEXT':
         return (
@@ -227,14 +223,6 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
                     </FormControl>
                     <FormMessage />
                   </FormItem>
-                )}
-              />
-
-              <Controller
-                control={control}
-                name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
-                render={({ field: { onChange }, fieldState: { error } }) => (
-                  <Editor onChange={onChange} error={error} editable />
                 )}
               />
 

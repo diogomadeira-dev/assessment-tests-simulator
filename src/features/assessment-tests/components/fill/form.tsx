@@ -1,39 +1,24 @@
 'use client'
 
 import { dataFaker } from '@/app/(authenticated)/assessment-tests/[id]/page'
-import Editor from '@/components/editor'
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Form } from '@/components/ui/form'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
+import { AlphabeticEnum } from '@/types/assessment-tests'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, CircleAlert } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { CreateAssessmentInputSchema } from '../../api/create-assessment-test'
 import {
   FillAssessmentInput,
   FillAssessmentInputSchema,
 } from '../../api/fill-assessment-test'
+import BreakComponent from './break'
+import PageComponent from './page'
 import StartComponent from './start'
-
-type questionTypesSwitchProps = {
-  question: CreateAssessmentInputSchema['parts'][number]['pages'][number]['questions'][number]
-  partIndex: number
-  pageIndex: number
-  questionIndex: number
-}
 
 export default function FillAssessmentTestForm({ id }: { id: number }) {
   const router = useRouter()
@@ -78,81 +63,6 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
     router.push(pathname + '?page=' + tabPage)
   }, [tabPage])
 
-  const questionTypesSwitch = ({
-    question,
-    partIndex,
-    pageIndex,
-    questionIndex,
-  }: questionTypesSwitchProps) => {
-    switch (question.type) {
-      case 'SHORT_TEXT':
-        return (
-          <FormField
-            control={form.control}
-            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`}
-            defaultValue=""
-            render={({ field }) => (
-              <FormItem>
-                <Editor
-                  key={`editor-${partIndex}-${pageIndex}-${questionIndex}`}
-                  content={question.label}
-                />
-                <FormControl>
-                  <Input placeholder="Write here..." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        )
-      case 'RADIO_GROUP':
-        return (
-          <>
-            <FormField
-              control={form.control}
-              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`}
-              render={({ field }) => (
-                <FormItem className="space-y-3">
-                  <Editor
-                    key={`editor-${partIndex}-${pageIndex}-${questionIndex}`}
-                    content={question.label}
-                  />
-                  <FormControl>
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      className="flex flex-col space-y-1"
-                    >
-                      {question.options.map((question, questionIndex) => (
-                        <FormItem
-                          key={`questionIndex-${questionIndex}`}
-                          className="flex items-center space-x-3 space-y-0"
-                        >
-                          <FormControl>
-                            <RadioGroupItem value={question.id} />
-                          </FormControl>
-                          <FormLabel className="font-normal">
-                            {question.name}
-                          </FormLabel>
-                        </FormItem>
-                      ))}
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </>
-        )
-      // case "TYPE":
-      //   return (
-
-      //   )
-      default:
-        return null
-    }
-  }
-
   return (
     <Form {...form}>
       <div className="flex h-screen">
@@ -174,50 +84,58 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
               <Tabs
                 defaultValue={pageNumberUrl.toString()}
                 value={tabPage.toString()}
-                onValueChange={(value) => setTabPage(Number(value))}
+                onValueChange={(value) => setTabPage(value)}
               >
                 <div className="flex justify-between pb-8">
                   <div className="flex gap-4">
-                    {pageNumberUrl > 0 && (
-                      <Button
-                        type="button"
-                        size="icon"
-                        variant="secondary"
-                        onClick={() => setTabPage((oldState) => oldState - 1)}
-                      >
-                        <ArrowLeft className="h-4 w-4" />
-                      </Button>
-                    )}
+                    <Button
+                      type="button"
+                      size="icon"
+                      variant="secondary"
+                      onClick={() => setTabPage((oldState) => oldState - 1)}
+                      disabled={pageNumberUrl === 0}
+                    >
+                      <ArrowLeft className="h-4 w-4" />
+                    </Button>
+
                     <TabsList>
-                      <TabsTrigger
-                        key={`pageIndex-${0}`}
-                        value="0"
-                        className="bg-accent text-accent-foreground"
-                      >
+                      <TabsTrigger value="0" className="font-extrabold">
                         Start
                       </TabsTrigger>
-                      {dataFaker.parts.map((part, partIndex) =>
-                        part.pages.map((page, pageIndex) => (
-                          <TabsTrigger
-                            key={`pageIndex-${pageIndex}`}
-                            value={page.number.toString()}
-                            className={cn({
-                              'border border-red-500':
-                                form.formState.errors?.parts?.[partIndex]
-                                  ?.pages?.[pageIndex],
-                            })}
-                          >
-                            {/* // TODO: ADD THIS DYNAMIC WARNING TO TAB TRIGGER COMPONENT */}
-                            {form.formState.errors?.parts?.[partIndex]?.pages?.[
-                              pageIndex
-                            ] && (
-                              <CircleAlert className="mr-1 h-4 w-4 text-destructive" />
+                      {dataFaker.parts.map((part, partIndex) => {
+                        return (
+                          <React.Fragment key={`partIndex-${partIndex}`}>
+                            {partIndex > 0 && (
+                              <TabsTrigger
+                                value={part.id}
+                                className="font-extrabold"
+                              >
+                                Part {AlphabeticEnum[partIndex]}
+                              </TabsTrigger>
                             )}
-                            {pageNumberUrl === page.number && 'Page '}{' '}
-                            {page.number.toString()}
-                          </TabsTrigger>
-                        )),
-                      )}
+
+                            {part.pages.map((page, pageIndex) => (
+                              <TabsTrigger
+                                key={`pageIndex-${pageIndex}`}
+                                value={page.number.toString()}
+                                className={cn({
+                                  'border border-red-500':
+                                    form.formState.errors?.parts?.[partIndex]
+                                      ?.pages?.[pageIndex],
+                                })}
+                              >
+                                {/* // TODO: ADD THIS DYNAMIC WARNING TO TAB TRIGGER COMPONENT */}
+                                {form.formState.errors?.parts?.[partIndex]
+                                  ?.pages?.[pageIndex] && (
+                                  <CircleAlert className="mr-1 h-4 w-4 text-destructive" />
+                                )}
+                                {pageNumberUrl === page.number && 'Page '}{' '}
+                                {page.number.toString()}
+                              </TabsTrigger>
+                            ))}
+                          </React.Fragment>
+                        )
+                      })}
                     </TabsList>
                     <Button
                       type="button"
@@ -237,9 +155,18 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
 
                 {dataFaker.parts.map((part, partIndex) => (
                   <div key={partIndex}>
-                    {part.pages.map((page, pageIndex) => (
-                      <div key={pageIndex}>
-                        <TabsContent value={page.number.toString()}>
+                    <TabsContent
+                      key={`page-${tabPage}`}
+                      value={tabPage.toString()}
+                    >
+                      {partIndex > 0 && (
+                        <TabsContent value={part.id}>
+                          <BreakComponent partIndex={partIndex} />
+                        </TabsContent>
+                      )}
+
+                      {part.pages.map((page, pageIndex) => (
+                        <div key={pageIndex}>
                           <AnimatePresence mode="wait">
                             {/* ! TODO: ANIMATION NOT WORK ON EXIT */}
                             <motion.div
@@ -250,25 +177,29 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                               transition={{ duration: 0.5 }}
                               className="space-y-8"
                             >
-                              {page?.questions &&
-                                page?.questions.length > 0 &&
-                                page.questions.map(
-                                  (question, questionIndex) => (
-                                    <div key={questionIndex}>
-                                      {questionTypesSwitch({
-                                        question,
-                                        partIndex,
-                                        pageIndex,
-                                        questionIndex,
-                                      })}
-                                    </div>
-                                  ),
-                                )}
+                              <TabsContent
+                                key={`${page.number}`}
+                                value={`${page.number}`}
+                              >
+                                <PageComponent
+                                  partIndex={partIndex}
+                                  pageIndex={pageIndex}
+                                  page={page}
+                                />
+                              </TabsContent>
+
+                              {/* {JSON.stringify(page)} */}
+
+                              {/* <PageComponent
+                                partIndex={partIndex}
+                                pageIndex={pageIndex}
+                                page={page}
+                              /> */}
                             </motion.div>
                           </AnimatePresence>
-                        </TabsContent>
-                      </div>
-                    ))}
+                        </div>
+                      ))}
+                    </TabsContent>
                   </div>
                 ))}
               </Tabs>

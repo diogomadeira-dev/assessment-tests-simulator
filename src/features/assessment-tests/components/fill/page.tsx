@@ -9,74 +9,54 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { TabsContent } from '@/components/ui/tabs'
-import { Textarea } from '@/components/ui/textarea'
-import { AlphabeticEnum } from '@/types/assessment-tests'
 import { useSearchParams } from 'next/navigation'
 import { useFormContext } from 'react-hook-form'
+import { CreateAssessmentInputSchema } from '../../api/create-assessment-test'
 import { FillAssessmentInputSchema } from '../../api/fill-assessment-test'
-import BreakComponent from './break'
 
-export default function PageComponent({ data }: { data: any }) {
-  console.log('🚀 ~ PageComponent ~ data:', data)
+type questionTypesSwitchProps = {
+  question: CreateAssessmentInputSchema['parts'][number]['pages'][number]['questions'][number]
+  partIndex: number
+  pageIndex: number
+  questionIndex: number
+}
+
+export default function PageComponent({
+  partIndex,
+  pageIndex,
+  page,
+}: {
+  partIndex: number
+  pageIndex: number
+  page: CreateAssessmentInputSchema['parts'][number]['pages'][number]
+}) {
   const searchParams = useSearchParams()
-  const page = Number(searchParams.get('page')) || 0
-  const pageData = data.data[page - 1]
+
+  const pageNumberUrl = Number(searchParams.get('page')) || 0
 
   const { control, register } = useFormContext<FillAssessmentInputSchema>()
 
   const questionTypesSwitch = ({
-    questionIndex,
     question,
-  }: {
-    questionIndex: number
-    question: any
-  }) => {
+    partIndex,
+    pageIndex,
+    questionIndex,
+  }: questionTypesSwitchProps) => {
     switch (question.type) {
       case 'SHORT_TEXT':
         return (
-          <>
-            {/* <input
-              type="text"
-              {...register(`questions.${question.questionCount - 1}.answer`)}
-              // defaultValue={defaultValue}
-            /> */}
-            <FormField
-              control={control}
-              name={`questions.${question.questionCount - 1}.answer`}
-              render={({ field }) => (
-                <FormItem>
-                  {/* <FormLabel>Short text</FormLabel> */}
-                  <p>
-                    TESTE - {`questions.${question.questionCount - 1}.answer`}
-                  </p>
-                  <Editor
-                    key={`editor-${pageData}-${question.label}-${questionIndex}`}
-                    content={question.label}
-                  />
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </>
-        )
-      case 'LONG_TEXT':
-        return (
           <FormField
             control={control}
-            name={`questions.${questionIndex}.answer`}
+            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`}
+            defaultValue=""
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Long text</FormLabel>
+                <Editor
+                  key={`editor-${partIndex}-${pageIndex}-${questionIndex}`}
+                  content={question.label}
+                />
                 <FormControl>
-                  <Textarea
-                    placeholder="Escreve aqui..."
-                    className="resize-y"
-                    {...field}
-                  />
+                  <Input placeholder="Write here..." {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -85,88 +65,68 @@ export default function PageComponent({ data }: { data: any }) {
         )
       case 'RADIO_GROUP':
         return (
-          <FormField
-            control={control}
-            name={`questions.${questionIndex}.answer`}
-            render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>Notify me about...</FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={(value) => field.onChange([value])}
-                    // defaultValue={field.value}
-                    className="flex flex-col space-y-1"
-                  >
-                    {question.options.map((option, optionIndex) => (
-                      <FormItem
-                        key={`optionIndex-${optionIndex}`}
-                        className="flex items-center space-x-3 space-y-0"
-                      >
-                        <FormControl>
-                          <RadioGroupItem value={option.id} />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          {option.name}
-                        </FormLabel>
-                      </FormItem>
-                    ))}
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <>
+            <FormField
+              control={control}
+              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`}
+              render={({ field }) => (
+                <FormItem className="space-y-3">
+                  <Editor
+                    key={`editor-${partIndex}-${pageIndex}-${questionIndex}`}
+                    content={question.label}
+                  />
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col space-y-1"
+                    >
+                      {question.options.map((question, questionIndex) => (
+                        <FormItem
+                          key={`questionIndex-${questionIndex}`}
+                          className="flex items-center space-x-3 space-y-0"
+                        >
+                          <FormControl>
+                            <RadioGroupItem value={question.id} />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            {question.name}
+                          </FormLabel>
+                        </FormItem>
+                      ))}
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </>
         )
       // case "TYPE":
       //   return (
+
       //   )
       default:
         return null
     }
   }
 
-  if (pageData?.breakPart) return <BreakComponent />
-
   return (
-    <TabsContent value={page > 0 ? page.toString() : ''}>
-      <Card>
-        <CardContent className="space-y-2">
-          <p>Part {AlphabeticEnum[pageData.partIndex]}</p>
-          <p>Page {pageData.pageNumber}</p>
-
-          {pageData?.questions.length > 0 &&
-            pageData.questions.map((question, questionIndex) => (
-              <div key={`editor-${pageData}-${questionIndex}`}>
-                <p>question.type - {question.type}</p>
-                {/* {questionTypesSwitch({ questionIndex, question })} */}
-
-                <FormField
-                  control={control}
-                  name={`questions.${question.questionCount - 1}.answer`}
-                  render={({ field }) => (
-                    <FormItem>
-                      {/* <FormLabel>Short text</FormLabel> */}
-                      <p>
-                        TESTE -{' '}
-                        {`questions.${question.questionCount - 1}.answer`}
-                      </p>
-                      <Editor
-                        key={`editor-${pageData}-${question.label}-${questionIndex}`}
-                        content={question.label}
-                      />
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            ))}
-
-          {/* {JSON.stringify(data, null, 2)} */}
-        </CardContent>
-      </Card>
-    </TabsContent>
+    <Card>
+      <CardContent className="space-y-2">
+        {page?.questions &&
+          page?.questions.length > 0 &&
+          page.questions.map((question, questionIndex) => (
+            <div key={questionIndex}>
+              {questionTypesSwitch({
+                question,
+                partIndex,
+                pageIndex,
+                questionIndex,
+              })}
+            </div>
+          ))}
+      </CardContent>
+    </Card>
   )
 }

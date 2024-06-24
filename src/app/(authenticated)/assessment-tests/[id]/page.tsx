@@ -7,6 +7,7 @@ export const dataFaker = {
   year: '2º Ano de escolaridade',
   parts: [
     {
+      id: 'e0d6cebb-599e-47a1-a16f-49f5fcc54bc7',
       pages: [
         {
           number: 1,
@@ -59,6 +60,7 @@ export const dataFaker = {
       ],
     },
     {
+      id: 'e0d6cebb-599e-47a1-a16f-49f5hcc54bj9',
       pages: [
         {
           number: 3,

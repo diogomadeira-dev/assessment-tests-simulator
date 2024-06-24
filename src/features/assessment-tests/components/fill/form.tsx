@@ -26,6 +26,7 @@ import {
   FillAssessmentInput,
   FillAssessmentInputSchema,
 } from '../../api/fill-assessment-test'
+import StartComponent from './start'
 
 type questionTypesSwitchProps = {
   question: CreateAssessmentInputSchema['parts'][number]['pages'][number]['questions'][number]
@@ -39,7 +40,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const page = Number(searchParams.get('page')) || 0
+  const pageNumberUrl = Number(searchParams.get('page')) || 0
 
   const [tabPage, setTabPage] = useState(1)
   const [pageCount, setPageCount] = useState(0)
@@ -53,7 +54,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
   }
 
   useEffect(() => {
-    setTabPage(page)
+    setTabPage(pageNumberUrl)
 
     let pageCounter = 0
     dataFaker.parts.forEach((part, partIndex) =>
@@ -160,21 +161,21 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
               escolaridade
             </p>
             <p className="text-sm text-muted-foreground">
-              {page}/{pageCount}
+              {pageNumberUrl}/{pageCount}
             </p>
           </div>
-          <Tabs value={page.toString()}>
+          <Tabs value={pageNumberUrl.toString()}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               {/* <pre>{JSON.stringify(dataFaker, null, 2)}</pre> */}
 
               <Tabs
-                defaultValue={page.toString()}
+                defaultValue={pageNumberUrl.toString()}
                 value={tabPage.toString()}
                 onValueChange={(value) => setTabPage(Number(value))}
               >
                 <div className="flex justify-between pb-8">
                   <div className="flex gap-4">
-                    {page > 0 && (
+                    {pageNumberUrl > 0 && (
                       <Button
                         type="button"
                         size="icon"
@@ -185,6 +186,9 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                       </Button>
                     )}
                     <TabsList>
+                      <TabsTrigger key={`pageIndex-${0}`} value="0">
+                        Start
+                      </TabsTrigger>
                       {dataFaker.parts.map((part, partIndex) =>
                         part.pages.map((page, pageIndex) => (
                           <TabsTrigger
@@ -202,6 +206,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                             ] && (
                               <CircleAlert className="mr-1 h-4 w-4 text-destructive" />
                             )}
+                            {pageNumberUrl === page.number && 'Page '}{' '}
                             {page.number.toString()}
                           </TabsTrigger>
                         )),
@@ -219,6 +224,9 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
 
                   <Button type="submit">Submit</Button>
                 </div>
+
+                {/* ! TODO: THIS COMPONENT IS RENDERED EVERYTIME */}
+                <StartComponent />
 
                 {dataFaker.parts.map((part, partIndex) => (
                   <div key={partIndex}>

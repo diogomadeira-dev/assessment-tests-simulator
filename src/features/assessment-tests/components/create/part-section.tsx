@@ -3,6 +3,7 @@ import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/cre
 import { AlphabeticEnum } from '@/types/assessment-tests'
 import { useTranslations } from 'next-intl'
 import { useFieldArray, useFormContext } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid'
 import { PageSection } from './page-section'
 
 export const PartSection = () => {
@@ -14,8 +15,8 @@ export const PartSection = () => {
 
   const {
     fields,
-    append: appendField,
-    remove: removeField,
+    append: appendPart,
+    remove: removePart,
   } = useFieldArray({
     control,
     name: 'parts',
@@ -33,27 +34,12 @@ export const PartSection = () => {
               <Button
                 type="button"
                 variant="ghost"
-                onClick={() => removeField(partIndex)}
+                onClick={() => removePart(partIndex)}
               >
                 Remove Part
               </Button>
             </div>
           )}
-
-          {/* 
-          <FormField
-            control={control}
-            name={`parts.${partIndex}.name`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Parte Name</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
 
           <PageSection partIndex={partIndex} />
         </fieldset>
@@ -62,8 +48,8 @@ export const PartSection = () => {
       <Button
         type="button"
         onClick={() =>
-          appendField({
-            // name: '',
+          appendPart({
+            id: uuidv4(),
             pages: [],
           })
         }

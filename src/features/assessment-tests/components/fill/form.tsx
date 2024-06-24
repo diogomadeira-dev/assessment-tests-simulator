@@ -8,7 +8,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { AlphabeticEnum } from '@/types/assessment-tests'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, CircleAlert } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -71,8 +70,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
           {/* errors: {JSON.stringify(form.formState.errors)} */}
           <div className="flex justify-between py-12">
             <p className="text-sm text-muted-foreground">
-              Prova Modelo 1 | Matemática e Estudo do meio 2º Ano de
-              escolaridade
+              {dataFaker.name} | {dataFaker.subject} {dataFaker.year}
             </p>
             <p className="text-sm text-muted-foreground">
               {pageNumberUrl}/{pageCount}
@@ -107,7 +105,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                         return (
                           <div key={`partIndex-${partIndex}`}>
                             <div className="flex items-end gap-1">
-                              <div>
+                              {/* <div>
                                 {partIndex > 0 && (
                                   <TabsTrigger
                                     value={part.id}
@@ -116,7 +114,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                                     Stop
                                   </TabsTrigger>
                                 )}
-                              </div>
+                              </div> */}
                               <div>
                                 <div className="flex flex-col items-center pb-2">
                                   <p className="text-sm">
@@ -183,8 +181,8 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
 
                       {part.pages.map((page, pageIndex) => (
                         <div key={pageIndex}>
-                          <AnimatePresence mode="wait">
-                            {/* ! TODO: ANIMATION NOT WORK ON EXIT */}
+                          {/* ! TODO: ANIMATION NOT WORK ON EXIT */}
+                          {/* <AnimatePresence mode="wait">
                             <motion.div
                               key={`pageIndex-${pageIndex}`}
                               initial={{ y: 10, opacity: 0 }}
@@ -192,27 +190,19 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                               exit={{ y: -10, opacity: 0 }}
                               transition={{ duration: 0.5 }}
                               className="space-y-8"
-                            >
-                              <TabsContent
-                                key={`${page.number}`}
-                                value={`${page.number}`}
-                              >
-                                <PageComponent
-                                  partIndex={partIndex}
-                                  pageIndex={pageIndex}
-                                  page={page}
-                                />
-                              </TabsContent>
-
-                              {/* {JSON.stringify(page)} */}
-
-                              {/* <PageComponent
-                                partIndex={partIndex}
-                                pageIndex={pageIndex}
-                                page={page}
-                              /> */}
-                            </motion.div>
-                          </AnimatePresence>
+                            > */}
+                          <TabsContent
+                            key={`${page.number}`}
+                            value={`${page.number}`}
+                          >
+                            <PageComponent
+                              partIndex={partIndex}
+                              pageIndex={pageIndex}
+                              page={page}
+                            />
+                          </TabsContent>
+                          {/* </motion.div>
+                          </AnimatePresence> */}
                         </div>
                       ))}
                     </TabsContent>

@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { AlphabeticEnum } from '@/types/assessment-tests'
 import { useSearchParams } from 'next/navigation'
 import { useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../../api/create-assessment-test'
@@ -112,21 +113,27 @@ export default function PageComponent({
   }
 
   return (
-    <Card>
-      <CardContent className="space-y-2">
-        {page?.questions &&
-          page?.questions.length > 0 &&
-          page.questions.map((question, questionIndex) => (
-            <div key={questionIndex}>
-              {questionTypesSwitch({
-                question,
-                partIndex,
-                pageIndex,
-                questionIndex,
-              })}
-            </div>
-          ))}
-      </CardContent>
-    </Card>
+    <div className="space-y-8">
+      {pageIndex === 0 && (
+        <p className="h2 text-center">PARTE {AlphabeticEnum[partIndex]}</p>
+      )}
+
+      <Card>
+        <CardContent className="space-y-2">
+          {page?.questions &&
+            page?.questions.length > 0 &&
+            page.questions.map((question, questionIndex) => (
+              <div key={questionIndex}>
+                {questionTypesSwitch({
+                  question,
+                  partIndex,
+                  pageIndex,
+                  questionIndex,
+                })}
+              </div>
+            ))}
+        </CardContent>
+      </Card>
+    </div>
   )
 }

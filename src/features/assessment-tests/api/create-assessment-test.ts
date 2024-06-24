@@ -18,6 +18,7 @@ export const CreateAssessmentInput = z.object({
   year: stringValidate,
   parts: z.array(
     z.object({
+      id: z.string(),
       pages: z.array(
         z.object({
           questions: z.array(

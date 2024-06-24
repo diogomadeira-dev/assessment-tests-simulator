@@ -112,6 +112,8 @@ export default function PageComponent({
     }
   }
 
+  console.log('🚀 ~ StartComponent ~ page:', page)
+
   return (
     <div className="space-y-8">
       {pageIndex === 0 && (

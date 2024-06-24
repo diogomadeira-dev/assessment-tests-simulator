@@ -19,7 +19,7 @@ export default function StartComponent() {
             <div className="mt-2 text-2xl font-bold">{dataFaker.subject}</div>
             <div className="mt-2 p-8 text-lg font-bold">{dataFaker.year}</div>
 
-            <Button type="button">Começar</Button>
+            <Button type="button">Start</Button>
           </div>
         </CardContent>
       </Card>

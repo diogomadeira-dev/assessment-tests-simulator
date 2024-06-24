@@ -16,7 +16,6 @@ import {
   FillAssessmentInput,
   FillAssessmentInputSchema,
 } from '../../api/fill-assessment-test'
-import BreakComponent from './break'
 import PageComponent from './page'
 import StartComponent from './start'
 
@@ -165,7 +164,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                 </div>
 
                 {/* ! TODO: THIS COMPONENT IS RENDERED EVERYTIME */}
-                <StartComponent />
+                {tabPage === 0 && <StartComponent />}
 
                 {dataFaker.parts.map((part, partIndex) => (
                   <div key={partIndex}>
@@ -173,11 +172,11 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                       key={`page-${tabPage}`}
                       value={tabPage.toString()}
                     >
-                      {partIndex > 0 && (
+                      {/* {partIndex > 0 && (
                         <TabsContent value={part.id}>
                           <BreakComponent partIndex={partIndex} />
                         </TabsContent>
-                      )}
+                      )} */}
 
                       {part.pages.map((page, pageIndex) => (
                         <div key={pageIndex}>

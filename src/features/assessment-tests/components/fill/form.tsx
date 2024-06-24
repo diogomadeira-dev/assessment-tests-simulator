@@ -25,7 +25,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const pageNumberUrl = Number(searchParams.get('page')) || 0
+  const pageNumberUrl = searchParams.get('page') || '0'
 
   const [tabPage, setTabPage] = useState(1)
   const [pageCount, setPageCount] = useState(0)
@@ -39,7 +39,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
   }
 
   useEffect(() => {
-    setTabPage(pageNumberUrl)
+    setTabPage(Number(pageNumberUrl))
 
     let pageCounter = 0
     dataFaker.parts.forEach((part, partIndex) =>
@@ -83,7 +83,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
               <Tabs
                 defaultValue={pageNumberUrl.toString()}
                 value={tabPage.toString()}
-                onValueChange={(value) => setTabPage(value)}
+                onValueChange={(value) => setTabPage(Number(value))}
               >
                 <div className="flex justify-between pb-8">
                   <div className="flex gap-4">
@@ -92,7 +92,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                       size="icon"
                       variant="outline"
                       onClick={() => setTabPage((oldState) => oldState - 1)}
-                      disabled={pageNumberUrl === 0}
+                      disabled={Number(pageNumberUrl) === 0}
                     >
                       <ArrowLeft className="h-4 w-4" />
                     </Button>

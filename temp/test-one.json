@@ -1,0 +1,35 @@
+{
+  "parts": [
+      {
+          "pages": [
+              {
+                  "number": 1,
+                  "questions": [
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"1. Seleciona a opção correta\"}]},{\"type\":\"paragraph\"},{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"A História que acabaste de ouvir é sobre\"}]}]}",
+                          "type": "RADIO_GROUP",
+                          "options": [
+                              {
+                                  "id": "f9e986e2-7c97-415f-92cc-d85564f5b0de",
+                                  "name": "uma zebra"
+                              },
+                              {
+                                  "id": "a1a05199-01fc-49b9-b5b4-07bf4fdacc09",
+                                  "name": "uma cabra"
+                              },
+                              {
+                                  "id": "7dc3bcf4-a608-4973-b2bd-28cfe82216d3",
+                                  "name": "uma vaca"
+                              }
+                          ]
+                      }
+                  ]
+              }
+          ]
+      }
+  ],
+  "name": "Prova modelo 1",
+  "subject": "Matemática",
+  "year": "2º ano de escolaridade"
+}

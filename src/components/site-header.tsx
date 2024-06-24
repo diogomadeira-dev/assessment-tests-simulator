@@ -1,4 +1,5 @@
 import { signOut } from '@/features/auth/actions/sign-out'
+import { LogOut } from 'lucide-react'
 import { MainNav } from './main-nav'
 import { MobileNav } from './mobile-nav'
 import { Button } from './ui/button'
@@ -43,7 +44,9 @@ export function SiteHeader() {
             </Link> */}
             {/* <ModeToggle /> */}
             <form action={signOut}>
-              <Button>Sign out</Button>
+              <Button variant="outline">
+                <LogOut className="h-4 w-4" />
+              </Button>
             </form>
           </nav>
         </div>

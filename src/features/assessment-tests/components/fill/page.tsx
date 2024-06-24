@@ -117,11 +117,13 @@ export default function PageComponent({
   return (
     <div className="space-y-8">
       {pageIndex === 0 && (
-        <p className="h2 text-center">PARTE {AlphabeticEnum[partIndex]}</p>
+        <p className="h2 text-center text-secondary">
+          PART {AlphabeticEnum[partIndex]}
+        </p>
       )}
 
-      <Card>
-        <CardContent className="space-y-2">
+      <Card className="px-4 py-6">
+        <CardContent className="space-y-12">
           {page?.questions &&
             page?.questions.length > 0 &&
             page.questions.map((question, questionIndex) => (

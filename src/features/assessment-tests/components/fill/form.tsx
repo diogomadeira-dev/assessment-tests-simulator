@@ -1,6 +1,5 @@
 'use client'
 
-import { dataFaker } from '@/app/(authenticated)/assessment-tests/[id]/page'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { Separator } from '@/components/ui/separator'
@@ -16,6 +15,7 @@ import {
   FillAssessmentInput,
   FillAssessmentInputSchema,
 } from '../../api/fill-assessment-test'
+import assessmentTestOne from './../../../../../temp/test-one.json'
 import PageComponent from './page'
 import StartComponent from './start'
 
@@ -33,6 +33,8 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
     resolver: zodResolver(FillAssessmentInput),
   })
 
+  const assessmentTestData = assessmentTestOne
+
   const onSubmit = async (data: FillAssessmentInputSchema) => {
     console.log('🚀 ~ onSubmit ~ data:', data)
   }
@@ -41,7 +43,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
     setTabPage(Number(pageNumberUrl))
 
     let pageCounter = 0
-    dataFaker.parts.forEach((part, partIndex) =>
+    assessmentTestData.parts.forEach((part, partIndex) =>
       part.pages.forEach((page, pageIndex) => {
         pageCounter++
         page.questions.forEach((question, questionIndex) => {
@@ -56,7 +58,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
     )
 
     setPageCount(pageCounter)
-  }, [dataFaker])
+  }, [assessmentTestData])
 
   useEffect(() => {
     router.push(pathname + '?page=' + tabPage)
@@ -67,9 +69,10 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
       <div className="flex h-screen">
         <div className="container">
           {/* errors: {JSON.stringify(form.formState.errors)} */}
-          <div className="flex justify-between py-12">
+          <div className="flex justify-between py-2">
             <p className="text-sm text-muted-foreground">
-              {dataFaker.name} | {dataFaker.subject} {dataFaker.year}
+              {assessmentTestData.name} | {assessmentTestData.subject}{' '}
+              {assessmentTestData.year}
             </p>
             <p className="text-sm text-muted-foreground">
               {pageNumberUrl}/{pageCount}
@@ -77,14 +80,14 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
           </div>
           <Tabs value={pageNumberUrl.toString()}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              {/* <pre>{JSON.stringify(dataFaker, null, 2)}</pre> */}
+              {/* <pre>{JSON.stringify(assessmentTestData, null, 2)}</pre> */}
 
               <Tabs
                 defaultValue={pageNumberUrl.toString()}
                 value={tabPage.toString()}
                 onValueChange={(value) => setTabPage(Number(value))}
               >
-                <div className="flex justify-between pb-8">
+                <div className="flex justify-between py-8">
                   <div className="flex gap-4">
                     <Button
                       type="button"
@@ -100,7 +103,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                       <TabsTrigger value="0" className="font-extrabold">
                         Start
                       </TabsTrigger>
-                      {dataFaker.parts.map((part, partIndex) => {
+                      {assessmentTestData.parts.map((part, partIndex) => {
                         return (
                           <div key={`partIndex-${partIndex}`}>
                             <div className="flex items-end gap-1">
@@ -128,7 +131,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                                       key={`pageIndex-${pageIndex}`}
                                       value={page.number.toString()}
                                       className={cn({
-                                        'border border-red-500':
+                                        'border-warning border':
                                           form.formState.errors?.parts?.[
                                             partIndex
                                           ]?.pages?.[pageIndex],
@@ -137,7 +140,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                                       {/* // TODO: ADD THIS DYNAMIC WARNING TO TAB TRIGGER COMPONENT */}
                                       {form.formState.errors?.parts?.[partIndex]
                                         ?.pages?.[pageIndex] && (
-                                        <CircleAlert className="mr-1 h-4 w-4 text-destructive" />
+                                        <CircleAlert className="text-warning mr-1 h-4 w-4" />
                                       )}
                                       {/* {pageNumberUrl === page.number && 'Page '}{' '} */}
                                       {page.number.toString()}
@@ -155,18 +158,21 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                       size="icon"
                       variant="outline"
                       onClick={() => setTabPage((oldState) => oldState + 1)}
+                      disabled={Number(pageNumberUrl) >= pageCount}
                     >
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </div>
 
-                  <Button type="submit">Submit</Button>
+                  <Button variant="secondary" type="submit">
+                    Submit
+                  </Button>
                 </div>
 
                 {/* ! TODO: THIS COMPONENT IS RENDERED EVERYTIME */}
                 {tabPage === 0 && <StartComponent />}
 
-                {dataFaker.parts.map((part, partIndex) => (
+                {assessmentTestData.parts.map((part, partIndex) => (
                   <div key={partIndex}>
                     <TabsContent
                       key={`page-${tabPage}`}

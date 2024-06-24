@@ -3,8 +3,16 @@
 import { dataFaker } from '@/app/(authenticated)/assessment-tests/[id]/page'
 import Editor from '@/components/editor'
 import { Button } from '@/components/ui/button'
-import { Form, FormItem, FormMessage } from '@/components/ui/form'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -13,10 +21,18 @@ import { ArrowLeft, ArrowRight, CircleAlert } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { CreateAssessmentInputSchema } from '../../api/create-assessment-test'
 import {
   FillAssessmentInput,
   FillAssessmentInputSchema,
 } from '../../api/fill-assessment-test'
+
+type questionTypesSwitchProps = {
+  question: CreateAssessmentInputSchema['parts'][number]['pages'][number]['questions'][number]
+  partIndex: number
+  pageIndex: number
+  questionIndex: number
+}
 
 export default function FillAssessmentTestForm({ id }: { id: number }) {
   const router = useRouter()
@@ -40,14 +56,98 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
     setTabPage(page)
 
     let pageCounter = 0
-    dataFaker.parts.forEach((part) => part.pages.forEach(() => pageCounter++))
+    dataFaker.parts.forEach((part, partIndex) =>
+      part.pages.forEach((page, pageIndex) => {
+        pageCounter++
+        page.questions.forEach((question, questionIndex) => {
+          form.register(
+            `parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`,
+            {
+              value: '',
+            },
+          )
+        })
+      }),
+    )
 
     setPageCount(pageCounter)
-  }, [])
+  }, [dataFaker])
 
   useEffect(() => {
     router.push(pathname + '?page=' + tabPage)
   }, [tabPage])
+
+  const questionTypesSwitch = ({
+    question,
+    partIndex,
+    pageIndex,
+    questionIndex,
+  }: questionTypesSwitchProps) => {
+    switch (question.type) {
+      case 'SHORT_TEXT':
+        return (
+          <FormField
+            control={form.control}
+            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`}
+            defaultValue=""
+            render={({ field }) => (
+              <FormItem>
+                <Editor
+                  key={`editor-${partIndex}-${pageIndex}-${questionIndex}`}
+                  content={question.label}
+                />
+                <FormControl>
+                  <Input placeholder="Write here..." {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )
+      case 'RADIO_GROUP':
+        return (
+          <>
+            <FormField
+              control={form.control}
+              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`}
+              render={({ field }) => (
+                <FormItem className="space-y-3">
+                  <FormLabel>Notify me about...</FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col space-y-1"
+                    >
+                      {question.options.map((question, questionIndex) => (
+                        <FormItem
+                          key={`questionIndex-${questionIndex}`}
+                          className="flex items-center space-x-3 space-y-0"
+                        >
+                          <FormControl>
+                            <RadioGroupItem value={question.id} />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            {question.name}
+                          </FormLabel>
+                        </FormItem>
+                      ))}
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </>
+        )
+      // case "TYPE":
+      //   return (
+
+      //   )
+      default:
+        return null
+    }
+  }
 
   return (
     <Form {...form}>
@@ -140,35 +240,12 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                                 page.questions.map(
                                   (question, questionIndex) => (
                                     <div key={questionIndex}>
-                                      <FormItem>
-                                        <Editor
-                                          key={`editor-${question.label}-${questionIndex}`}
-                                          content={question.label}
-                                        />
-                                        <Input
-                                          {...form.register(
-                                            `parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`,
-                                            {
-                                              value: '',
-                                            },
-                                          )}
-                                        />
-                                        {form.formState.errors?.parts?.[
-                                          partIndex
-                                        ]?.pages?.[pageIndex]?.questions?.[
-                                          questionIndex
-                                        ]?.answer?.message && (
-                                          <FormMessage>
-                                            {
-                                              form.formState.errors?.parts?.[
-                                                partIndex
-                                              ]?.pages?.[pageIndex]
-                                                ?.questions?.[questionIndex]
-                                                ?.answer?.message
-                                            }
-                                          </FormMessage>
-                                        )}
-                                      </FormItem>
+                                      {questionTypesSwitch({
+                                        question,
+                                        partIndex,
+                                        pageIndex,
+                                        questionIndex,
+                                      })}
                                     </div>
                                   ),
                                 )}
@@ -181,7 +258,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                 ))}
               </Tabs>
 
-              {/* <pre>{JSON.stringify(form.watch(), null, 2)}</pre> */}
+              <pre>{JSON.stringify(form.watch(), null, 2)}</pre>
             </form>
           </Tabs>
         </div>

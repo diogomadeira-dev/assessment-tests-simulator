@@ -86,6 +86,26 @@ export const dataFaker = {
               label:
                 '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"Question 7 - "},{"type":"text","text":"Pagina 2 - Parte B"}]}]}',
             },
+            {
+              number: '',
+              label:
+                '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":"Test "},{"type":"text","marks":[{"type":"bold"}],"text":"Radio group"}]},{"type":"paragraph"},{"type":"paragraph","content":[{"type":"text","marks":[{"type":"italic"}],"text":"Isto é uma descrição de exemplo"}]}]}',
+              type: 'RADIO_GROUP',
+              options: [
+                {
+                  id: '75325822-6d93-46cd-adad-93cc975ea8aa',
+                  name: '11',
+                },
+                {
+                  id: '50fb4632-b725-4254-8958-5e6a03df0056',
+                  name: '22',
+                },
+                {
+                  id: 'd3498490-3b7c-46c1-95c6-ad616aefe52b',
+                  name: '33',
+                },
+              ],
+            },
           ],
         },
       ],

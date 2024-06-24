@@ -113,7 +113,10 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
               name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`}
               render={({ field }) => (
                 <FormItem className="space-y-3">
-                  <FormLabel>Notify me about...</FormLabel>
+                  <Editor
+                    key={`editor-${partIndex}-${pageIndex}-${questionIndex}`}
+                    content={question.label}
+                  />
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -189,7 +192,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                       <TabsTrigger
                         key={`pageIndex-${0}`}
                         value="0"
-                        className="bg-secondary text-secondary-foreground"
+                        className="bg-accent text-accent-foreground"
                       >
                         Start
                       </TabsTrigger>

@@ -3,6 +3,7 @@
 import { dataFaker } from '@/app/(authenticated)/assessment-tests/[id]/page'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
+import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { AlphabeticEnum } from '@/types/assessment-tests'
@@ -10,7 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, CircleAlert } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   FillAssessmentInput,
@@ -91,56 +92,71 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                     <Button
                       type="button"
                       size="icon"
-                      variant="secondary"
+                      variant="outline"
                       onClick={() => setTabPage((oldState) => oldState - 1)}
                       disabled={pageNumberUrl === 0}
                     >
                       <ArrowLeft className="h-4 w-4" />
                     </Button>
 
-                    <TabsList>
+                    <TabsList className="items-end">
                       <TabsTrigger value="0" className="font-extrabold">
                         Start
                       </TabsTrigger>
                       {dataFaker.parts.map((part, partIndex) => {
                         return (
-                          <React.Fragment key={`partIndex-${partIndex}`}>
-                            {partIndex > 0 && (
-                              <TabsTrigger
-                                value={part.id}
-                                className="font-extrabold"
-                              >
-                                Part {AlphabeticEnum[partIndex]}
-                              </TabsTrigger>
-                            )}
-
-                            {part.pages.map((page, pageIndex) => (
-                              <TabsTrigger
-                                key={`pageIndex-${pageIndex}`}
-                                value={page.number.toString()}
-                                className={cn({
-                                  'border border-red-500':
-                                    form.formState.errors?.parts?.[partIndex]
-                                      ?.pages?.[pageIndex],
-                                })}
-                              >
-                                {/* // TODO: ADD THIS DYNAMIC WARNING TO TAB TRIGGER COMPONENT */}
-                                {form.formState.errors?.parts?.[partIndex]
-                                  ?.pages?.[pageIndex] && (
-                                  <CircleAlert className="mr-1 h-4 w-4 text-destructive" />
+                          <div key={`partIndex-${partIndex}`}>
+                            <div className="flex items-end gap-1">
+                              <div>
+                                {partIndex > 0 && (
+                                  <TabsTrigger
+                                    value={part.id}
+                                    className="font-extrabold"
+                                  >
+                                    Stop
+                                  </TabsTrigger>
                                 )}
-                                {pageNumberUrl === page.number && 'Page '}{' '}
-                                {page.number.toString()}
-                              </TabsTrigger>
-                            ))}
-                          </React.Fragment>
+                              </div>
+                              <div>
+                                <div className="flex flex-col items-center pb-2">
+                                  <p className="text-sm">
+                                    Part {AlphabeticEnum[partIndex]}
+                                  </p>
+                                  <Separator className="border border-secondary" />
+                                </div>
+
+                                <div className="flex flex-row gap-1">
+                                  {part.pages.map((page, pageIndex) => (
+                                    <TabsTrigger
+                                      key={`pageIndex-${pageIndex}`}
+                                      value={page.number.toString()}
+                                      className={cn({
+                                        'border border-red-500':
+                                          form.formState.errors?.parts?.[
+                                            partIndex
+                                          ]?.pages?.[pageIndex],
+                                      })}
+                                    >
+                                      {/* // TODO: ADD THIS DYNAMIC WARNING TO TAB TRIGGER COMPONENT */}
+                                      {form.formState.errors?.parts?.[partIndex]
+                                        ?.pages?.[pageIndex] && (
+                                        <CircleAlert className="mr-1 h-4 w-4 text-destructive" />
+                                      )}
+                                      {/* {pageNumberUrl === page.number && 'Page '}{' '} */}
+                                      {page.number.toString()}
+                                    </TabsTrigger>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         )
                       })}
                     </TabsList>
                     <Button
                       type="button"
                       size="icon"
-                      variant="secondary"
+                      variant="outline"
                       onClick={() => setTabPage((oldState) => oldState + 1)}
                     >
                       <ArrowRight className="h-4 w-4" />

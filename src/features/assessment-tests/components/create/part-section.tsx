@@ -25,18 +25,20 @@ export const PartSection = () => {
     <div className="space-y-16">
       {fields.map((field, partIndex) => (
         <fieldset key={field.id}>
-          <div className="flex items-center justify-center gap-2">
-            <h2 className="text-2xl font-black">
-              {`${t('assessment-test.part')} ${AlphabeticEnum[partIndex]}`}
-            </h2>
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={() => removeField(partIndex)}
-            >
-              Remove Part
-            </Button>
-          </div>
+          {watch().parts.length > 1 && (
+            <div className="flex items-center justify-center gap-2">
+              <h2 className="text-2xl font-black">
+                {`${t('assessment-test.part')} ${AlphabeticEnum[partIndex]}`}
+              </h2>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => removeField(partIndex)}
+              >
+                Remove Part
+              </Button>
+            </div>
+          )}
 
           {/* 
           <FormField

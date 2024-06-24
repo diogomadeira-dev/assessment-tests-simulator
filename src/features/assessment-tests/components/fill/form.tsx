@@ -186,7 +186,11 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                       </Button>
                     )}
                     <TabsList>
-                      <TabsTrigger key={`pageIndex-${0}`} value="0">
+                      <TabsTrigger
+                        key={`pageIndex-${0}`}
+                        value="0"
+                        className="bg-secondary text-secondary-foreground"
+                      >
                         Start
                       </TabsTrigger>
                       {dataFaker.parts.map((part, partIndex) =>

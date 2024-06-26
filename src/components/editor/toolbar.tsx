@@ -1,7 +1,6 @@
 import { type Editor } from '@tiptap/react'
 import {
   Bold,
-  FileAudio,
   Heading1,
   Heading2,
   Heading3,
@@ -13,10 +12,43 @@ import {
   ListOrdered,
   Strikethrough,
 } from 'lucide-react'
+import { useState } from 'react'
+import { Button } from '../ui/button'
 import { Separator } from '../ui/separator'
 import { Toggle } from '../ui/toggle'
 
 export const Toolbar = ({ editor }: { editor: Editor }) => {
+  const [file, setFile] = useState<File | null>(null)
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setFile(e.target.files[0])
+    }
+  }
+
+  const handleUpload = async () => {
+    // We will fill this out later
+
+    console.log('file', file)
+
+    if (file) {
+      const blob = new Blob([file], { type: file.type })
+
+      const formData = new FormData()
+      formData.append('image', blob, 'test')
+      const response = await fetch(`http://localhost:3333/file-upload/single`, {
+        method: 'POST',
+        // headers: {
+        //   Authorization: `${token if needed}`,
+        // },
+        body: formData,
+        redirect: 'follow',
+      })
+
+      console.log('response', response)
+    }
+  }
+
   return (
     <div className="flex flex-row items-center gap-1 rounded-tl-md rounded-tr-md border-b border-input bg-transparent p-1">
       <Toggle
@@ -110,7 +142,7 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
       >
         <ListOrdered className="h-4 w-4" />
       </Toggle>
-      <Toggle
+      {/* <Toggle
         size="sm"
         pressed={editor.isActive('audio')}
         onPressedChange={() =>
@@ -121,7 +153,31 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
         }
       >
         <FileAudio className="h-4 w-4" />
-      </Toggle>
+      </Toggle> */}
+      <>
+        <div>
+          <label htmlFor="file" className="sr-only">
+            Choose a file
+          </label>
+          <input id="file" type="file" onChange={handleFileChange} />
+        </div>
+        {file && (
+          <section>
+            File details:
+            <ul>
+              <li>Name: {file.name}</li>
+              <li>Type: {file.type}</li>
+              <li>Size: {file.size} bytes</li>
+            </ul>
+          </section>
+        )}
+
+        {file && (
+          <Button type="button" onClick={handleUpload}>
+            Upload a file
+          </Button>
+        )}
+      </>
     </div>
   )
 }

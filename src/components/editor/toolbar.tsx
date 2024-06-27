@@ -35,7 +35,7 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
       const blob = new Blob([file], { type: file.type })
 
       const formData = new FormData()
-      formData.append('image', blob, 'test')
+      formData.append('image', blob, file.name)
       const response = await fetch(`http://localhost:3333/file-upload/single`, {
         method: 'POST',
         // headers: {

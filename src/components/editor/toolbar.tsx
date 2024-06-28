@@ -1,6 +1,8 @@
+import { delay } from '@/utils/delay'
 import { type Editor } from '@tiptap/react'
 import {
   Bold,
+  FileAudio,
   Heading1,
   Heading2,
   Heading3,
@@ -12,40 +14,69 @@ import {
   ListOrdered,
   Strikethrough,
 } from 'lucide-react'
-import { useState } from 'react'
-import { Button } from '../ui/button'
+import { useRef } from 'react'
 import { Separator } from '../ui/separator'
 import { Toggle } from '../ui/toggle'
 
-export const Toolbar = ({ editor }: { editor: Editor }) => {
-  const [file, setFile] = useState<File | null>(null)
+async function getPosts(formData) {
+  const response = await fetch(`http://localhost:3333/file-upload/single`, {
+    method: 'POST',
+    body: formData,
+  })
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const posts = await response.json()
+  return posts
+}
+
+export const Toolbar = ({ editor }: { editor: Editor }) => {
+  const audioFileInputRef = useRef<HTMLInputElement | null>(null)
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setFile(e.target.files[0])
+      const file: File = e.target.files[0]
+      const fileUploaded = await handleUpload(file)
+
+      await delay(100)
+
+      editor.commands.setAudio({
+        src: 'http://' + fileUploaded.image_url,
+        controls: true,
+      })
     }
   }
 
-  const handleUpload = async () => {
-    // We will fill this out later
-
-    console.log('file', file)
-
+  const handleUpload = async (file: File) => {
     if (file) {
       const blob = new Blob([file], { type: file.type })
 
       const formData = new FormData()
       formData.append('image', blob, file.name)
-      const response = await fetch(`http://localhost:3333/file-upload/single`, {
-        method: 'POST',
-        // headers: {
-        //   Authorization: `${token if needed}`,
-        // },
-        body: formData,
-        redirect: 'follow',
-      })
 
-      console.log('response', response)
+      try {
+        // const res = await fetch(`http://localhost:3333/file-upload/single`, {
+        //   method: 'POST',
+        //   body: formData,
+        //   // redirect: 'follow',
+        // })
+
+        // // await sleeper(3000)
+
+        // if (!res.ok) {
+        //   throw new Error(`HTTP error! status: ${res.status}`)
+        // }
+
+        // const data = await res.json()
+
+        const data = await getPosts(formData)
+
+        console.log('🚀 ~ handleUpload ~ result:', data)
+        return data
+        // Log and return the result
+        // console.log('🚀 ~ handleUpload ~ result:', result)
+        // return data
+      } catch (error) {
+        console.log('🚀 ~ handleUpload ~ error:', error)
+      }
     }
   }
 
@@ -142,24 +173,32 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
       >
         <ListOrdered className="h-4 w-4" />
       </Toggle>
-      {/* <Toggle
+      <Toggle
         size="sm"
         pressed={editor.isActive('audio')}
-        onPressedChange={() =>
-          // TODO: import audio to storage
-          editor.commands.setAudio({
-            src: 'https://samplelib.com/lib/preview/mp3/sample-15s.mp3',
-          })
-        }
+        onPressedChange={() => {
+          audioFileInputRef.current?.click()
+          // // TODO: import audio to storage
+          // editor.commands.setAudio({
+          //   src: 'https://samplelib.com/lib/preview/mp3/sample-15s.mp3',
+          // })
+        }}
       >
         <FileAudio className="h-4 w-4" />
-      </Toggle> */}
-      <>
+      </Toggle>
+      <input
+        onChange={handleFileChange}
+        multiple={false}
+        ref={audioFileInputRef}
+        type="file"
+        accept="audio/*"
+        hidden
+      />
+      {/* <>
         <div>
           <label htmlFor="file" className="sr-only">
             Choose a file
           </label>
-          <input id="file" type="file" onChange={handleFileChange} />
         </div>
         {file && (
           <section>
@@ -177,7 +216,7 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
             Upload a file
           </Button>
         )}
-      </>
+      </> */}
     </div>
   )
 }

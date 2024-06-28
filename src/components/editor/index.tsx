@@ -70,9 +70,7 @@ const Editor = (props: TiptapProps) => {
         },
       }).configure({ levels: [1, 2, 3, 4, 5, 6] }),
       HyperMultimediaKit.configure({
-        Audio: {
-          controls: true,
-        },
+        Audio: true,
       }),
     ],
     content: props?.content ? JSON.parse(props.content) : '',

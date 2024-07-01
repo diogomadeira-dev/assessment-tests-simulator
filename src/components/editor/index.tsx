@@ -1,13 +1,12 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import {
-  HyperMultimediaKit
-} from '@docs.plus/extension-hypermultimedia'
+import { HyperMultimediaKit } from '@docs.plus/extension-hypermultimedia'
 import Heading from '@tiptap/extension-heading'
 import { EditorContent, mergeAttributes, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { FieldError } from 'react-hook-form'
+import ImageResize from 'tiptap-extension-resize-image'
 import { FormMessage } from '../ui/form'
 import { Toolbar } from './toolbar'
 
@@ -79,8 +78,12 @@ const Editor = (props: TiptapProps) => {
         Image: {
           // modal: imageModal,
           // inline: true,
+          HTMLAttributes: {
+            class: 'object-contain',
+          },
         },
       }),
+      ImageResize,
     ],
     content: props?.content ? JSON.parse(props.content) : '',
     onUpdate({ editor }) {

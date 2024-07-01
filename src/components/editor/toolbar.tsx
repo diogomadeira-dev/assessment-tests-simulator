@@ -3,6 +3,7 @@ import { type Editor } from '@tiptap/react'
 import {
   Bold,
   FileAudio,
+  FileImage,
   Heading1,
   Heading2,
   Heading3,
@@ -30,6 +31,7 @@ async function getPosts(formData) {
 
 export const Toolbar = ({ editor }: { editor: Editor }) => {
   const audioFileInputRef = useRef<HTMLInputElement | null>(null)
+  const imageFileInputRef = useRef<HTMLInputElement | null>(null)
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -38,10 +40,18 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
 
       await delay(100)
 
-      editor.commands.setAudio({
-        src: 'http://' + fileUploaded.image_url,
-        controls: true,
-      })
+      if (fileUploaded.fileType === 'audio') {
+        editor.commands.setAudio({
+          src: 'http://' + fileUploaded.image_url,
+          controls: true,
+        })
+      }
+
+      if (fileUploaded.fileType === 'image') {
+        editor.commands.setImage({
+          src: 'http://' + fileUploaded.image_url,
+        })
+      }
     }
   }
 
@@ -173,16 +183,11 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
       >
         <ListOrdered className="h-4 w-4" />
       </Toggle>
+      <Separator orientation="vertical" className="h-8 w-[1px]" />
       <Toggle
         size="sm"
         pressed={editor.isActive('audio')}
-        onPressedChange={() => {
-          audioFileInputRef.current?.click()
-          // // TODO: import audio to storage
-          // editor.commands.setAudio({
-          //   src: 'https://samplelib.com/lib/preview/mp3/sample-15s.mp3',
-          // })
-        }}
+        onPressedChange={() => audioFileInputRef.current?.click()}
       >
         <FileAudio className="h-4 w-4" />
       </Toggle>
@@ -192,6 +197,21 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
         ref={audioFileInputRef}
         type="file"
         accept="audio/*"
+        hidden
+      />
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('image')}
+        onPressedChange={() => imageFileInputRef.current?.click()}
+      >
+        <FileImage className="h-4 w-4" />
+      </Toggle>
+      <input
+        onChange={handleFileChange}
+        multiple={false}
+        ref={imageFileInputRef}
+        type="file"
+        accept="image/*"
         hidden
       />
       {/* <>

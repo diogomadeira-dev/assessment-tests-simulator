@@ -131,7 +131,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                                       key={`pageIndex-${pageIndex}`}
                                       value={page.number.toString()}
                                       className={cn({
-                                        'border-warning border':
+                                        'border border-warning':
                                           form.formState.errors?.parts?.[
                                             partIndex
                                           ]?.pages?.[pageIndex],
@@ -140,7 +140,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                                       {/* // TODO: ADD THIS DYNAMIC WARNING TO TAB TRIGGER COMPONENT */}
                                       {form.formState.errors?.parts?.[partIndex]
                                         ?.pages?.[pageIndex] && (
-                                        <CircleAlert className="text-warning mr-1 h-4 w-4" />
+                                        <CircleAlert className="mr-1 h-4 w-4 text-warning" />
                                       )}
                                       {/* {pageNumberUrl === page.number && 'Page '}{' '} */}
                                       {page.number.toString()}

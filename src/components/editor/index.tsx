@@ -6,8 +6,8 @@ import Heading from '@tiptap/extension-heading'
 import { EditorContent, mergeAttributes, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { FieldError } from 'react-hook-form'
-import ImageResize from 'tiptap-extension-resize-image'
 import { FormMessage } from '../ui/form'
+import { ImageResize } from './image-resize-component'
 import { Toolbar } from './toolbar'
 
 type TiptapProps =
@@ -75,13 +75,7 @@ const Editor = (props: TiptapProps) => {
           // modal: audioModal,
           // inline: true,
         },
-        Image: {
-          // modal: imageModal,
-          // inline: true,
-          HTMLAttributes: {
-            class: 'object-contain',
-          },
-        },
+        Image: true,
       }),
       ImageResize,
     ],

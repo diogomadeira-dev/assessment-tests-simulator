@@ -26,7 +26,7 @@
                       },
                       {
                         "number": "",
-                        "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"23. Observa a figura e imagina uma história em que dois amigos visitam o Jardim Botânico. O que irão eles observar e descobrir? Como poderão viver eles essa aventura?\"}]},{\"type\":\"paragraph\"},{\"type\":\"image\",\"attrs\":{\"src\":\"http://localhost:9000/assessment-test-1/b8f384871eddfb0dfd1ac942b9602919.jpeg\",\"alt\":null,\"style\":\"width: 100%; height: auto; cursor: pointer;\",\"title\":null,\"loading\":null,\"srcset\":null,\"sizes\":null,\"crossorigin\":null,\"usemap\":null,\"ismap\":null,\"width\":null,\"height\":null,\"referrerpolicy\":null,\"longdesc\":null,\"decoding\":null,\"class\":null,\"id\":null,\"name\":null,\"draggable\":true,\"tabindex\":null,\"aria-label\":null,\"aria-labelledby\":null,\"aria-describedby\":null}}]}",
+                        "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"imageResize\",\"attrs\":{\"src\":\"http://localhost:9000/assessment-test-1/e7bc96fd29b5771bf0d943e139370acc.jpeg\",\"alt\":null,\"title\":null,\"width\":601,\"height\":121}}]}",
                         "type": "SHORT_TEXT"
                       }
                   ]

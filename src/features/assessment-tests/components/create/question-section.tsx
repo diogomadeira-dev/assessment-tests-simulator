@@ -47,7 +47,7 @@ const Children = ({
 
   return (
     <fieldset>
-      <legend>Children</legend>
+      {/* <legend>Children</legend> */}
       {options.map((option, optionIndex) => (
         <section
           key={option.id}
@@ -58,7 +58,7 @@ const Children = ({
             name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.options.${optionIndex}.name`}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Number</FormLabel>
+                {/* <FormLabel>Number</FormLabel> */}
                 <FormControl>
                   <Input placeholder="Option" {...field} />
                 </FormControl>
@@ -66,12 +66,12 @@ const Children = ({
               </FormItem>
             )}
           />
-          <button type="button" onClick={() => removeOption(optionIndex)}>
+          <Button type="button" onClick={() => removeOption(optionIndex)}>
             Remove option
-          </button>
+          </Button>
         </section>
       ))}
-      <button
+      <Button
         type="button"
         onClick={() =>
           appendOption({
@@ -81,7 +81,7 @@ const Children = ({
         }
       >
         Append option
-      </button>
+      </Button>
     </fieldset>
   )
 }
@@ -139,52 +139,20 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
         )
       case 'RADIO_GROUP':
         return (
-          <>
-            {/* <FormField
+          <div className="w-full">
+            <Controller
               control={control}
-              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.options`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Number</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Option" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
+              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
+              render={({ field: { onChange }, fieldState: { error } }) => (
+                <Editor onChange={onChange} error={error} editable />
               )}
-            /> */}
+            />
             <Children
               partIndex={partIndex}
               pageIndex={pageIndex}
               questionIndex={questionIndex}
             />
-
-            {/* {pages[pageIndex].questions[questionIndex].options.map((field, index) => (
-          <fieldset key={field.id}>
-            <legend>Field {index}</legend>
-            <input {...register(`rounds.${index}.name`)} />
-            <Children fieldIndex={index} />
-            <section
-              style={{
-                marginTop: 16,
-                display: "flex",
-                alignItems: "center",
-                gap: 16
-              }}
-            >
-              <button type="button" onClick={() => removeField(index)}>
-                Remove
-              </button>
-              <button
-                type="button"
-                onClick={() => appendField({ name: "", scrim: [] })}
-              >
-                Append Field
-              </button>
-            </section>
-          </fieldset>
-        ))} */}
-          </>
+          </div>
         )
       // case "TYPE":
       //   return (

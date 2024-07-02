@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import Image from '@tiptap/extension-image'
 import {
   NodeViewWrapper,
@@ -13,7 +12,8 @@ export const ImageResizeComponent = ({
   editor,
   updateAttributes,
   node,
-}) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+}: any) => {
   const {
     options: { editable },
   } = editor

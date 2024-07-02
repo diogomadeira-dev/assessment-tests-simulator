@@ -17,28 +17,47 @@ import { PartSection } from '@/features/assessment-tests/components/create/part-
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { FormProvider, useForm } from 'react-hook-form'
+import assessmentTestDefaultValue from './../../../../../temp/test-one.json'
 
 const CreateAssessmentTestForm = () => {
   const t = useTranslations()
 
   const form = useForm<CreateAssessmentInputSchema>({
     resolver: zodResolver(CreateAssessmentInput),
-    defaultValues: {
-      parts: [
-        {
-          pages: [
-            {
-              questions: [],
-            },
-          ],
-        },
-      ],
-    },
+    defaultValues: assessmentTestDefaultValue,
+    // defaultValues: {
+    //   parts: [
+    //     {
+    //       pages: [
+    //         {
+    //           questions: [],
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
   })
 
   const { handleSubmit, control } = form
 
-  const onSubmit = (data: CreateAssessmentInputSchema) => console.log(data)
+  const onSubmit = (data: CreateAssessmentInputSchema) => {
+    let pageNumber = 0
+
+    const parts = data.parts.map((part) => ({
+      pages: part.pages.map((page) => {
+        pageNumber++
+        return {
+          number: pageNumber,
+          ...page,
+        }
+      }),
+    }))
+
+    console.log('assessmentTest', {
+      ...data,
+      parts,
+    })
+  }
 
   return (
     <FormProvider {...form}>

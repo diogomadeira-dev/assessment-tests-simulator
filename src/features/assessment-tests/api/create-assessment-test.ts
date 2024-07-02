@@ -18,19 +18,21 @@ export const CreateAssessmentInput = z.object({
   year: stringValidate,
   parts: z.array(
     z.object({
-      id: z.string(),
       pages: z.array(
         z.object({
           questions: z.array(
             z.object({
               number: z.string(),
               label: stringValidate,
-              options: z.array(
-                z.object({
-                  id: z.string(),
-                  name: z.string(),
-                }),
-              ),
+              options: z
+                .array(
+                  z.object({
+                    id: z.string(),
+                    name: z.string(),
+                  }),
+                )
+                // TODO: optional need to depend on type field
+                .optional(),
               type: z.enum(getValues(QuestionTypeEnum)),
             }),
             // .superRefine((data, ctx) => {

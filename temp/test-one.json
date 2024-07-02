@@ -1,4 +1,7 @@
 {
+  "name": "Prova modelo 1",
+  "subject": "Matemática",
+  "year": "2º ano de escolaridade",
   "parts": [
       {
           "pages": [
@@ -7,8 +10,7 @@
                   "questions": [
                       {
                           "number": "",
-                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Ouve a história atentamente\"}]},{\"type\":\"paragraph\"},{\"type\":\"Audio\",\"attrs\":{\"keyId\":\"g1kbg-kx6y9\",\"src\":\"https://samplelib.com/lib/preview/mp3/sample-15s.mp3\",\"controls\":true,\"autoplay\":false,\"loop\":false,\"muted\":false,\"preload\":\"metadata\",\"volume\":1,\"margin\":\"0in\",\"clear\":\"none\",\"float\":\"unset\",\"display\":\"block\",\"justifyContent\":\"start\",\"width\":null,\"height\":null}},{\"type\":\"paragraph\"},{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"1. Seleciona a opção correta\"}]},{\"type\":\"paragraph\"},{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"A História que acabaste de ouvir é sobre\"}]}]}",
-                          "type": "RADIO_GROUP",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Ouve a história atentamente\"}]},{\"type\":\"paragraph\"},{\"type\":\"Audio\",\"attrs\":{\"keyId\":\"pnbb8-p4jpb\",\"src\":\"http://localhost:9000/assessment-test-1/28afcfbc6f97c3569c655ea4b0de7b1c.mp3\",\"controls\":true,\"autoplay\":false,\"loop\":false,\"muted\":false,\"preload\":\"metadata\",\"volume\":1,\"margin\":\"0in\",\"clear\":\"none\",\"float\":\"unset\",\"display\":\"block\",\"justifyContent\":\"start\",\"width\":null,\"height\":null}},{\"type\":\"paragraph\"},{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"1. Seleciona a opção correta\"}]},{\"type\":\"paragraph\"},{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"A História que acabaste de ouvir é sobre\"}]}]}",
                           "options": [
                               {
                                   "id": "f9e986e2-7c97-415f-92cc-d85564f5b0de",
@@ -22,19 +24,69 @@
                                   "id": "7dc3bcf4-a608-4973-b2bd-28cfe82216d3",
                                   "name": "uma vaca"
                               }
-                          ]
+                          ],
+                          "type": "RADIO_GROUP"
                       },
                       {
-                        "number": "",
-                        "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"imageResize\",\"attrs\":{\"src\":\"http://localhost:9000/assessment-test-1/e7bc96fd29b5771bf0d943e139370acc.jpeg\",\"alt\":null,\"title\":null,\"width\":601,\"height\":121}}]}",
-                        "type": "SHORT_TEXT"
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"2. Seleciona a opção correta\"}]},{\"type\":\"paragraph\"},{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"A vaca andava às voltas\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "315b4a4c-9800-4039-b379-143e3658cf68",
+                                  "name": "pela montanha"
+                              },
+                              {
+                                  "id": "c56c016e-73e7-4b06-81aa-a3192375de34",
+                                  "name": "pelo prado"
+                              },
+                              {
+                                  "id": "1db3d887-a1a9-4e35-81c4-3fdd7bb18d90",
+                                  "name": "pelo campo"
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"3. Seleciona o que a vaca costumava fazer\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "8ceb82f5-14a9-4f7c-b3f1-e76926610b6b",
+                                  "name": "Pastava, bebia, dormia e dava leite"
+                              },
+                              {
+                                  "id": "132e547f-1c77-4be7-97c1-54656a08502f",
+                                  "name": "Pastava, dormia, ruminava e dava leite"
+                              },
+                              {
+                                  "id": "18b4151e-4d7f-4bca-a5f3-9eca5d550f9f",
+                                  "name": "Pastava, ruminava, bebia e dava leite"
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"4. Seleciona a imagem que ilustra a história que ouviste\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "44e27dc1-0805-4915-8078-eaacc3aeab8a",
+                                  "name": ""
+                              },
+                              {
+                                  "id": "25e4b5b5-4a4e-442c-bdf0-9d3b3535f383",
+                                  "name": ""
+                              },
+                              {
+                                  "id": "697d8ab2-364f-4a27-9156-e5ca74c29f77",
+                                  "name": ""
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
                       }
                   ]
               }
           ]
       }
-  ],
-  "name": "Prova modelo 1",
-  "subject": "Matemática",
-  "year": "2º ano de escolaridade"
+  ]
 }

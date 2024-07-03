@@ -8,6 +8,7 @@ import Table from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
+import TextAlign from '@tiptap/extension-text-align'
 import { EditorContent, mergeAttributes, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { FieldError } from 'react-hook-form'
@@ -82,6 +83,9 @@ const Editor = (props: TiptapProps) => {
         },
         Image: true,
       }),
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }),
       ImageResize,
       Blockquote.configure({
         HTMLAttributes: {
@@ -91,12 +95,24 @@ const Editor = (props: TiptapProps) => {
       Table.configure({
         // resizable: true,
         HTMLAttributes: {
-          class: 'my-custom-class',
+          class: 'w-full',
         },
       }),
-      TableRow,
-      TableHeader,
-      TableCell,
+      TableRow.configure({
+        // HTMLAttributes: {
+        //   class: 'border-2',
+        // },
+      }),
+      TableHeader.configure({
+        HTMLAttributes: {
+          class: 'border-x border-t py-4 px-2',
+        },
+      }),
+      TableCell.configure({
+        HTMLAttributes: {
+          class: 'border py-4 px-2',
+        },
+      }),
     ],
     content: props?.content ? JSON.parse(props.content) : '',
     onUpdate({ editor }) {

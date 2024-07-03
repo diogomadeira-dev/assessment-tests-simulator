@@ -1,6 +1,10 @@
 import { delay } from '@/utils/delay'
 import { type Editor } from '@tiptap/react'
 import {
+  AlignCenter,
+  AlignJustify,
+  AlignLeft,
+  AlignRight,
   Bold,
   FileAudio,
   FileImage,
@@ -18,6 +22,7 @@ import {
   TextQuote,
 } from 'lucide-react'
 import { useRef } from 'react'
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Separator } from '../ui/separator'
 import { Toggle } from '../ui/toggle'
 
@@ -163,6 +168,43 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
       <Separator orientation="vertical" className="h-8 w-[1px]" />
       <Toggle
         size="sm"
+        pressed={editor.isActive('left')}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign('left').run()
+        }
+      >
+        <AlignLeft className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('center')}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign('center').run()
+        }
+      >
+        <AlignCenter className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('right')}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign('right').run()
+        }
+      >
+        <AlignRight className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('justify')}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign('justify').run()
+        }
+      >
+        <AlignJustify className="h-4 w-4" />
+      </Toggle>
+      <Separator orientation="vertical" className="h-8 w-[1px]" />
+      <Toggle
+        size="sm"
         pressed={editor.isActive('bulletList')}
         onPressedChange={() => editor.chain().focus().toggleBulletList().run()}
       >
@@ -220,6 +262,76 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
       >
         <Table className="h-4 w-4" />
       </Toggle>
+      <Popover>
+        <PopoverTrigger>Edit table</PopoverTrigger>
+        <PopoverContent className="flex flex-col">
+          <button
+            onClick={() => editor.chain().focus().addColumnBefore().run()}
+          >
+            Add column before
+          </button>
+          <button onClick={() => editor.chain().focus().addColumnAfter().run()}>
+            Add column after
+          </button>
+          <button onClick={() => editor.chain().focus().deleteColumn().run()}>
+            Delete column
+          </button>
+          <button onClick={() => editor.chain().focus().addRowBefore().run()}>
+            Add row before
+          </button>
+          <button onClick={() => editor.chain().focus().addRowAfter().run()}>
+            Add row after
+          </button>
+          <button onClick={() => editor.chain().focus().deleteRow().run()}>
+            Delete row
+          </button>
+          <button onClick={() => editor.chain().focus().deleteTable().run()}>
+            Delete table
+          </button>
+          <button onClick={() => editor.chain().focus().mergeCells().run()}>
+            Merge cells
+          </button>
+          <button onClick={() => editor.chain().focus().splitCell().run()}>
+            Split cell
+          </button>
+          <button
+            onClick={() => editor.chain().focus().toggleHeaderColumn().run()}
+          >
+            Toggle header column
+          </button>
+          <button
+            onClick={() => editor.chain().focus().toggleHeaderRow().run()}
+          >
+            Toggle header row
+          </button>
+          <button
+            onClick={() => editor.chain().focus().toggleHeaderCell().run()}
+          >
+            Toggle header cell
+          </button>
+          <button onClick={() => editor.chain().focus().mergeOrSplit().run()}>
+            Merge or split
+          </button>
+          <button
+            onClick={() =>
+              editor.chain().focus().setCellAttribute('colspan', 2).run()
+            }
+          >
+            Set cell attribute
+          </button>
+          <button onClick={() => editor.chain().focus().fixTables().run()}>
+            Fix tables
+          </button>
+          <button onClick={() => editor.chain().focus().goToNextCell().run()}>
+            Go to next cell
+          </button>
+          <button
+            onClick={() => editor.chain().focus().goToPreviousCell().run()}
+          >
+            Go to previous cell
+          </button>
+        </PopoverContent>
+      </Popover>
       {/* <>
         <div>
           <label htmlFor="file" className="sr-only">

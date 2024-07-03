@@ -1,4 +1,5 @@
 import Editor from '@/components/editor'
+import { getPosts } from '@/components/editor/toolbar'
 import { Button } from '@/components/ui/button'
 import {
   FormControl,
@@ -11,7 +12,9 @@ import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
 import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
+import { delay } from '@/utils/delay'
 import { useTranslations } from 'next-intl'
+import { useRef } from 'react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid'
 import { QuestionsTypeDialog } from './questionsTypeDialog'
@@ -25,6 +28,46 @@ type questionTypesSwitchProps = {
   questionIndex: number
 }
 
+// ! TODO: REPEATED
+const handleUpload = async (file: File) => {
+  if (file) {
+    const blob = new Blob([file], { type: file.type })
+
+    const formData = new FormData()
+    formData.append('image', blob, file.name)
+
+    try {
+      const data = await getPosts(formData)
+      return data
+    } catch (error) {
+      console.log('🚀 ~ handleUpload ~ error:', error)
+    }
+  }
+}
+
+const handleFileChange = async ({
+  e,
+  field,
+  setValue,
+}: {
+  e: React.ChangeEvent<HTMLInputElement>
+  field: string
+  setValue: any
+}) => {
+  if (e.target.files) {
+    const file: File = e.target.files[0]
+    const fileUploaded = await handleUpload(file)
+
+    await delay(100)
+
+    console.log('🚀 ~ field:', field)
+
+    if (fileUploaded.fileType === 'image') {
+      setValue(field, 'http://' + fileUploaded.image_url)
+    }
+  }
+}
+
 const Children = ({
   questionIndex,
   partIndex,
@@ -34,7 +77,9 @@ const Children = ({
   partIndex: number
   pageIndex: number
 }) => {
-  const { control } = useFormContext<CreateAssessmentInputSchema>()
+  const imageFileInputRef = useRef<HTMLInputElement | null>(null)
+
+  const { control, setValue } = useFormContext<CreateAssessmentInputSchema>()
 
   const {
     fields: options,
@@ -53,6 +98,10 @@ const Children = ({
           key={option.id}
           style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}
         >
+          <p>partIndex: {partIndex}</p>
+          <p>pageIndex: {pageIndex}</p>
+          <p>questionIndex: {questionIndex}</p>
+          <p>optionIndex: {optionIndex}</p>
           <FormField
             control={control}
             name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.options.${optionIndex}.name`}
@@ -66,6 +115,28 @@ const Children = ({
               </FormItem>
             )}
           />
+
+          {/* <Button
+            type="button"
+            onClick={() => imageFileInputRef.current?.click()}
+          >
+            Upload image
+          </Button> */}
+
+          <input
+            onChange={(event) =>
+              handleFileChange({
+                e: event,
+                field: `parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.options.${optionIndex}.image_url`,
+                setValue,
+              })
+            }
+            multiple={false}
+            // ref={imageFileInputRef}
+            type="file"
+            accept="image/*"
+            // hidden
+          />
           <Button type="button" onClick={() => removeOption(optionIndex)}>
             Remove option
           </Button>
@@ -77,6 +148,7 @@ const Children = ({
           appendOption({
             id: uuidv4(),
             name: '',
+            image_url: '',
           })
         }
       >
@@ -138,6 +210,23 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
           />
         )
       case 'RADIO_GROUP':
+        return (
+          <div className="w-full">
+            <Controller
+              control={control}
+              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
+              render={({ field: { onChange }, fieldState: { error } }) => (
+                <Editor onChange={onChange} error={error} editable />
+              )}
+            />
+            <Children
+              partIndex={partIndex}
+              pageIndex={pageIndex}
+              questionIndex={questionIndex}
+            />
+          </div>
+        )
+      case 'RADIO_GROUP_HORIZONTAL':
         return (
           <div className="w-full">
             <Controller

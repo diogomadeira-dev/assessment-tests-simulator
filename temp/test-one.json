@@ -71,18 +71,21 @@
                           "options": [
                               {
                                   "id": "44e27dc1-0805-4915-8078-eaacc3aeab8a",
-                                  "name": ""
+                                  "name": "11111",
+                                  "image_url": "http://localhost:9000/assessment-test-1/629efd386e3d492e238521b43b35308e.webp"
                               },
                               {
                                   "id": "25e4b5b5-4a4e-442c-bdf0-9d3b3535f383",
-                                  "name": ""
+                                  "name": "222",
+                                  "image_url": "http://localhost:9000/assessment-test-1/6663b33cd24c7ce52dff108390496134.webp"
                               },
                               {
                                   "id": "697d8ab2-364f-4a27-9156-e5ca74c29f77",
-                                  "name": ""
+                                  "name": "3333",
+                                  "image_url": "http://localhost:9000/assessment-test-1/93712e617a83e9d6378ca039031582ce.webp"
                               }
                           ],
-                          "type": "RADIO_GROUP"
+                          "type": "RADIO_GROUP_HORIZONTAL"
                       }
                   ]
               }

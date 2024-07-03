@@ -19,7 +19,7 @@ import { useRef } from 'react'
 import { Separator } from '../ui/separator'
 import { Toggle } from '../ui/toggle'
 
-async function getPosts(formData) {
+export async function getPosts(formData) {
   const response = await fetch(`http://localhost:3333/file-upload/single`, {
     method: 'POST',
     body: formData,
@@ -55,6 +55,8 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
     }
   }
 
+  // ! TODO: REPEATED
+
   const handleUpload = async (file: File) => {
     if (file) {
       const blob = new Blob([file], { type: file.type })
@@ -63,27 +65,8 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
       formData.append('image', blob, file.name)
 
       try {
-        // const res = await fetch(`http://localhost:3333/file-upload/single`, {
-        //   method: 'POST',
-        //   body: formData,
-        //   // redirect: 'follow',
-        // })
-
-        // // await sleeper(3000)
-
-        // if (!res.ok) {
-        //   throw new Error(`HTTP error! status: ${res.status}`)
-        // }
-
-        // const data = await res.json()
-
         const data = await getPosts(formData)
-
-        console.log('🚀 ~ handleUpload ~ result:', data)
         return data
-        // Log and return the result
-        // console.log('🚀 ~ handleUpload ~ result:', result)
-        // return data
       } catch (error) {
         console.log('🚀 ~ handleUpload ~ error:', error)
       }

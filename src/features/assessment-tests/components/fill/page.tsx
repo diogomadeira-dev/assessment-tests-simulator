@@ -10,6 +10,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { AlphabeticEnum } from '@/types/assessment-tests'
+import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../../api/create-assessment-test'
@@ -93,6 +94,51 @@ export default function PageComponent({
                           <FormLabel className="font-normal">
                             {question.name}
                           </FormLabel>
+                        </FormItem>
+                      ))}
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </>
+        )
+      case 'RADIO_GROUP_HORIZONTAL':
+        return (
+          <>
+            <FormField
+              control={control}
+              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`}
+              render={({ field }) => (
+                <FormItem className="space-y-3">
+                  <Editor
+                    key={`editor-${partIndex}-${pageIndex}-${questionIndex}`}
+                    content={question.label}
+                  />
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-row space-y-1"
+                    >
+                      {question.options.map((question, questionIndex) => (
+                        <FormItem
+                          key={`questionIndex-${questionIndex}`}
+                          className="flex flex-col items-center justify-center"
+                        >
+                          <Image
+                            src={question.image_url}
+                            width={100}
+                            height={100}
+                            alt={question.name}
+                          />
+                          <FormLabel className="font-normal">
+                            {question.name}
+                          </FormLabel>
+                          <FormControl>
+                            <RadioGroupItem value={question.id} />
+                          </FormControl>
                         </FormItem>
                       ))}
                     </RadioGroup>

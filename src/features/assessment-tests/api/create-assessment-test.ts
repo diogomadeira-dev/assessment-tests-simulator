@@ -29,6 +29,7 @@ export const CreateAssessmentInput = z.object({
                   z.object({
                     id: z.string(),
                     name: z.string(),
+                    image_url: z.string().optional(),
                   }),
                 )
                 // TODO: optional need to depend on type field

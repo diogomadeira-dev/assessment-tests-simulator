@@ -1,0 +1,292 @@
+{
+  "name": "Prova modelo 1",
+  "subject": "Matemática",
+  "year": "2º ano de escolaridade",
+  "parts": [
+      {
+          "pages": [
+              {
+                  "number": 1,
+                  "questions": [
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Ouve a história atentamente\"}]},{\"type\":\"paragraph\"},{\"type\":\"Audio\",\"attrs\":{\"keyId\":\"pnbb8-p4jpb\",\"src\":\"http://localhost:9000/assessment-test-1/28afcfbc6f97c3569c655ea4b0de7b1c.mp3\",\"controls\":true,\"autoplay\":false,\"loop\":false,\"muted\":false,\"preload\":\"metadata\",\"volume\":1,\"margin\":\"0in\",\"clear\":\"none\",\"float\":\"unset\",\"display\":\"block\",\"justifyContent\":\"start\",\"width\":null,\"height\":null}},{\"type\":\"paragraph\"},{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"1. Seleciona a opção correta\"}]},{\"type\":\"paragraph\"},{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"A História que acabaste de ouvir é sobre\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "f9e986e2-7c97-415f-92cc-d85564f5b0de",
+                                  "name": "uma zebra"
+                              },
+                              {
+                                  "id": "a1a05199-01fc-49b9-b5b4-07bf4fdacc09",
+                                  "name": "uma cabra"
+                              },
+                              {
+                                  "id": "7dc3bcf4-a608-4973-b2bd-28cfe82216d3",
+                                  "name": "uma vaca"
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"2. Seleciona a opção correta\"}]},{\"type\":\"paragraph\"},{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"A vaca andava às voltas\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "315b4a4c-9800-4039-b379-143e3658cf68",
+                                  "name": "pela montanha"
+                              },
+                              {
+                                  "id": "c56c016e-73e7-4b06-81aa-a3192375de34",
+                                  "name": "pelo prado"
+                              },
+                              {
+                                  "id": "1db3d887-a1a9-4e35-81c4-3fdd7bb18d90",
+                                  "name": "pelo campo"
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"3. Seleciona o que a vaca costumava fazer\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "8ceb82f5-14a9-4f7c-b3f1-e76926610b6b",
+                                  "name": "Pastava, bebia, dormia e dava leite"
+                              },
+                              {
+                                  "id": "132e547f-1c77-4be7-97c1-54656a08502f",
+                                  "name": "Pastava, dormia, ruminava e dava leite"
+                              },
+                              {
+                                  "id": "18b4151e-4d7f-4bca-a5f3-9eca5d550f9f",
+                                  "name": "Pastava, ruminava, bebia e dava leite"
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"4. Seleciona a imagem que ilustra a história que ouviste\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "44e27dc1-0805-4915-8078-eaacc3aeab8a",
+                                  "name": "11111",
+                                  "image_url": "http://localhost:9000/assessment-test-1/629efd386e3d492e238521b43b35308e.webp"
+                              },
+                              {
+                                  "id": "25e4b5b5-4a4e-442c-bdf0-9d3b3535f383",
+                                  "name": "222",
+                                  "image_url": "http://localhost:9000/assessment-test-1/6663b33cd24c7ce52dff108390496134.webp"
+                              },
+                              {
+                                  "id": "697d8ab2-364f-4a27-9156-e5ca74c29f77",
+                                  "name": "3333",
+                                  "image_url": "http://localhost:9000/assessment-test-1/93712e617a83e9d6378ca039031582ce.webp"
+                              }
+                          ],
+                          "type": "RADIO_GROUP_HORIZONTAL"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"5. Seleciona todas as afirmações verdadeiras, de acordo com o texto que acabaste de ouvir\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "856b89d9-d177-4230-a3d3-8c7c784e0742",
+                                  "name": "A vaca ia passear para a montanha",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "4d051c0b-dd08-48b3-8e32-31b40822ac0a",
+                                  "name": "Ela adorava manteiga sem pão",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "17f03faa-9db6-49c8-be13-104f734fd867",
+                                  "name": "A manteiga era de uma grande brancura",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "d1540280-db40-4fa3-a7af-dd881522e020",
+                                  "name": "A vaca não andava muito",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "5198944f-1828-4a61-b2ad-f935c3e74783",
+                                  "name": "Ela adorava o sabor das flores amarelas",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "MULTI_CHECKBOX"
+                      }
+                  ]
+              },
+              {
+                  "number": 2,
+                  "questions": [
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"6. Seleciona a opção correta\"}]},{\"type\":\"blockquote\",\"content\":[{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"Os pássaros e as abelhas são responsáveis pela reprodução de certas flores, levando o seu pólen de planta para a planta.\"}]}]},{\"type\":\"paragraph\"},{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"O que têm as flores que lhes permite atrair os pássaros e as abelhas?\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "a28423a0-c45a-4703-8a80-f8347de2be67",
+                                  "name": "Os espinhos afiados",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "ced2bbfc-cefb-4b05-b6b5-ea92965c89bf",
+                                  "name": "As cores vivas",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "d6836976-92fe-4287-8800-980ecbc0d349",
+                                  "name": "As pétalas secas",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"7. Seleciona a opção correta\"},{\"type\":\"hardBreak\"},{\"type\":\"hardBreak\"},{\"type\":\"text\",\"text\":\"Para além da flor, quais são as partes constituintes de uma planta?\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "78465a18-4309-4193-b927-87123af6ccee",
+                                  "name": "Raiz, caule e folha",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "16bb6b7f-24d3-4d2b-9e22-498c8ffdcb22",
+                                  "name": "Raiz, caule e fruta",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "0ddc7452-fe43-4963-94b3-ef027d1d1d0c",
+                                  "name": " Raiz, caule, folha e fruta",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"8. A professora perguntou à sua turma: «Será que as sementes precisam de luz para germinar?»\"},{\"type\":\"hardBreak\"},{\"type\":\"hardBreak\"},{\"type\":\"text\",\"text\":\"Os alunos fizeram as suas previsões e, por isso, fez-se a experiência seguinte: Colocaram-se sementes de feijão em quatro copos de plástico transparente, devidamente identificados com os números 1, 2, 3 e 4, com o fundo coberto de algodão, de acordo com as condições e resultados observados e que constam do quadro seguinte.\"}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}},{\"type\":\"table\",\"content\":[{\"type\":\"tableRow\",\"content\":[{\"type\":\"tableHeader\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}}]},{\"type\":\"tableHeader\",\"attrs\":{\"colspan\":2,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Influência da luz\"}]}]},{\"type\":\"tableHeader\",\"attrs\":{\"colspan\":2,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Influência da água\"}]}]}]},{\"type\":\"tableRow\",\"content\":[{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Copo\"}]}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"center\"},\"content\":[{\"type\":\"text\",\"text\":\"1\"}]}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"center\"},\"content\":[{\"type\":\"text\",\"text\":\"2\"}]}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"center\"},\"content\":[{\"type\":\"text\",\"text\":\"3\"}]}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"center\"},\"content\":[{\"type\":\"text\",\"text\":\"4\"}]}]}]},{\"type\":\"tableRow\",\"content\":[{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Estado das sementes\"}]}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"center\"},\"content\":[{\"type\":\"text\",\"text\":\"Algodão húmido\"},{\"type\":\"hardBreak\"},{\"type\":\"text\",\"text\":\"Expostas à luz\"}]}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"center\"},\"content\":[{\"type\":\"text\",\"text\":\"Algodão húmido\"},{\"type\":\"hardBreak\"},{\"type\":\"text\",\"text\":\"Fechadas num armário\"}]}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"center\"},\"content\":[{\"type\":\"text\",\"text\":\"Algodão húmido\"},{\"type\":\"hardBreak\"},{\"type\":\"text\",\"text\":\"Expostas à luz\"}]}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"center\"},\"content\":[{\"type\":\"text\",\"text\":\"Algodão seco\"},{\"type\":\"hardBreak\"},{\"type\":\"text\",\"text\":\"Expostas à luz\"}]}]}]},{\"type\":\"tableRow\",\"content\":[{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Sementes germinadas\"}]}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"center\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"X\"}]}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"center\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"X\"}]}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"center\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"X\"}]}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}}]}]},{\"type\":\"tableRow\",\"content\":[{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Semente não germinadas\"}]}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}}]},{\"type\":\"tableCell\",\"attrs\":{\"colspan\":1,\"rowspan\":1,\"colwidth\":null},\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"center\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"X\"}]}]}]}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"text\":\"De acordo com a experiência descrita anteriormente, seleciona os materiais que foram necessários.\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "1bb4f28a-318c-41dd-94a1-1b8377d548cf",
+                                  "name": "4 copos de plástico transparente",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "f27312ca-e914-4f50-ae6d-4f109ed6d17d",
+                                  "name": "Terra",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "abf0b6fd-d539-4611-8e37-117e374b23e2",
+                                  "name": "Algodão",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "06b7f032-d2d0-4f66-8dd7-47d6baecec38",
+                                  "name": "Etiquetas",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "af0859dd-d83e-45b7-9e59-f26bfc9615fb",
+                                  "name": "Marcadores",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "5332fe57-1c42-47d2-8b0f-9a90811eea85",
+                                  "name": "Folha de papel",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "4ba01b71-2976-47df-b9f6-9f4436c6f25c",
+                                  "name": "Água",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "d7602306-91b3-46c6-a739-a6c29c747e00",
+                                  "name": "Feijões",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "01bbc4b6-cb1a-41fc-9843-830b6d2617f0",
+                                  "name": "Erva",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "MULTI_CHECKBOX"
+                      }
+                  ]
+              },
+              {
+                  "number": 3,
+                  "questions": [
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"9. Seleciona a opção correta\"}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"text\":\"Em qual copo as sementes não germinaram?\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "476b20e8-5c7e-46ce-adef-7ad1573e427b",
+                                  "name": "Copo 1",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "9036f400-7e9a-4dbb-8277-34a0e7652702",
+                                  "name": "Copo 2",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "8827e034-f504-4387-867c-41002a4b1095",
+                                  "name": "Copo 3",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "f689bc71-cc11-4d43-bcc8-9446a4713bac",
+                                  "name": "Copo 4",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"9.1 Explica porque não germinaram\"}]}]}",
+                          "type": "LONG_TEXT"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"10. Seleciona as respostas corretas\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "a0a06318-b5e6-47ba-9287-2e21134b73d2",
+                                  "name": "A água é essencial à germinação das sementes de feijão",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "7d240b4a-016e-4386-9f76-6ba246547a3a",
+                                  "name": "A luz é essencial à germinação das sementes de feijão",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "e80233c0-3ed8-40f7-b819-eb91ac9eb7df",
+                                  "name": "A luz e a água são essenciais à germinação das sementes de feijão",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "df7ccf3e-7051-4ef5-8f7b-dfb6a9a9d33f",
+                                  "name": "A luz não é indispensável à germinação das sementes de feijão",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "MULTI_CHECKBOX"
+                      }
+                  ]
+              }
+          ]
+      }
+  ]
+}

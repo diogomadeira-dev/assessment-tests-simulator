@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { cn } from '@/lib/utils'
 import { CircleEllipsis } from 'lucide-react'
 
 export function MainNav() {
@@ -15,11 +14,11 @@ export function MainNav() {
         <CircleEllipsis className="h-6 w-6" />
         <span className="hidden font-bold sm:inline-block">
           {/* {siteConfig.name} */}
-          wefewfewewf
+          ATS
         </span>
       </Link>
       <nav className="flex items-center gap-4 text-sm lg:gap-6">
-        <Link
+        {/* <Link
           href="/docs"
           className={cn(
             'transition-colors hover:text-foreground/80',
@@ -79,7 +78,7 @@ export function MainNav() {
           )}
         >
           GitHub
-        </Link>
+        </Link> */}
       </nav>
     </div>
   )

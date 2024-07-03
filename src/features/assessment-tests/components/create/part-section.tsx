@@ -3,6 +3,7 @@ import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/cre
 import { AlphabeticEnum } from '@/types/assessment-tests'
 import { useTranslations } from 'next-intl'
 import { useFieldArray, useFormContext } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid'
 import { PageSection } from './page-section'
 
 export const PartSection = () => {
@@ -14,8 +15,8 @@ export const PartSection = () => {
 
   const {
     fields,
-    append: appendField,
-    remove: removeField,
+    append: appendPart,
+    remove: removePart,
   } = useFieldArray({
     control,
     name: 'parts',
@@ -25,33 +26,20 @@ export const PartSection = () => {
     <div className="space-y-16">
       {fields.map((field, partIndex) => (
         <fieldset key={field.id}>
-          <div className="flex items-center justify-center gap-2">
-            <h2 className="text-2xl font-black">
-              {`${t('assessment-test.part')} ${AlphabeticEnum[partIndex]}`}
-            </h2>
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={() => removeField(partIndex)}
-            >
-              Remove Part
-            </Button>
-          </div>
-
-          {/* 
-          <FormField
-            control={control}
-            name={`parts.${partIndex}.name`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Parte Name</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
+          {watch().parts.length > 1 && (
+            <div className="flex items-center justify-center gap-2">
+              <h2 className="text-2xl font-black">
+                {`${t('assessment-test.part')} ${AlphabeticEnum[partIndex]}`}
+              </h2>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => removePart(partIndex)}
+              >
+                Remove Part
+              </Button>
+            </div>
+          )}
 
           <PageSection partIndex={partIndex} />
         </fieldset>
@@ -60,8 +48,8 @@ export const PartSection = () => {
       <Button
         type="button"
         onClick={() =>
-          appendField({
-            // name: '',
+          appendPart({
+            id: uuidv4(),
             pages: [],
           })
         }

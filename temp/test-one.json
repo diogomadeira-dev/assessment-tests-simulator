@@ -256,6 +256,33 @@
                           "number": "",
                           "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"9.1 Explica porque não germinaram\"}]}]}",
                           "type": "LONG_TEXT"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"10. Seleciona as respostas corretas\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "a0a06318-b5e6-47ba-9287-2e21134b73d2",
+                                  "name": "A água é essencial à germinação das sementes de feijão",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "7d240b4a-016e-4386-9f76-6ba246547a3a",
+                                  "name": "A luz é essencial à germinação das sementes de feijão",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "e80233c0-3ed8-40f7-b819-eb91ac9eb7df",
+                                  "name": "A luz e a água são essenciais à germinação das sementes de feijão",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "df7ccf3e-7051-4ef5-8f7b-dfb6a9a9d33f",
+                                  "name": "A luz não é indispensável à germinação das sementes de feijão",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "MULTI_CHECKBOX"
                       }
                   ]
               }

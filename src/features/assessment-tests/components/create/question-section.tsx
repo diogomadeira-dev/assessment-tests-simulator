@@ -98,10 +98,6 @@ const Children = ({
           key={option.id}
           style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}
         >
-          <p>partIndex: {partIndex}</p>
-          <p>pageIndex: {pageIndex}</p>
-          <p>questionIndex: {questionIndex}</p>
-          <p>optionIndex: {optionIndex}</p>
           <FormField
             control={control}
             name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.options.${optionIndex}.name`}

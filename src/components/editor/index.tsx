@@ -4,6 +4,10 @@ import { cn } from '@/lib/utils'
 import { HyperMultimediaKit } from '@docs.plus/extension-hypermultimedia'
 import Blockquote from '@tiptap/extension-blockquote'
 import Heading from '@tiptap/extension-heading'
+import Table from '@tiptap/extension-table'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import TableRow from '@tiptap/extension-table-row'
 import { EditorContent, mergeAttributes, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { FieldError } from 'react-hook-form'
@@ -84,6 +88,15 @@ const Editor = (props: TiptapProps) => {
           class: 'mt-6 border-l-2 pl-6 italic',
         },
       }),
+      Table.configure({
+        // resizable: true,
+        HTMLAttributes: {
+          class: 'my-custom-class',
+        },
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
     ],
     content: props?.content ? JSON.parse(props.content) : '',
     onUpdate({ editor }) {

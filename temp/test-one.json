@@ -145,6 +145,80 @@
                               }
                           ],
                           "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"7. Seleciona a opção correta\"},{\"type\":\"hardBreak\"},{\"type\":\"hardBreak\"},{\"type\":\"text\",\"text\":\"Para além da flor, quais são as partes constituintes de uma planta?\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "78465a18-4309-4193-b927-87123af6ccee",
+                                  "name": "Raiz, caule e folha",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "16bb6b7f-24d3-4d2b-9e22-498c8ffdcb22",
+                                  "name": "Raiz, caule e fruta",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "0ddc7452-fe43-4963-94b3-ef027d1d1d0c",
+                                  "name": " Raiz, caule, folha e fruta",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"8. A professora perguntou à sua turma: «Será que as sementes precisam de luz para germinar?»\"},{\"type\":\"hardBreak\"},{\"type\":\"hardBreak\"},{\"type\":\"text\",\"text\":\"Os alunos fizeram as suas previsões e, por isso, fez-se a experiência seguinte: Colocaram-se sementes de feijão em quatro copos de plástico transparente, devidamente identificados com os números 1, 2, 3 e 4, com o fundo coberto de algodão, de acordo com as condições e resultados observados e que constam do quadro seguinte.\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "1bb4f28a-318c-41dd-94a1-1b8377d548cf",
+                                  "name": "4 copos de plástico transparente",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "f27312ca-e914-4f50-ae6d-4f109ed6d17d",
+                                  "name": "Terra",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "abf0b6fd-d539-4611-8e37-117e374b23e2",
+                                  "name": "Algodão",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "06b7f032-d2d0-4f66-8dd7-47d6baecec38",
+                                  "name": "Etiquetas",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "af0859dd-d83e-45b7-9e59-f26bfc9615fb",
+                                  "name": "Marcadores",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "5332fe57-1c42-47d2-8b0f-9a90811eea85",
+                                  "name": "Folha de papel",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "4ba01b71-2976-47df-b9f6-9f4436c6f25c",
+                                  "name": "Água",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "d7602306-91b3-46c6-a739-a6c29c747e00",
+                                  "name": "Feijões",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "01bbc4b6-cb1a-41fc-9843-830b6d2617f0",
+                                  "name": "Erva",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "MULTI_CHECKBOX"
                       }
                   ]
               }

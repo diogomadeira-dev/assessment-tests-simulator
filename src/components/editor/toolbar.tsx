@@ -14,6 +14,7 @@ import {
   List,
   ListOrdered,
   Strikethrough,
+  Table,
   TextQuote,
 } from 'lucide-react'
 import { useRef } from 'react'
@@ -205,6 +206,20 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
         accept="image/*"
         hidden
       />
+      <Separator orientation="vertical" className="h-8 w-[1px]" />
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('table')}
+        onPressedChange={() =>
+          editor
+            .chain()
+            .focus()
+            .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+            .run()
+        }
+      >
+        <Table className="h-4 w-4" />
+      </Toggle>
       {/* <>
         <div>
           <label htmlFor="file" className="sr-only">

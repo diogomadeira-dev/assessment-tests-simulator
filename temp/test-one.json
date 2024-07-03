@@ -120,6 +120,17 @@
                           "type": "MULTI_CHECKBOX"
                       }
                   ]
+              },
+              {
+                  "number": 2,
+                  "questions": [
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"6. Seleciona a opção correta\"}]}]}",
+                          "options": [],
+                          "type": "RADIO_GROUP"
+                      }
+                  ]
               }
           ]
       }

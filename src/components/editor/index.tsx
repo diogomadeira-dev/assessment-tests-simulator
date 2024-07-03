@@ -23,6 +23,8 @@ type TiptapProps =
     }
 
 const Editor = (props: TiptapProps) => {
+  console.log(props)
+
   const editor = useEditor({
     editable: props.editable ?? false,
     editorProps: {

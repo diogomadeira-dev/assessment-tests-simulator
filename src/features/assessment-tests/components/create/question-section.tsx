@@ -25,6 +25,7 @@ type QuestionProps = {
 }
 
 type questionTypesSwitchProps = {
+  question: CreateAssessmentInputSchema['parts'][number]['pages'][number]['questions'][number]
   questionIndex: number
 }
 
@@ -173,7 +174,10 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
     name: `parts.${partIndex}.pages.${pageIndex}.questions`,
   })
 
-  const questionTypesSwitch = ({ questionIndex }: questionTypesSwitchProps) => {
+  const questionTypesSwitch = ({
+    question,
+    questionIndex,
+  }: questionTypesSwitchProps) => {
     switch (
       watch().parts[partIndex].pages[pageIndex].questions[questionIndex].type
     ) {
@@ -184,7 +188,12 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
               control={control}
               name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
               render={({ field: { onChange }, fieldState: { error } }) => (
-                <Editor onChange={onChange} error={error} editable />
+                <Editor
+                  content={question.label}
+                  onChange={onChange}
+                  error={error}
+                  editable
+                />
               )}
             />
           </div>
@@ -216,7 +225,12 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
               control={control}
               name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
               render={({ field: { onChange }, fieldState: { error } }) => (
-                <Editor onChange={onChange} error={error} editable />
+                <Editor
+                  content={question.label}
+                  onChange={onChange}
+                  error={error}
+                  editable
+                />
               )}
             />
             <Children
@@ -233,7 +247,12 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
               control={control}
               name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
               render={({ field: { onChange }, fieldState: { error } }) => (
-                <Editor onChange={onChange} error={error} editable />
+                <Editor
+                  content={question.label}
+                  onChange={onChange}
+                  error={error}
+                  editable
+                />
               )}
             />
             <Children
@@ -250,7 +269,12 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
               control={control}
               name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
               render={({ field: { onChange }, fieldState: { error } }) => (
-                <Editor onChange={onChange} error={error} editable />
+                <Editor
+                  content={question.label}
+                  onChange={onChange}
+                  error={error}
+                  editable
+                />
               )}
             />
             <Children
@@ -271,8 +295,8 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
 
   return (
     <fieldset className="space-y-20">
-      {pages.map((child, questionIndex, { length }) => (
-        <section key={child.id} className="space-y-20">
+      {pages.map((question, questionIndex, { length }) => (
+        <section key={question.id} className="space-y-20">
           <div>
             <div className="flex items-center gap-2">
               <h3 className="text-xl font-extrabold">New Question</h3>
@@ -301,7 +325,7 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
               />
 
               <div className="flex gap-2">
-                {questionTypesSwitch({ questionIndex })}
+                {questionTypesSwitch({ question, questionIndex })}
               </div>
             </div>
           </div>

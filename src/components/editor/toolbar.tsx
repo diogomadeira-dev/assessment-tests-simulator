@@ -14,6 +14,7 @@ import {
   List,
   ListOrdered,
   Strikethrough,
+  TextQuote,
 } from 'lucide-react'
 import { useRef } from 'react'
 import { Separator } from '../ui/separator'
@@ -95,6 +96,13 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
         onPressedChange={() => editor.chain().focus().toggleStrike().run()}
       >
         <Strikethrough className="h-4 w-4" />
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive('blockquote')}
+        onPressedChange={() => editor.chain().focus().setBlockquote().run()}
+      >
+        <TextQuote className="h-4 w-4" />
       </Toggle>
       <Separator orientation="vertical" className="h-8 w-[1px]" />
       <Toggle

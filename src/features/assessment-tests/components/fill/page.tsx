@@ -84,16 +84,19 @@ export default function PageComponent({
                       defaultValue={field.value}
                       className="flex flex-col space-y-1"
                     >
-                      {question.options.map((question, questionIndex) => (
+                      {question.options.map((option, optionIndex) => (
                         <FormItem
-                          key={`questionIndex-${questionIndex}`}
+                          key={`optionIndex-${optionIndex}`}
                           className="flex items-center space-x-3 space-y-0"
                         >
                           <FormControl>
-                            <RadioGroupItem value={question.id} />
+                            <RadioGroupItem value={option.id} />
                           </FormControl>
-                          <FormLabel className="font-normal">
-                            {question.name}
+                          <FormLabel className="flex gap-2 font-normal">
+                            <p className="font-semibold">
+                              {AlphabeticEnum[optionIndex]}.
+                            </p>
+                            {option.name}
                           </FormLabel>
                         </FormItem>
                       ))}
@@ -121,24 +124,27 @@ export default function PageComponent({
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="flex flex-row space-y-1"
+                      className="flex flex-row space-y-3"
                     >
-                      {question.options.map((question, questionIndex) => (
+                      {question.options.map((option, optionIndex) => (
                         <FormItem
-                          key={`questionIndex-${questionIndex}`}
-                          className="flex flex-col items-center justify-center"
+                          key={`optionIndex-${optionIndex}`}
+                          className="flex flex-col items-center justify-center space-y-6"
                         >
                           <Image
-                            src={question.image_url}
+                            src={option.image_url}
                             width={100}
                             height={100}
-                            alt={question.name}
+                            alt={option.name}
                           />
-                          <FormLabel className="font-normal">
-                            {question.name}
+                          <FormLabel className="flex gap-2 font-normal">
+                            <p className="font-semibold">
+                              {AlphabeticEnum[optionIndex]}.
+                            </p>
+                            {option.name}
                           </FormLabel>
                           <FormControl>
-                            <RadioGroupItem value={question.id} />
+                            <RadioGroupItem value={option.id} />
                           </FormControl>
                         </FormItem>
                       ))}
@@ -174,7 +180,7 @@ export default function PageComponent({
                         return (
                           <FormItem
                             // ! TODO: REPLACE FOR QUESTION ID
-                            key={`questionIndex-${questionIndex}`}
+                            key={`optionIndex-${optionIndex}`}
                             className="flex flex-row items-start space-x-3 space-y-0"
                           >
                             <FormControl>
@@ -217,7 +223,10 @@ export default function PageComponent({
                                 }}
                               />
                             </FormControl>
-                            <FormLabel className="font-normal">
+                            <FormLabel className="flex gap-2 font-normal">
+                              <p className="font-semibold">
+                                {AlphabeticEnum[optionIndex]}.
+                              </p>
                               {option.name}
                             </FormLabel>
                           </FormItem>

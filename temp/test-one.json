@@ -221,6 +221,43 @@
                           "type": "MULTI_CHECKBOX"
                       }
                   ]
+              },
+              {
+                  "number": 3,
+                  "questions": [
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"9. Seleciona a opção correta\"}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"text\":\"Em qual copo as sementes não germinaram?\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "476b20e8-5c7e-46ce-adef-7ad1573e427b",
+                                  "name": "Copo 1",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "9036f400-7e9a-4dbb-8277-34a0e7652702",
+                                  "name": "Copo 2",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "8827e034-f504-4387-867c-41002a4b1095",
+                                  "name": "Copo 3",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "f689bc71-cc11-4d43-bcc8-9446a4713bac",
+                                  "name": "Copo 4",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"9.1 Explica porque não germinaram\"}]}]}",
+                          "type": "LONG_TEXT"
+                      }
+                  ]
               }
           ]
       }

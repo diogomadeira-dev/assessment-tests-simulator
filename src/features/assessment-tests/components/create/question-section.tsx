@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
-import { Textarea } from '@/components/ui/textarea'
 import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
 import { delay } from '@/utils/delay'
 import { useTranslations } from 'next-intl'
@@ -200,23 +199,20 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
         )
       case 'LONG_TEXT':
         return (
-          <FormField
-            control={control}
-            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Long text</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Escreve aqui..."
-                    className="resize-y"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="w-full">
+            <Controller
+              control={control}
+              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
+              render={({ field: { onChange }, fieldState: { error } }) => (
+                <Editor
+                  content={question.label}
+                  onChange={onChange}
+                  error={error}
+                  editable
+                />
+              )}
+            />
+          </div>
         )
       case 'RADIO_GROUP':
         return (

@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Textarea } from '@/components/ui/textarea'
 import { AlphabeticEnum } from '@/types/assessment-tests'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
@@ -60,6 +61,30 @@ export default function PageComponent({
                 />
                 <FormControl>
                   <Input placeholder="Write here..." {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )
+      case 'LONG_TEXT':
+        return (
+          <FormField
+            control={control}
+            name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`}
+            defaultValue=""
+            render={({ field }) => (
+              <FormItem>
+                <Editor
+                  key={`editor-${partIndex}-${pageIndex}-${questionIndex}`}
+                  content={question.label}
+                />
+                <FormControl>
+                  <Textarea
+                    placeholder="Write here..."
+                    className="resize-y"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

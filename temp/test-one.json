@@ -126,8 +126,24 @@
                   "questions": [
                       {
                           "number": "",
-                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"6. Seleciona a opção correta\"}]}]}",
-                          "options": [],
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"6. Seleciona a opção correta\"}]},{\"type\":\"blockquote\",\"content\":[{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"Os pássaros e as abelhas são responsáveis pela reprodução de certas flores, levando o seu pólen de planta para a planta.\"}]}]},{\"type\":\"paragraph\"},{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"O que têm as flores que lhes permite atrair os pássaros e as abelhas?\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "a28423a0-c45a-4703-8a80-f8347de2be67",
+                                  "name": "Os espinhos afiados",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "ced2bbfc-cefb-4b05-b6b5-ea92965c89bf",
+                                  "name": "As cores vivas",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "d6836976-92fe-4287-8800-980ecbc0d349",
+                                  "name": "As pétalas secas",
+                                  "image_url": ""
+                              }
+                          ],
                           "type": "RADIO_GROUP"
                       }
                   ]

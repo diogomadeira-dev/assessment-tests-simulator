@@ -100,7 +100,7 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
       <Toggle
         size="sm"
         pressed={editor.isActive('blockquote')}
-        onPressedChange={() => editor.chain().focus().setBlockquote().run()}
+        onPressedChange={() => editor.chain().focus().toggleBlockquote().run()}
       >
         <TextQuote className="h-4 w-4" />
       </Toggle>

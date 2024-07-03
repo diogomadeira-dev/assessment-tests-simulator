@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import { HyperMultimediaKit } from '@docs.plus/extension-hypermultimedia'
+import Blockquote from '@tiptap/extension-blockquote'
 import Heading from '@tiptap/extension-heading'
 import { EditorContent, mergeAttributes, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
@@ -23,8 +24,6 @@ type TiptapProps =
     }
 
 const Editor = (props: TiptapProps) => {
-  console.log(props)
-
   const editor = useEditor({
     editable: props.editable ?? false,
     editorProps: {
@@ -80,6 +79,11 @@ const Editor = (props: TiptapProps) => {
         Image: true,
       }),
       ImageResize,
+      Blockquote.configure({
+        HTMLAttributes: {
+          class: 'mt-6 border-l-2 pl-6 italic',
+        },
+      }),
     ],
     content: props?.content ? JSON.parse(props.content) : '',
     onUpdate({ editor }) {

@@ -141,29 +141,30 @@ export function QuestionsTypeDialog({
               </QuestionTypeCard>
             </div>
           </DialogClose>
-
+          <DialogClose asChild>
+            <div>
+              <QuestionTypeCard
+                title="Ordenar campos"
+                description="Ordenar campos"
+                action={() =>
+                  appendPage({
+                    number: '',
+                    label: '',
+                    type: 'SORTABLE',
+                  })
+                }
+              >
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-4/5" />
+                </div>
+              </QuestionTypeCard>
+            </div>
+          </DialogClose>
           <DialogClose asChild>
             <QuestionTypeCard
               title="Ligação de pares"
               description="Ligação de pares"
-              action={() =>
-                appendPage({
-                  number: '',
-                  label: '',
-                  type: 'RADIO_GROUP',
-                })
-              }
-            >
-              <div className="space-y-2">
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="h-4 w-4/5" />
-              </div>
-            </QuestionTypeCard>
-          </DialogClose>
-          <DialogClose asChild>
-            <QuestionTypeCard
-              title="Ordenar campos"
-              description="Ordenar campos"
               action={() =>
                 appendPage({
                   number: '',

@@ -86,6 +86,38 @@
                               }
                           ],
                           "type": "RADIO_GROUP_HORIZONTAL"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"5. Seleciona todas as afirmações verdadeiras, de acordo com o texto que acabaste de ouvir\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "856b89d9-d177-4230-a3d3-8c7c784e0742",
+                                  "name": "A vaca ia passear para a montanha",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "4d051c0b-dd08-48b3-8e32-31b40822ac0a",
+                                  "name": "Ela adorava manteiga sem pão",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "17f03faa-9db6-49c8-be13-104f734fd867",
+                                  "name": "A manteiga era de uma grande brancura",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "d1540280-db40-4fa3-a7af-dd881522e020",
+                                  "name": "A vaca não andava muito",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "5198944f-1828-4a61-b2ad-f935c3e74783",
+                                  "name": "Ela adorava o sabor das flores amarelas",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "MULTI_CHECKBOX"
                       }
                   ]
               }

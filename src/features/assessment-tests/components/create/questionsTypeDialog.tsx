@@ -102,22 +102,24 @@ export function QuestionsTypeDialog({
             </div>
           </DialogClose>
           <DialogClose asChild>
-            <QuestionTypeCard
-              title="Escolha múltipla"
-              description="Escolha múltipla"
-              action={() =>
-                appendPage({
-                  number: '',
-                  label: '',
-                  type: 'RADIO_GROUP',
-                })
-              }
-            >
-              <div className="space-y-2">
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="h-4 w-4/5" />
-              </div>
-            </QuestionTypeCard>
+            <div>
+              <QuestionTypeCard
+                title="Escolha múltipla"
+                description="Escolha múltipla"
+                action={() =>
+                  appendPage({
+                    number: '',
+                    label: '',
+                    type: 'MULTI_CHECKBOX',
+                  })
+                }
+              >
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-4/5" />
+                </div>
+              </QuestionTypeCard>
+            </div>
           </DialogClose>
 
           <DialogClose asChild>

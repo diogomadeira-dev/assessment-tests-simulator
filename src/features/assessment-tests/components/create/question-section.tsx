@@ -243,6 +243,23 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
             />
           </div>
         )
+      case 'MULTI_CHECKBOX':
+        return (
+          <div className="w-full">
+            <Controller
+              control={control}
+              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
+              render={({ field: { onChange }, fieldState: { error } }) => (
+                <Editor onChange={onChange} error={error} editable />
+              )}
+            />
+            <Children
+              partIndex={partIndex}
+              pageIndex={pageIndex}
+              questionIndex={questionIndex}
+            />
+          </div>
+        )
       // case "TYPE":
       //   return (
 

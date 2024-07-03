@@ -32,6 +32,7 @@ export const QuestionTypeEnum = {
   LONG_TEXT: 'LONG_TEXT',
   RADIO_GROUP: 'RADIO_GROUP', // * Single choice
   RADIO_GROUP_HORIZONTAL: 'RADIO_GROUP_HORIZONTAL', // * Single choice horizontal
+  MULTI_CHECKBOX: 'MULTI_CHECKBOX', // * Multiple choice
 } as const
 
 export type QuestionType =

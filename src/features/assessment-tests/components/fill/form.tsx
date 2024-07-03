@@ -31,6 +31,34 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
 
   const form = useForm<FillAssessmentInputSchema>({
     resolver: zodResolver(FillAssessmentInput),
+    defaultValues: {
+      parts: [
+        {
+          pages: [
+            {
+              questions: [
+                {
+                  answer: 'a1a05199-01fc-49b9-b5b4-07bf4fdacc09',
+                },
+                {
+                  answer: '1db3d887-a1a9-4e35-81c4-3fdd7bb18d90',
+                },
+                {
+                  answer: '18b4151e-4d7f-4bca-a5f3-9eca5d550f9f',
+                },
+                {
+                  answer: '44e27dc1-0805-4915-8078-eaacc3aeab8a',
+                },
+                {
+                  answer:
+                    '["4d051c0b-dd08-48b3-8e32-31b40822ac0a","17f03faa-9db6-49c8-be13-104f734fd867","d1540280-db40-4fa3-a7af-dd881522e020"]',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   })
 
   const assessmentTestData = assessmentTestOne

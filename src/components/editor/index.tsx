@@ -33,8 +33,6 @@ const Editor = (props: TiptapProps) => {
     editable: props.editable ?? false,
     editorProps: {
       attributes: {
-        // class:
-        //   'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto max-h-[380px] min-h-[80px] w-full overflow-auto rounded-md rounded-tl-none rounded-tr-none bg-transparent text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
         class:
           'prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl focus:outline-none',
       },

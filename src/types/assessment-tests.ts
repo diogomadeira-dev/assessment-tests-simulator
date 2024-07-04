@@ -1,3 +1,5 @@
+import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
+
 export enum AlphabeticEnum {
   'A',
   'B',
@@ -39,3 +41,10 @@ export const QuestionTypeEnum = {
 
 export type QuestionType =
   (typeof QuestionTypeEnum)[keyof typeof QuestionTypeEnum]
+
+export type questionTypesSwitchProps = {
+  question: CreateAssessmentInputSchema['parts'][number]['pages'][number]['questions'][number]
+  partIndex: number
+  pageIndex: number
+  questionIndex: number
+}

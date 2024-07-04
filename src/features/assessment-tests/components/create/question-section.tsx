@@ -16,7 +16,7 @@ import { useTranslations } from 'next-intl'
 import { useRef } from 'react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid'
-import { QuestionsTypeDialog } from './questionsTypeDialog'
+import { QuestionsTypeDialog } from './questions-type-dialog'
 
 type QuestionProps = {
   partIndex: number

@@ -30,7 +30,7 @@ import {
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import { CreateAssessmentInputSchema } from '../../api/create-assessment-test'
 import { FillAssessmentInputSchema } from '../../api/fill-assessment-test'
 import UserItem from './sortable-item'
@@ -358,6 +358,22 @@ export default function PageComponent({
           </div>
         )
       }
+      case 'FREE_TEXT':
+        return (
+          <div className="w-full space-y-4">
+            <Editor
+              key={`editor-${partIndex}-${pageIndex}-${questionIndex}`}
+              content={question.label}
+            />
+            <Controller
+              control={control}
+              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`}
+              render={({ field: { onChange }, fieldState: { error } }) => (
+                <Editor onChange={onChange} error={error} editable />
+              )}
+            />
+          </div>
+        )
       // case "TYPE":
       //   return (
 

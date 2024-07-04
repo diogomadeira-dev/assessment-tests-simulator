@@ -34,6 +34,7 @@ export const QuestionTypeEnum = {
   RADIO_GROUP_HORIZONTAL: 'RADIO_GROUP_HORIZONTAL', // * Single choice horizontal
   MULTI_CHECKBOX: 'MULTI_CHECKBOX', // * Multiple choice
   SORTABLE: 'SORTABLE',
+  FREE_TEXT: 'FREE_TEXT',
 } as const
 
 export type QuestionType =

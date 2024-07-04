@@ -298,6 +298,23 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
             />
           </div>
         )
+      case 'FREE_TEXT':
+        return (
+          <div className="w-full">
+            <Controller
+              control={control}
+              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
+              render={({ field: { onChange }, fieldState: { error } }) => (
+                <Editor
+                  content={question.label}
+                  onChange={onChange}
+                  error={error}
+                  editable
+                />
+              )}
+            />
+          </div>
+        )
       // case "TYPE":
       //   return (
 

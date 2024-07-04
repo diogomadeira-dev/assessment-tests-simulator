@@ -162,6 +162,26 @@ export function QuestionsTypeDialog({
             </div>
           </DialogClose>
           <DialogClose asChild>
+            <div>
+              <QuestionTypeCard
+                title="Texto livre"
+                description="Usado em textos narrativos longos"
+                action={() =>
+                  appendPage({
+                    number: '',
+                    label: '',
+                    type: 'FREE_TEXT',
+                  })
+                }
+              >
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-4/5" />
+                </div>
+              </QuestionTypeCard>
+            </div>
+          </DialogClose>
+          <DialogClose asChild>
             <QuestionTypeCard
               title="Ligação de pares"
               description="Ligação de pares"

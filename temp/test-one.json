@@ -290,26 +290,308 @@
                           "options": [
                               {
                                   "id": "3c580998-d485-4de5-a278-9c8896187c8e",
-                                  "name": "1",
+                                  "name": "",
                                   "image_url": "http://localhost:9000/assessment-test-1/2a82c11c1df95c1a2f294e5e029adbf8.webp"
                               },
                               {
                                   "id": "730a30c3-1d91-4376-928b-1c219527e453",
-                                  "name": "2",
+                                  "name": "",
                                   "image_url": "http://localhost:9000/assessment-test-1/8951e6f2415b808e05e5634119b56617.webp"
                               },
                               {
                                   "id": "f09d322d-7ee5-4f80-a528-023cf2916351",
-                                  "name": "3",
+                                  "name": "",
                                   "image_url": "http://localhost:9000/assessment-test-1/e00b0661b55bea1debe1a091e6369037.webp"
                               },
                               {
                                   "id": "010be1e8-83a4-49a1-b853-2b14fe1fb3d0",
-                                  "name": "4",
+                                  "name": "",
                                   "image_url": "http://localhost:9000/assessment-test-1/ccdecf80971895f82446b29298ba2c7c.webp"
                               }
                           ],
                           "type": "SORTABLE"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"12. Seleciona a opção correta\"}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"text\":\"Na maior parte das plantas, a parte que dá origem à semente é a\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "f7266ee8-d707-4757-96b8-c617e2359ad8",
+                                  "name": "folha",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "725aa285-b430-438f-b857-528b6280220d",
+                                  "name": "flor",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "40be0ba9-e36e-4610-82a8-f2aebc24f7db",
+                                  "name": "raiz",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      }
+                  ]
+              }
+          ]
+      },
+      {
+          "pages": [
+              {
+                  "number": 4,
+                  "questions": [
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Lê o texto.\"}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"justify\"},\"content\":[{\"type\":\"text\",\"text\":\"Ora certo dia, a vaca parecia louca, comeu tantas flores amarelas que ia rebentando. Só que o resultado foi imprevisível. A vaca não daria por nada se não fosse o caso de todas as outras vacas do prado olharem para ela com ares espantados. — Vai ver-te ao espelho! Disse um vitelo mais atrevidote… — O meu belo pelo branco… está amarelo. E até as minhas magníficas manchas castanhas estão amarelas! Que infelicidade… Não sei o que fazer — suspirou a vaca. — Toma um banho e deixa de comer flores amarelas — disse o vitelo atrevidote. A vaca assim fez. Ao fim de dois ou três dias voltou à normalidade… — Nunca mais comerei flores amarelas. Nunca mais serei uma vaca amarela… Está decidido. E estava mesmo. Até que encontrou um campo das mais belas papoilas vermelhas…\"}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"start\"}},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"start\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"italic\"}],\"text\":\"Alexandre Honrado, A vaca amarela in Quem conta um conto, vol. 1, Lisboa, Raiz Editora, 2011 (adaptado)\"}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"start\"}},{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"13. Seleciona a imagem que ilustra o primeiro parágrafo do texto\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "3fc99ebf-d95b-4fc6-8b80-62e621fcf47e",
+                                  "name": "",
+                                  "image_url": "http://localhost:9000/assessment-test-1/79cf77ded4c6d30ca5da8c9c8f4b2501.webp"
+                              },
+                              {
+                                  "id": "3054ba97-4db5-4123-839f-4a88e558e0dd",
+                                  "name": "",
+                                  "image_url": "http://localhost:9000/assessment-test-1/7d88ac4464bfaf202e58dd8427cd7e62.webp"
+                              },
+                              {
+                                  "id": "c4b54894-5994-4a45-a5f9-c718943f8850",
+                                  "name": "",
+                                  "image_url": "http://localhost:9000/assessment-test-1/1bfdad249e021fd6371b1b89ae5c5868.webp"
+                              }
+                          ],
+                          "type": "RADIO_GROUP_HORIZONTAL"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"14. Seleciona a opção correta\"}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"text\":\"Certo dia a vaca parecia\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "e73f1ce7-dde4-4219-a72a-55bbce0c1779",
+                                  "name": "descansada",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "d0b49de8-3fc8-4ec8-a5f1-3a32df3a7de9",
+                                  "name": "tresmalhada",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "4df06982-7797-4cd8-8d30-cf36b266f03b",
+                                  "name": " louca",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"15. Seleciona a opção correta\"},{\"type\":\"hardBreak\"},{\"type\":\"hardBreak\"},{\"type\":\"text\",\"text\":\"A vaca estava infeliz porque\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "ea4d45bd-6c13-4848-b034-6c1169231a76",
+                                  "name": "o pelo branco estava amarelo",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "0f8434aa-ab09-4964-ba8d-093fdfa40a95",
+                                  "name": "o pelo branco estava preto",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "ccee8402-3e9b-42ba-8f78-15a5436a826a",
+                                  "name": "o pelo branco estava castanho",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      }
+                  ]
+              },
+              {
+                  "number": 5,
+                  "questions": [
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"16. Seleciona a opção correta\"}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"text\":\"A vaca não sabia o que fazer. O vitelo sugeriu-lhe\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "7c1af08d-b643-4b79-ba86-0fcac9c3dc5e",
+                                  "name": "que tomasse um banho e fosse pastar",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "843075b4-70eb-4d85-8285-2a977aa06f2c",
+                                  "name": "que tomasse um banho e fosse dormir",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "727402ca-ee27-4581-a9f1-f7d116e6fbd5",
+                                  "name": "que tomasse um banho e deixasse de comer flores amarelas",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"17. Seleciona a opção correta\"}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"text\":\"Depois de tudo voltar à normalidade, a vaca decidiu\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "0922dbf9-0ac2-4f92-9923-7a0c3c0c07ce",
+                                  "name": "nunca mais dar leite",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "096ea6d9-f837-4330-b36e-38faacfcfd7f",
+                                  "name": "nunca mais comer flores amarelas",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "95f7d14f-2dfd-4510-a66d-511144e2a9a6",
+                                  "name": "nunca mais ruminar",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"18. Seleciona o que terá acontecido para a história terminar da seguinte forma\"}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"text\":\"A história que leste termina assim:\"}]},{\"type\":\"blockquote\",\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"text\":\"— Esta manteiga é vermelha?\"},{\"type\":\"hardBreak\"},{\"type\":\"text\",\"text\":\"— É sim senhor. É daquela vaca acolá, que tem o pelo vermelho com manchas encarnadas…\"}]}]}]}",
+                          "options": [
+                              {
+                                  "id": "4950df54-65be-4334-85c9-915755a7b04a",
+                                  "name": "A vaca sujou-se com tinta vermelha",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "a5d6928b-30c8-4ebd-92d2-3d3ee89dd67c",
+                                  "name": "A vaca mascarou-se de palhaço",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "f4c103a0-7f67-466d-a1b9-0a3043c7ba35",
+                                  "name": "A vaca comeu papoilas vermelhas",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "2f5e9161-238e-4d13-b752-4d720429df0c",
+                                  "name": "A vaca rebolouçe em flores vermelhas",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "RADIO_GROUP"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"19. Seleciona todos os nomes femininos\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "63d0c367-97c9-46b8-b10f-9761b6faf6be",
+                                  "name": "Mala",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "6a9dd900-6498-4fb0-b79e-d92eec55ffc5",
+                                  "name": "Som",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "40c4af41-2da7-49fd-9aa9-6d5f50bbbf0e",
+                                  "name": "Lupa",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "3c5da276-7b6d-47c1-9e83-8c434c47b43d",
+                                  "name": "Bacia",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "7471ee58-e282-4a7a-ba7f-35734ad15ff3",
+                                  "name": "Livro",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "d9033757-2272-4b88-9d4c-d5533a4655c6",
+                                  "name": "Cofre",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "a03da860-5822-48db-9df8-478f2682254c",
+                                  "name": "Janela",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "MULTI_CHECKBOX"
+                      }
+                  ]
+              },
+              {
+                  "number": 6,
+                  "questions": [
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"21. Clica e arrasta os nomes das flores para ficarem por ordem alfabética\"}]}]}",
+                          "options": [
+                              {
+                                  "id": "b9bb7e0d-8dd8-44ec-a966-d4153b7aa877",
+                                  "name": "Margarida",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "41a4d54e-90f7-430f-bd7d-9b7efba947f5",
+                                  "name": "Gerbera",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "9e3a3ecc-d29a-4ac1-b998-c6bf56e780d9",
+                                  "name": "Camélia",
+                                  "image_url": ""
+                              },
+                              {
+                                  "id": "cb820d87-6643-4707-9435-67cb887df4a2",
+                                  "name": "Gladíolo",
+                                  "image_url": ""
+                              }
+                          ],
+                          "type": "SORTABLE"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"23. Observa a figura e imagina uma história em que dois amigos visitam o Jardim Botânico. O que irão eles observar e descobrir? Como poderão viver eles essa aventura?\"}]},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}},{\"type\":\"imageResize\",\"attrs\":{\"src\":\"http://localhost:9000/assessment-test-1/1d2f5003fbc1a73a8ad3a088c65699a1.webp\",\"alt\":null,\"title\":null,\"width\":\"100%\",\"height\":\"auto\"}},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"}},{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Quando\"}]}]}",
+                          "type": "LONG_TEXT"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Quem\"}]}]}",
+                          "type": "LONG_TEXT"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Onde\"}]}]}",
+                          "type": "LONG_TEXT"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"O quê\"}]}]}",
+                          "type": "LONG_TEXT"
+                      },
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"paragraph\",\"attrs\":{\"textAlign\":\"left\"},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Como\"}]}]}",
+                          "type": "LONG_TEXT"
+                      }
+                  ]
+              },
+              {
+                  "number": 7,
+                  "questions": [
+                      {
+                          "number": "",
+                          "label": "{\"type\":\"doc\",\"content\":[{\"type\":\"heading\",\"attrs\":{\"textAlign\":\"left\",\"level\":6},\"content\":[{\"type\":\"text\",\"marks\":[{\"type\":\"bold\"}],\"text\":\"Escreve um texto narrativo sobre a visita feita pelos dois amiguinhos, de acordo com o teu plano. Dá um título à tua história\"}]}]}",
+                          "type": "FREE_TEXT"
                       }
                   ]
               }

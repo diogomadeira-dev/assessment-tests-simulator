@@ -243,7 +243,7 @@ export default function FillAssessmentTestForm({ id }: { id: number }) {
                 ))}
               </Tabs>
 
-              {/* <pre>{JSON.stringify(form.watch(), null, 2)}</pre> */}
+              <pre>{JSON.stringify(form.watch(), null, 2)}</pre>
             </form>
           </Tabs>
         </div>

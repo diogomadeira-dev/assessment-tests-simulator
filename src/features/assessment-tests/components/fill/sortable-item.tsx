@@ -29,9 +29,11 @@ const UserItem: FC<UserItemProps> = (props) => {
       className="flex cursor-grab justify-between rounded border-2 border-dashed bg-white p-12"
     >
       <div>
-        <Image src={image_url} width={100} height={100} alt={name} />
-        {/* <h3 className="text-lg font-semibold">{name}</h3>
-        <p className="text-gray-600">{name}</p> */}
+        {image_url && (
+          <Image src={image_url} width={100} height={100} alt={name} />
+        )}
+        {name && <h3 className="text-lg font-semibold">{name}</h3>}
+        {/* <p className="text-gray-600">{name}</p> */}
       </div>
       {/* <button {...attributes} {...listeners} className='cursor-move'>
         Drag

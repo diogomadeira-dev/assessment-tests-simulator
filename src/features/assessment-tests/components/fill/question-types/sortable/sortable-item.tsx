@@ -1,17 +1,8 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import Image from 'next/image'
-import { FC } from 'react'
+import { InitialOptionsProps } from './index'
 
-interface UserItemProps {
-  user: {
-    id: number
-    name: string
-    image_url: string
-  }
-}
-const UserItem: FC<UserItemProps> = (props) => {
-  const { id, name, image_url } = props.option
+const SortableItem = ({ id, name, image_url }: InitialOptionsProps) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id })
 
@@ -30,10 +21,9 @@ const UserItem: FC<UserItemProps> = (props) => {
     >
       <div>
         {image_url && (
-          <Image src={image_url} width={100} height={100} alt={name} />
+          <img src={image_url} width={100} height={100} alt={name} />
         )}
         {name && <h3 className="text-lg font-semibold">{name}</h3>}
-        {/* <p className="text-gray-600">{name}</p> */}
       </div>
       {/* <button {...attributes} {...listeners} className='cursor-move'>
         Drag
@@ -42,4 +32,4 @@ const UserItem: FC<UserItemProps> = (props) => {
   )
 }
 
-export default UserItem
+export default SortableItem

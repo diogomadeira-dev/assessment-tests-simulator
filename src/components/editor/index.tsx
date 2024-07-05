@@ -2,7 +2,6 @@
 
 import { cn } from '@/lib/utils'
 import { HyperMultimediaKit } from '@docs.plus/extension-hypermultimedia'
-import Blockquote from '@tiptap/extension-blockquote'
 import Heading from '@tiptap/extension-heading'
 import Table from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
@@ -85,11 +84,11 @@ const Editor = (props: TiptapProps) => {
         types: ['heading', 'paragraph'],
       }),
       ImageResize,
-      Blockquote.configure({
-        HTMLAttributes: {
-          class: 'mt-6 border-l-2 pl-6 italic',
-        },
-      }),
+      // Blockquote.configure({
+      //   HTMLAttributes: {
+      //     class: 'mt-6 border-l-2 pl-6 italic',
+      //   },
+      // }),
       Table.configure({
         // resizable: true,
         HTMLAttributes: {

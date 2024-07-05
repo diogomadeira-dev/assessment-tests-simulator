@@ -14,13 +14,17 @@ export const FillAssessmentInput = z.object({
           questions: z.array(
             z.object({
               answer: stringValidate,
-              option: z.array(
-                z.object({
-                  id: z.string(),
-                  name: z.string().optional(),
-                  image_url: z.string().optional(),
+              option: z
+                .array(
+                  z.object({
+                    id: z.string(),
+                    name: z.string().optional(),
+                    image_url: z.string().optional(),
+                  }),
+                )
+                .refine((value) => value.some((item) => item), {
+                  message: 'You have to select at least one item.',
                 }),
-              ),
             }),
           ),
         }),

@@ -30,7 +30,7 @@ export const SortableItem = (props: SortableItemProps) => {
       style={style}
       {...attributes}
       {...listeners}
-      className="flex cursor-grab justify-between rounded border-2 border-dashed bg-white p-12"
+      className="flex cursor-grab justify-between rounded border-2 border-dashed bg-white transition-colors duration-300 hover:border-secondary"
     >
       <SortableBase {...props} />
     </div>

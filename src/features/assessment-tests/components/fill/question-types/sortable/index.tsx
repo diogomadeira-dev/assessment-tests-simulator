@@ -18,7 +18,7 @@ export type InitialOptionsProps = {
 
 export const SortableType = (props: questionTypesSwitchProps) => {
   const { question, partIndex, pageIndex, questionIndex } = props
-  const { control, watch, setValue } =
+  const { control, watch, setValue, formState } =
     useFormContext<FillAssessmentInputSchema>()
 
   const { fields: questionOptions, move } = useFieldArray({
@@ -88,6 +88,12 @@ export const SortableType = (props: questionTypesSwitchProps) => {
           </div>
         </SortableContext>
       </DndContext>
+
+      {JSON.stringify(
+        formState.errors?.parts?.[partIndex]?.pages?.[pageIndex]?.questions?.[
+          questionIndex
+        ],
+      )}
     </div>
   )
 }

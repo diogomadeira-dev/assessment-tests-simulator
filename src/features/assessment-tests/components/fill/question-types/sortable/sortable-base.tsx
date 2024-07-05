@@ -1,4 +1,5 @@
 import { FillAssessmentInputSchema } from '@/features/assessment-tests/api/fill-assessment-test'
+import { GripHorizontal } from 'lucide-react'
 import Image from 'next/image'
 import { Controller, useFormContext } from 'react-hook-form'
 import { SortableItemProps } from './sortable-item'
@@ -12,7 +13,7 @@ export const SortableBase = ({
   const { control } = useFormContext<FillAssessmentInputSchema>()
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center space-y-6 px-12 py-6">
       <div>
         <Controller
           name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.option.${optionIndex}`}
@@ -25,7 +26,7 @@ export const SortableBase = ({
                     src={field.value.image_url}
                     width={100}
                     height={100}
-                    alt={field.value.name}
+                    alt={field.value?.name}
                   />
                 )}
                 {field.value?.name && (
@@ -36,6 +37,7 @@ export const SortableBase = ({
           }}
         />
       </div>
+      <GripHorizontal className="h-6 w-6 text-neutral-500" />
     </div>
   )
 }

@@ -1,6 +1,8 @@
 import { FillAssessmentInputSchema } from '@/features/assessment-tests/api/fill-assessment-test'
+import { cn } from '@/lib/utils'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { useFormContext } from 'react-hook-form'
 import { SortableBase } from './sortable-base'
 
 export type SortableItemProps = {
@@ -12,7 +14,9 @@ export type SortableItemProps = {
 }
 
 export const SortableItem = (props: SortableItemProps) => {
-  const { option } = props
+  const { option, partIndex, pageIndex, questionIndex } = props
+
+  const { formState } = useFormContext<FillAssessmentInputSchema>()
 
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
@@ -30,7 +34,16 @@ export const SortableItem = (props: SortableItemProps) => {
       style={style}
       {...attributes}
       {...listeners}
-      className="flex cursor-grab justify-between rounded border-2 border-dashed bg-white transition-colors duration-300 hover:border-secondary"
+      className={cn(
+        'flex cursor-grab justify-between rounded border-2 border-dashed bg-white transition-colors duration-200 hover:border-secondary',
+        {
+          // ! TODO: ERROR MESSAGE NOT REMOVED AFTER SORT IMAGES
+          'border-warning': Boolean(
+            formState?.errors?.parts?.[partIndex].pages?.[pageIndex]
+              .questions?.[questionIndex]?.answer,
+          ),
+        },
+      )}
     >
       <SortableBase {...props} />
     </div>

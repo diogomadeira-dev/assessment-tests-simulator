@@ -1,4 +1,5 @@
 import Editor from '@/components/editor'
+import { FormMessage } from '@/components/ui/form'
 import { FillAssessmentInputSchema } from '@/features/assessment-tests/api/fill-assessment-test'
 import { questionTypesSwitchProps } from '@/types/assessment-tests'
 import { DndContext } from '@dnd-kit/core'
@@ -7,7 +8,7 @@ import {
   SortableContext,
 } from '@dnd-kit/sortable'
 import { useEffect } from 'react'
-import { useFieldArray, useFormContext } from 'react-hook-form'
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { SortableItem } from './sortable-item'
 
 export type InitialOptionsProps = {
@@ -18,7 +19,8 @@ export type InitialOptionsProps = {
 
 export const SortableType = (props: questionTypesSwitchProps) => {
   const { question, partIndex, pageIndex, questionIndex } = props
-  const { control, watch, setValue, formState } =
+
+  const { control, watch, setValue } =
     useFormContext<FillAssessmentInputSchema>()
 
   const { fields: questionOptions, move } = useFieldArray({
@@ -48,8 +50,7 @@ export const SortableType = (props: questionTypesSwitchProps) => {
       <p>
         RESULT:{' '}
         {JSON.stringify(
-          watch().parts[partIndex].pages[pageIndex].questions[questionIndex]
-            .option,
+          watch().parts[partIndex].pages[pageIndex].questions[questionIndex],
         )}
       </p>
 
@@ -65,6 +66,10 @@ export const SortableType = (props: questionTypesSwitchProps) => {
             )
             const newIndex = questionOptions.findIndex(
               (option) => option.id === over.id,
+            )
+            setValue(
+              `parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`,
+              'sorted',
             )
             move(oldIndex, newIndex)
           }
@@ -88,12 +93,15 @@ export const SortableType = (props: questionTypesSwitchProps) => {
           </div>
         </SortableContext>
       </DndContext>
-
-      {JSON.stringify(
-        formState.errors?.parts?.[partIndex]?.pages?.[pageIndex]?.questions?.[
-          questionIndex
-        ],
-      )}
+      <Controller
+        name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.answer`}
+        control={control}
+        render={({ fieldState: { error } }) => {
+          return (
+            <div>{error && <FormMessage>{error.message}</FormMessage>}</div>
+          )
+        }}
+      />
     </div>
   )
 }

@@ -13,7 +13,7 @@ export const SortableBase = ({
   const { control } = useFormContext<FillAssessmentInputSchema>()
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-6 px-12 py-6">
+    <div className="flex flex-col items-center justify-between space-y-6 px-12 py-6">
       <div>
         <Controller
           name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.option.${optionIndex}`}

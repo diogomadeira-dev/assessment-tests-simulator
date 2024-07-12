@@ -16,7 +16,7 @@ import { useTranslations } from 'next-intl'
 import { useRef } from 'react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid'
-import { QuestionsTypeDialog } from './questionsTypeDialog'
+import { QuestionsTypeDialog } from './questions-type-dialog'
 
 type QuestionProps = {
   partIndex: number
@@ -273,6 +273,45 @@ export const QuestionSection = ({ partIndex, pageIndex }: QuestionProps) => {
               partIndex={partIndex}
               pageIndex={pageIndex}
               questionIndex={questionIndex}
+            />
+          </div>
+        )
+      case 'SORTABLE':
+        return (
+          <div className="w-full">
+            <Controller
+              control={control}
+              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
+              render={({ field: { onChange }, fieldState: { error } }) => (
+                <Editor
+                  content={question.label}
+                  onChange={onChange}
+                  error={error}
+                  editable
+                />
+              )}
+            />
+            <Children
+              partIndex={partIndex}
+              pageIndex={pageIndex}
+              questionIndex={questionIndex}
+            />
+          </div>
+        )
+      case 'FREE_TEXT':
+        return (
+          <div className="w-full">
+            <Controller
+              control={control}
+              name={`parts.${partIndex}.pages.${pageIndex}.questions.${questionIndex}.label`}
+              render={({ field: { onChange }, fieldState: { error } }) => (
+                <Editor
+                  content={question.label}
+                  onChange={onChange}
+                  error={error}
+                  editable
+                />
+              )}
             />
           </div>
         )

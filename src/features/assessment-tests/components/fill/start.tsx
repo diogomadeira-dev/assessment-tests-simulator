@@ -8,7 +8,6 @@ export default function StartComponent() {
   const searchParams = useSearchParams()
 
   const page = searchParams.get('page')
-  console.log('🚀 ~ StartComponent ~ page:', page)
 
   return (
     <TabsContent value="0">

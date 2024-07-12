@@ -2,7 +2,6 @@
 
 import { cn } from '@/lib/utils'
 import { HyperMultimediaKit } from '@docs.plus/extension-hypermultimedia'
-import Blockquote from '@tiptap/extension-blockquote'
 import Heading from '@tiptap/extension-heading'
 import Table from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
@@ -33,8 +32,6 @@ const Editor = (props: TiptapProps) => {
     editable: props.editable ?? false,
     editorProps: {
       attributes: {
-        // class:
-        //   'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto max-h-[380px] min-h-[80px] w-full overflow-auto rounded-md rounded-tl-none rounded-tr-none bg-transparent text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
         class:
           'prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl focus:outline-none',
       },
@@ -87,11 +84,11 @@ const Editor = (props: TiptapProps) => {
         types: ['heading', 'paragraph'],
       }),
       ImageResize,
-      Blockquote.configure({
-        HTMLAttributes: {
-          class: 'mt-6 border-l-2 pl-6 italic',
-        },
-      }),
+      // Blockquote.configure({
+      //   HTMLAttributes: {
+      //     class: 'mt-6 border-l-2 pl-6 italic',
+      //   },
+      // }),
       Table.configure({
         // resizable: true,
         HTMLAttributes: {

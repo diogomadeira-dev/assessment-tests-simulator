@@ -1,3 +1,5 @@
+import { CreateAssessmentInputSchema } from '@/features/assessment-tests/api/create-assessment-test'
+
 export enum AlphabeticEnum {
   'A',
   'B',
@@ -33,7 +35,16 @@ export const QuestionTypeEnum = {
   RADIO_GROUP: 'RADIO_GROUP', // * Single choice
   RADIO_GROUP_HORIZONTAL: 'RADIO_GROUP_HORIZONTAL', // * Single choice horizontal
   MULTI_CHECKBOX: 'MULTI_CHECKBOX', // * Multiple choice
+  SORTABLE: 'SORTABLE',
+  FREE_TEXT: 'FREE_TEXT',
 } as const
 
 export type QuestionType =
   (typeof QuestionTypeEnum)[keyof typeof QuestionTypeEnum]
+
+export type questionTypesSwitchProps = {
+  question: CreateAssessmentInputSchema['parts'][number]['pages'][number]['questions'][number]
+  partIndex: number
+  pageIndex: number
+  questionIndex: number
+}

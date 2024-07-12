@@ -63,7 +63,7 @@ const CreateAssessmentTestForm = () => {
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)} className="container mx-auto">
         {/* {JSON.stringify(form.formState.errors, null, 2)} */}
-        <pre>{JSON.stringify(form.watch(), null, 4)}</pre>
+        {/* <pre>{JSON.stringify(form.watch(), null, 4)}</pre> */}
 
         <div className="flex justify-between gap-4 rounded-2xl bg-neutral-100 p-10">
           <FormField
